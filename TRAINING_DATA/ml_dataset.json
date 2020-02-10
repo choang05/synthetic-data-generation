@@ -1,0 +1,62 @@
+{
+  "C:\\Users\\choan\\Documents\\GitHub\\ar-object-classifier\\TRAINING_DATA/Can_Coke/screen_90.png": [
+    0.3934827446937561,
+    1.1850401163101196,
+    1.1392834186553955,
+    0.67368221282958984
+  ],
+  "C:\\Users\\choan\\Documents\\GitHub\\ar-object-classifier\\TRAINING_DATA/Can_Coke/screen_91.png": [
+    0.48964127898216248,
+    1.4154695272445679,
+    0.11628404259681702,
+    0.19385766983032227
+  ],
+  "C:\\Users\\choan\\Documents\\GitHub\\ar-object-classifier\\TRAINING_DATA/Can_Coke/screen_92.png": [
+    0.599220335483551,
+    1.3859436511993408,
+    0.23534399271011353,
+    0.18879556655883789
+  ],
+  "C:\\Users\\choan\\Documents\\GitHub\\ar-object-classifier\\TRAINING_DATA/Can_Coke/screen_93.png": [
+    0.76613324880599976,
+    1.7152177095413208,
+    0.21948057413101196,
+    0.25076782703399658
+  ],
+  "C:\\Users\\choan\\Documents\\GitHub\\ar-object-classifier\\TRAINING_DATA/Can_Coke/screen_94.png": [
+    0.60580193996429443,
+    1.5717370510101318,
+    0.22655069828033447,
+    0.20877671241760254
+  ],
+  "C:\\Users\\choan\\Documents\\GitHub\\ar-object-classifier\\TRAINING_DATA/Can_Coke/screen_95.png": [
+    0.0,
+    1.4289671182632446,
+    0.23540499806404114,
+    0.23819875717163086
+  ],
+  "C:\\Users\\choan\\Documents\\GitHub\\ar-object-classifier\\TRAINING_DATA/Can_Coke/screen_96.png": [
+    0.30641847848892212,
+    1.366626501083374,
+    0.14795774221420288,
+    0.1631934642791748
+  ],
+  "C:\\Users\\choan\\Documents\\GitHub\\ar-object-classifier\\TRAINING_DATA/Can_Coke/screen_97.png": [
+    0.0,
+    1.2989726066589355,
+    0.46970972418785095,
+    0.2768406867980957
+  ],
+  "C:\\Users\\choan\\Documents\\GitHub\\ar-object-classifier\\TRAINING_DATA/Can_Coke/screen_98.png": [
+    0.48365330696105957,
+    1.41249418258667,
+    0.21742457151412964,
+    0.193045973777771
+  ],
+  "C:\\Users\\choan\\Documents\\GitHub\\ar-object-classifier\\TRAINING_DATA/Can_Coke/screen_99.png": [
+    0.50992566347122192,
+    1.5493513345718384,
+    0.18859410285949707,
+    0.12180602550506592
+  ]
+}

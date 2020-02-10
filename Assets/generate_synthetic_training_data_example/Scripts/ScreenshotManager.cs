@@ -123,15 +123,15 @@ public class ScreenshotManager : MonoBehaviour
         }
 
         // create new thread to save the image to file (only operation that can be done in background)
-        //new System.Threading.Thread(() =>
-        //{
+        new System.Threading.Thread(() =>
+        {
             // create file and write optional header with image bytes
             var f = System.IO.File.Create(filename);
             if (fileHeader != null) f.Write(fileHeader, 0, fileHeader.Length);
             f.Write(fileData, 0, fileData.Length);
             f.Close();
             //Debug.Log(string.Format("Wrote screenshot {0} of size {1}", filename, fileData.Length));
-        //}).Start();
+        }).Start();
 
         // unhide optional game object if set
         if (hideGameObject != null)

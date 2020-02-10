@@ -9,6 +9,9 @@ public class CaptureManager : MonoBehaviour
 {
     public static CaptureManager instance = null;              //Static instance which allows it to be accessed by any other script.
 
+    [Header("Capture Parameters")]
+    public bool capturePerScene = true;
+    public Material[] skyboxesToCaptureIn;
     public GameObject objToScan;
     public Camera camera;
     public int screenshots = 300;
@@ -18,8 +21,9 @@ public class CaptureManager : MonoBehaviour
     public Vector3 cameraViewRandomOffsetRange;
 
     [Header("IO")]
-    public string datasetDirPath = "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET";
-    public string classFolderName;
+    public string datasetDirPath = "TRAINING_DATA";
+    public string datasetJsonName = "ml_dataset";
+    [HideInInspector] public string classFolderName;
 
     //  Holds our data that maps image filenames and region coordinates
     //public Dictionary<string, double[]> imageNameToRegions = new Dictionary<string, double[]>();
@@ -60,6 +64,9 @@ public class CaptureManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        datasetDirPath = Path.Combine(Application.dataPath, "../", datasetDirPath);
+        datasetDirPath = Path.GetFullPath(datasetDirPath);
+
         Screen.SetResolution(datasetImageSize, datasetImageSize, false);
 
         if (screenshotManager)
@@ -73,9 +80,25 @@ public class CaptureManager : MonoBehaviour
     public void CaptureObject()
     {
         Vector3[] points = GetSpherePoints(screenshots, distance);
-        CaptureImages(points);
 
-        DebugPoints();
+        //  if there is skyboxes, capture screenshots for each skybox... else, just capture once in current scene
+        Debug.Log("Starting capture...");
+        if (skyboxesToCaptureIn.Length > 0 && capturePerScene)
+        {
+            for (int i = 0; i < skyboxesToCaptureIn.Length; i++)
+            {
+                Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", i+1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[i].name));
+                RenderSettings.skybox = skyboxesToCaptureIn[i];
+                CaptureImages(points);
+            }
+        }
+        else
+        {
+            CaptureImages(points);
+        }
+        Debug.Log(string.Format("Capture completed! Results in {0}", datasetDirPath));
+
+        //DebugPoints();
     }
 
     private void CaptureImages(Vector3[] points)
@@ -83,26 +106,41 @@ public class CaptureManager : MonoBehaviour
         if (!camera || !objToScan || !screenshotManager || points.Length <= 0)
             return;
 
+        //  Get bounds used to check if its visable within the camera. Get collider if avaliable, add one if not
+        BoxCollider col = /*objToScan.GetComponent<Collider>()? objToScan.GetComponent<Collider>() :*/ objToScan.AddComponent<BoxCollider>();
+        col.size *= .5f;
+        Bounds visable_bounds = col.bounds;
+
         Dictionary<string, double[]> imageNameToRegions = new Dictionary<string, double[]>();
         for (int i = 0; i < points.Length; i++)
         {
             camera.transform.position = points[i];
             camera.transform.LookAt(objToScan.transform);
 
-            //  random distance offset
-            camera.transform.localPosition += new Vector3(0, 0, UnityEngine.Random.Range(-distanceRandomOffset, distanceRandomOffset)); 
+            //  keep randomizing view until its within the shot
+            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
+            do
+            {
+                camera.transform.LookAt(objToScan.transform);
 
-            //  Add randomness to the view to assist training quality
-            float ranX = UnityEngine.Random.Range(cameraViewRandomOffsetRange.x, -cameraViewRandomOffsetRange.x);
-            float ranY = UnityEngine.Random.Range(cameraViewRandomOffsetRange.y, -cameraViewRandomOffsetRange.y);
-            float ranZ = UnityEngine.Random.Range(cameraViewRandomOffsetRange.z, -cameraViewRandomOffsetRange.z);
-            camera.transform.eulerAngles += new Vector3(ranX, ranY, ranZ);
+                //  random distance offset
+                camera.transform.localPosition += new Vector3(0, 0, UnityEngine.Random.Range(-distanceRandomOffset, distanceRandomOffset)); 
+
+                //  Add randomness to the view to assist training quality
+                float ranX = UnityEngine.Random.Range(cameraViewRandomOffsetRange.x, -cameraViewRandomOffsetRange.x);
+                float ranY = UnityEngine.Random.Range(cameraViewRandomOffsetRange.y, -cameraViewRandomOffsetRange.y);
+                float ranZ = UnityEngine.Random.Range(cameraViewRandomOffsetRange.z, -cameraViewRandomOffsetRange.z);
+                camera.transform.eulerAngles += new Vector3(ranX, ranY, ranZ);
+
+                planes = GeometryUtility.CalculateFrustumPlanes(camera);
+
+            } while (!GeometryUtility.TestPlanesAABB(planes, col.bounds));
 
             // folder name of the dataset object key
-            if (string.IsNullOrEmpty(classFolderName))
+            //if (string.IsNullOrEmpty(classFolderName))
                 classFolderName = objToScan.name;
 
-            //  cache results
+            //  Take screenshot, calculate bounding box regions, and cache results
             string filename = screenshotManager.TakeScreenshot(datasetDirPath);
             Rect rect = boundsManager.Get3dTo2dRect(objToScan);
             double xNorm = Mathf.Clamp(rect.x / datasetImageSize, 0, datasetImageSize);
@@ -117,10 +155,8 @@ public class CaptureManager : MonoBehaviour
 
         //  dataset dict to json
         string json = JsonConvert.SerializeObject(imageNameToRegions, Formatting.Indented);
-        var stringPath = datasetDirPath;
-        var folder = Path.GetFullPath(stringPath);
-        var fn = string.Format("{0}/ml_dataset.json", folder);
-        File.WriteAllText(fn, json); 
+        string datasetFilepath = Path.Combine(datasetDirPath, datasetJsonName);
+        File.WriteAllText(datasetFilepath, json); 
     }
 
     [ContextMenu(nameof(DebugPoints))]
