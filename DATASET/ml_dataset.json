@@ -1,0 +1,602 @@
+{
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_0.png": [
+    0.41239246726036072,
+    1.1480474472045898,
+    0.38151952624320984,
+    0.50677263736724854
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_1.png": [
+    0.0,
+    0.18030893802642822,
+    0.97710734605789185,
+    0.72802579402923584
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_2.png": [
+    0.40085005760192871,
+    0.838398814201355,
+    0.32886201143264771,
+    0.47284412384033203
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_3.png": [
+    0.45186981558799744,
+    0.63177764415740967,
+    0.50688815116882324,
+    0.48319077491760254
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_4.png": [
+    0.0,
+    1.1511702537536621,
+    1.17548406124115,
+    1.3892374038696289
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_5.png": [
+    0.0063406461849808693,
+    0.87805163860321045,
+    0.59422636032104492,
+    0.553209662437439
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_6.png": [
+    0.54827380180358887,
+    0.97936058044433594,
+    0.80792069435119629,
+    0.9629589319229126
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_7.png": [
+    0.0,
+    0.042003273963928223,
+    0.78023374080657959,
+    0.83701920509338379
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_8.png": [
+    0.24023191630840302,
+    1.6336725950241089,
+    1.3749169111251831,
+    1.0295482873916626
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_9.png": [
+    0.0,
+    0.50047922134399414,
+    0.85922336578369141,
+    0.635331392288208
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_10.png": [
+    0.0,
+    1.061100959777832,
+    0.49767604470252991,
+    0.58674919605255127
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_11.png": [
+    0.0,
+    0.090192794799804688,
+    0.71210563182830811,
+    0.68413889408111572
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_12.png": [
+    0.0,
+    0.67008841037750244,
+    1.1180037260055542,
+    1.1172702312469482
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_13.png": [
+    0.21666985750198364,
+    0.017044186592102051,
+    0.75062662363052368,
+    0.70918917655944824
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_14.png": [
+    0.09905698150396347,
+    1.05937922000885,
+    0.5830504298210144,
+    0.40401363372802734
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_15.png": [
+    0.31752437353134155,
+    0.0,
+    1.0716078281402588,
+    1.1871094703674316
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_16.png": [
+    0.0,
+    0.56575429439544678,
+    0.63865917921066284,
+    0.54810559749603271
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_17.png": [
+    0.61023581027984619,
+    0.75735414028167725,
+    0.40415561199188232,
+    0.556817889213562
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_18.png": [
+    0.0,
+    0.38315260410308838,
+    0.92598980665206909,
+    0.75718414783477783
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_19.png": [
+    0.25748714804649353,
+    1.7437424659729004,
+    0.67443406581878662,
+    0.8096306324005127
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_20.png": [
+    0.022151738405227661,
+    1.2850868701934814,
+    1.1663219928741455,
+    1.0560064315795898
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_21.png": [
+    0.0,
+    0.54412937164306641,
+    0.71531492471694946,
+    0.801020622253418
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_22.png": [
+    0.0,
+    0.68530130386352539,
+    0.43181619048118591,
+    0.51972579956054688
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_23.png": [
+    0.035843569785356522,
+    0.0,
+    0.9030793309211731,
+    0.87554633617401123
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_24.png": [
+    0.0,
+    1.2915194034576416,
+    0.612030565738678,
+    0.73916006088256836
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_25.png": [
+    0.13417740166187286,
+    0.0,
+    0.88931757211685181,
+    0.93230140209198
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_26.png": [
+    0.0,
+    0.57978332042694092,
+    0.60879731178283691,
+    0.81816589832305908
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_27.png": [
+    0.500203013420105,
+    1.0131397247314453,
+    0.460219144821167,
+    0.51772451400756836
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_28.png": [
+    0.0,
+    0.896591067314148,
+    0.7853122353553772,
+    0.67187809944152832
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_29.png": [
+    0.0,
+    1.1773996353149414,
+    0.74045389890670776,
+    0.50463080406188965
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_30.png": [
+    0.0,
+    0.64615476131439209,
+    0.71786487102508545,
+    0.601838231086731
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_31.png": [
+    0.0,
+    1.4623496532440186,
+    0.69342827796936035,
+    0.52585840225219727
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_32.png": [
+    0.025045890361070633,
+    1.1922571659088135,
+    0.42453041672706604,
+    0.49717283248901367
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_33.png": [
+    0.0,
+    1.2903892993927002,
+    0.74346518516540527,
+    0.79506945610046387
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_34.png": [
+    0.0,
+    0.99561518430709839,
+    0.66211444139480591,
+    0.43606573343276978
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_35.png": [
+    0.061897564679384232,
+    0.55284678936004639,
+    0.434915691614151,
+    0.60342538356781006
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_36.png": [
+    0.033331587910652161,
+    0.0,
+    0.72722828388214111,
+    1.030495285987854
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_37.png": [
+    0.24072030186653137,
+    0.38936102390289307,
+    0.41996648907661438,
+    0.58403640985488892
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_38.png": [
+    0.29975908994674683,
+    0.0,
+    0.87703031301498413,
+    0.79647374153137207
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_39.png": [
+    1.0527704954147339,
+    0.0,
+    0.97279417514801025,
+    0.62223672866821289
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_40.png": [
+    0.15295623242855072,
+    1.0096020698547363,
+    0.49216538667678833,
+    0.42149972915649414
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_41.png": [
+    0.0,
+    0.77690386772155762,
+    1.095136284828186,
+    0.7078094482421875
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_42.png": [
+    0.94350701570510864,
+    0.92377233505249023,
+    0.63049203157424927,
+    0.82385170459747314
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_43.png": [
+    0.24970175325870514,
+    0.997389554977417,
+    0.505021870136261,
+    0.69626736640930176
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_44.png": [
+    0.00015782401897013187,
+    1.0818252563476563,
+    0.76668661832809448,
+    0.64676237106323242
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_45.png": [
+    0.0,
+    0.94527524709701538,
+    0.46015924215316772,
+    0.5143933892250061
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_46.png": [
+    0.0,
+    1.2484318017959595,
+    0.51113849878311157,
+    0.84900343418121338
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_47.png": [
+    0.0,
+    0.25096607208251953,
+    0.79671686887741089,
+    0.64521288871765137
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_48.png": [
+    0.0,
+    0.0,
+    0.62240499258041382,
+    0.55103743076324463
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_49.png": [
+    0.65761899948120117,
+    1.6332837343215942,
+    0.680103063583374,
+    1.0644351243972778
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_50.png": [
+    0.0,
+    0.30236184597015381,
+    0.5833359956741333,
+    0.6038825511932373
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_51.png": [
+    0.0,
+    0.0,
+    0.71467053890228271,
+    0.72904646396636963
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_52.png": [
+    0.0,
+    0.76918137073516846,
+    0.82101696729660034,
+    0.53152680397033691
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_53.png": [
+    0.30081337690353394,
+    1.1183316707611084,
+    0.43505978584289551,
+    0.458892822265625
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_54.png": [
+    0.0,
+    0.75597703456878662,
+    1.1895625591278076,
+    0.915866494178772
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_55.png": [
+    0.0,
+    0.94479084014892578,
+    0.74895000457763672,
+    0.67083382606506348
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_56.png": [
+    0.0,
+    1.0753161907196045,
+    0.640395998954773,
+    0.45118069648742676
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_57.png": [
+    0.25160235166549683,
+    0.80022633075714111,
+    0.631426215171814,
+    0.63917005062103271
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_58.png": [
+    0.0,
+    0.73505711555480957,
+    0.52569639682769775,
+    0.52544856071472168
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_59.png": [
+    0.0,
+    0.15426468849182129,
+    1.0314357280731201,
+    0.774966835975647
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_60.png": [
+    0.0973224937915802,
+    0.74077939987182617,
+    0.77172422409057617,
+    0.81306290626525879
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_61.png": [
+    0.0,
+    0.45466530323028564,
+    0.52542519569396973,
+    0.42995536327362061
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_62.png": [
+    0.0,
+    0.89975571632385254,
+    0.68278312683105469,
+    0.85895860195159912
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_63.png": [
+    0.54012483358383179,
+    0.74994754791259766,
+    0.6627691388130188,
+    0.58061480522155762
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_64.png": [
+    0.0,
+    1.1671360731124878,
+    0.6467781662940979,
+    0.55148601531982422
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_65.png": [
+    0.3644581139087677,
+    0.53140938282012939,
+    0.89863240718841553,
+    0.62519443035125732
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_66.png": [
+    0.29429730772972107,
+    0.7012563943862915,
+    0.39827397465705872,
+    0.51089274883270264
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_67.png": [
+    0.0,
+    1.1430753469467163,
+    0.95169210433959961,
+    0.91639387607574463
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_68.png": [
+    0.0038862563669681549,
+    1.6236131191253662,
+    0.66206067800521851,
+    0.57960319519042969
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_69.png": [
+    0.51569288969039917,
+    0.61252140998840332,
+    0.54304474592208862,
+    0.54039168357849121
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_70.png": [
+    0.19787855446338654,
+    0.76448500156402588,
+    0.77827286720275879,
+    0.64384984970092773
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_71.png": [
+    0.0,
+    0.34242331981658936,
+    0.46262270212173462,
+    0.67398130893707275
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_72.png": [
+    0.41979184746742249,
+    0.88165283203125,
+    0.83527231216430664,
+    0.70432889461517334
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_73.png": [
+    0.0,
+    0.93446803092956543,
+    1.0077039003372192,
+    0.76951789855957031
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_74.png": [
+    0.0,
+    0.78086328506469727,
+    0.53377270698547363,
+    0.45383644104003906
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_75.png": [
+    0.94927668571472168,
+    0.13512098789215088,
+    1.1129767894744873,
+    1.1707699298858643
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_76.png": [
+    0.51710104942321777,
+    0.50805306434631348,
+    0.45928317308425903,
+    0.67677950859069824
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_77.png": [
+    0.1162278801202774,
+    0.95351886749267578,
+    0.64610135555267334,
+    0.42227506637573242
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_78.png": [
+    0.582703173160553,
+    0.38079571723937988,
+    0.65758997201919556,
+    0.59938102960586548
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_79.png": [
+    0.29304137825965881,
+    0.32236611843109131,
+    0.4181765615940094,
+    0.61107939481735229
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_80.png": [
+    0.0,
+    0.21234679222106934,
+    0.94565021991729736,
+    0.838050127029419
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_81.png": [
+    0.5559658408164978,
+    0.65312576293945313,
+    0.81011480093002319,
+    0.63643479347229
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_82.png": [
+    0.68206334114074707,
+    0.0,
+    0.5925525426864624,
+    0.77892911434173584
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_83.png": [
+    0.16204313933849335,
+    1.1634085178375244,
+    0.66235226392745972,
+    0.87654995918273926
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_84.png": [
+    0.4169982373714447,
+    0.71940934658050537,
+    0.5844796895980835,
+    0.63886439800262451
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_85.png": [
+    0.28652063012123108,
+    0.37047159671783447,
+    0.59274590015411377,
+    0.572961688041687
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_86.png": [
+    0.0,
+    0.60799336433410645,
+    0.70292264223098755,
+    0.58922100067138672
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_87.png": [
+    0.036307107657194138,
+    1.3437905311584473,
+    0.61989444494247437,
+    0.80259156227111816
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_88.png": [
+    0.0,
+    0.65019726753234863,
+    0.77246683835983276,
+    0.58842682838439941
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_89.png": [
+    0.11287961155176163,
+    0.49746537208557129,
+    0.76495158672332764,
+    0.54425489902496338
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_90.png": [
+    0.0,
+    0.0,
+    1.2413598299026489,
+    0.97776651382446289
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_91.png": [
+    0.2963249683380127,
+    1.0672048330307007,
+    0.74710845947265625,
+    0.83488667011260986
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_92.png": [
+    0.0,
+    0.61569666862487793,
+    0.55157345533370972,
+    0.38658237457275391
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_93.png": [
+    0.25299578905105591,
+    0.56342005729675293,
+    0.74235373735427856,
+    0.71153926849365234
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_94.png": [
+    0.2590058445930481,
+    0.64226448535919189,
+    0.55972516536712646,
+    0.44638383388519287
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_95.png": [
+    0.05440850555896759,
+    0.94237488508224487,
+    0.56650310754776,
+    0.45491117238998413
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_96.png": [
+    0.0,
+    0.68573760986328125,
+    0.760044276714325,
+    0.74251747131347656
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_97.png": [
+    0.38099205493927,
+    0.47921657562255859,
+    0.478435754776001,
+    0.57868814468383789
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_98.png": [
+    0.10367557406425476,
+    0.7371445894241333,
+    0.46978357434272766,
+    0.40854930877685547
+  ],
+  "C:/Users/choan/Documents/GitHub/XR-Showdown-2020/DATASET/Can_Coke/screen_99.png": [
+    0.0,
+    0.0,
+    1.002172589302063,
+    1.3754127025604248
+  ]
+}
