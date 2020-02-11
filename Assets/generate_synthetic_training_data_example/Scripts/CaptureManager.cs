@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 public class CaptureManager : MonoBehaviour
@@ -84,11 +85,16 @@ public class CaptureManager : MonoBehaviour
     {
         Vector3[] points = GetSpherePoints(screenshots, distance);
 
-        //  Hide all the objects initially
+        //  Delete previous dataset folder
         for (int i = 0; i < objsToScan.Length; i++)
         {
-            objsToScan[i].SetActive(false);
+            string deletePath = Path.Combine(datasetDirPath, objsToScan[i].name);
+            FileUtil.DeleteFileOrDirectory(deletePath);
         }
+
+        //  Hide all the objects initially
+        for (int i = 0; i < objsToScan.Length; i++)
+            objsToScan[i].SetActive(false);
 
         //  if there is skyboxes, capture screenshots for each skybox... else, just capture once in current scene
         Debug.Log("Starting capture...");
@@ -110,6 +116,7 @@ public class CaptureManager : MonoBehaviour
             else
             {
                 CaptureImages(points, objsToScan[j]);
+                screenshotCount++;
             }
 
             objsToScan[j].SetActive(false);
@@ -165,10 +172,12 @@ public class CaptureManager : MonoBehaviour
             //  Take screenshot, calculate bounding box regions, and cache results
             string filename = screenshotManager.TakeScreenshot(datasetDirPath);
             Rect rect = boundsManager.Get3dTo2dRect(objToScan);
-            float xNorm = Mathf.Clamp(rect.x / datasetImageSize, 0, datasetImageSize);
-            float yNorm = Mathf.Clamp(rect.y / datasetImageSize, 0, datasetImageSize);
-            float x2Norm = Mathf.Clamp(rect.width / datasetImageSize, 0, datasetImageSize);
-            float y2Norm = Mathf.Clamp(rect.height / datasetImageSize, 0, datasetImageSize);
+            //print(string.Format("{0},{1},{2},{3}", rect.x, rect.y, rect.width+rect.x, rect.height+rect.y));
+
+            float xNorm = Mathf.Clamp(rect.x / Screen.width, 0, 1);
+            float yNorm = Mathf.Clamp(rect.y / Screen.height, 0, 1);
+            float x2Norm = Mathf.Clamp(rect.xMax / Screen.width, 0, 1);
+            float y2Norm = Mathf.Clamp(rect.yMax / Screen.height, 0, 1);
 
             //imageNameToRegions.Add(filename, new double[] {xNorm, yNorm, wNorm, hNorm});
             //print(string.Format("{0}, {1}", filename, new double[] { xNorm, yNorm, wNorm, hNorm }));

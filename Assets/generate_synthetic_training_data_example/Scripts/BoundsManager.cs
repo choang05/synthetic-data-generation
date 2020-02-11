@@ -131,6 +131,7 @@ public class BoundsManager : MonoBehaviour
         texture.SetPixel(0, 0, color);
         texture.Apply();
 
+        //GUI.DrawTexture(area, texture);   //  solid color
         Rect lineArea = area;
         lineArea.height = frameWidth; //Top line
         GUI.DrawTexture(lineArea, texture);
@@ -141,5 +142,10 @@ public class BoundsManager : MonoBehaviour
         GUI.DrawTexture(lineArea, texture);
         lineArea.x = area.xMax - frameWidth;//Right
         GUI.DrawTexture(lineArea, texture);
+
+        GUIStyle textStyle = new GUIStyle();
+        textStyle.normal.textColor = Color.blue;
+        Rect rectNorm = new Rect(area.x/Screen.width, area.y/ Screen.height, area.xMax/Screen.width, area.yMax/Screen.height);
+        GUI.Label(area, rectNorm.ToString(), textStyle);
     }
 }
