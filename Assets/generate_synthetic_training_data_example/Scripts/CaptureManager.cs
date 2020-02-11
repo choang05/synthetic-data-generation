@@ -12,7 +12,7 @@ public class CaptureManager : MonoBehaviour
     [Header("Capture Parameters")]
     public bool capturePerScene = true;
     public Material[] skyboxesToCaptureIn;
-    public GameObject objToScan;
+    public GameObject[] objsToScan;
     public Camera camera;
     public int screenshots = 300;
     public int datasetImageSize = 512;
@@ -35,6 +35,8 @@ public class CaptureManager : MonoBehaviour
 
     private ScreenshotManager screenshotManager;
     private BoundsManager boundsManager;
+    private CSVManager csvManager;
+
     private GameObject[] debugPointsGOs; 
 
     private void Awake()
@@ -59,6 +61,7 @@ public class CaptureManager : MonoBehaviour
 
         screenshotManager = FindObjectOfType<ScreenshotManager>();
         boundsManager = FindObjectOfType<BoundsManager>();
+        csvManager = FindObjectOfType<CSVManager>();
     }
 
     // Start is called before the first frame update
@@ -81,27 +84,46 @@ public class CaptureManager : MonoBehaviour
     {
         Vector3[] points = GetSpherePoints(screenshots, distance);
 
+        //  Hide all the objects initially
+        for (int i = 0; i < objsToScan.Length; i++)
+        {
+            objsToScan[i].SetActive(false);
+        }
+
         //  if there is skyboxes, capture screenshots for each skybox... else, just capture once in current scene
         Debug.Log("Starting capture...");
-        if (skyboxesToCaptureIn.Length > 0 && capturePerScene)
+        int screenshotCount = 0;
+        for (int j = 0; j < objsToScan.Length; j++)
         {
-            for (int i = 0; i < skyboxesToCaptureIn.Length; i++)
+            objsToScan[j].SetActive(true);
+
+            if (skyboxesToCaptureIn.Length > 0 && capturePerScene)
             {
-                Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", i+1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[i].name));
-                RenderSettings.skybox = skyboxesToCaptureIn[i];
-                CaptureImages(points);
+                for (int i = 0; i < skyboxesToCaptureIn.Length; i++)
+                {
+                    Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", i+1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[i].name));
+                    RenderSettings.skybox = skyboxesToCaptureIn[i];
+                    CaptureImages(points, objsToScan[j]);
+                    screenshotCount++;
+                }
             }
+            else
+            {
+                CaptureImages(points, objsToScan[j]);
+            }
+
+            objsToScan[j].SetActive(false);
         }
-        else
-        {
-            CaptureImages(points);
-        }
-        Debug.Log(string.Format("Capture completed! Results in {0}", datasetDirPath));
+
+        string csvPath = csvManager.CreateCSVFromRows(null);
+        
+        Debug.Log(string.Format("Captured {0} images! Results in {1}", screenshotCount, datasetDirPath));
+        Debug.Log(string.Format("Dataset csv created at {0}", csvPath));
 
         //DebugPoints();
     }
 
-    private void CaptureImages(Vector3[] points)
+    private void CaptureImages(Vector3[] points, GameObject objToScan)
     {
         if (!camera || !objToScan || !screenshotManager || points.Length <= 0)
             return;
@@ -143,20 +165,23 @@ public class CaptureManager : MonoBehaviour
             //  Take screenshot, calculate bounding box regions, and cache results
             string filename = screenshotManager.TakeScreenshot(datasetDirPath);
             Rect rect = boundsManager.Get3dTo2dRect(objToScan);
-            double xNorm = Mathf.Clamp(rect.x / datasetImageSize, 0, datasetImageSize);
-            double yNorm = Mathf.Clamp(rect.y / datasetImageSize, 0, datasetImageSize);
-            double wNorm = Mathf.Clamp(rect.width / datasetImageSize, 0, datasetImageSize);
-            double hNorm = Mathf.Clamp(rect.height / datasetImageSize, 0, datasetImageSize);
+            float xNorm = Mathf.Clamp(rect.x / datasetImageSize, 0, datasetImageSize);
+            float yNorm = Mathf.Clamp(rect.y / datasetImageSize, 0, datasetImageSize);
+            float x2Norm = Mathf.Clamp(rect.width / datasetImageSize, 0, datasetImageSize);
+            float y2Norm = Mathf.Clamp(rect.height / datasetImageSize, 0, datasetImageSize);
 
-            imageNameToRegions.Add(filename, new double[] {xNorm, yNorm, wNorm, hNorm});
-
+            //imageNameToRegions.Add(filename, new double[] {xNorm, yNorm, wNorm, hNorm});
             //print(string.Format("{0}, {1}", filename, new double[] { xNorm, yNorm, wNorm, hNorm }));
+
+            //  cache csv rowdata
+            string row = csvManager.GenerateRowString(CSVManager.AutoMLSets.UNASSIGNED, filename, objToScan.name, xNorm, yNorm, x2Norm, y2Norm);
+            csvManager.AppendRowData(row);
         }
 
         //  dataset dict to json
-        string json = JsonConvert.SerializeObject(imageNameToRegions, Formatting.Indented);
-        string datasetFilepath = Path.Combine(datasetDirPath, datasetJsonName);
-        File.WriteAllText(datasetFilepath, json); 
+        //string json = JsonConvert.SerializeObject(imageNameToRegions, Formatting.Indented);
+        //string datasetFilepath = Path.Combine(datasetDirPath, datasetJsonName);
+        //File.WriteAllText(datasetFilepath, json); 
     }
 
     [ContextMenu(nameof(DebugPoints))]

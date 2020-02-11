@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BoundsManager : MonoBehaviour
 {
@@ -37,6 +38,12 @@ public class BoundsManager : MonoBehaviour
     {
         //rect = GUI2dRectWithObject(gameObject);
         //Render_Colored_Rectangle((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, frameColor);
+
+        CaptureManager capManager = FindObjectOfType<CaptureManager>();
+        if (capManager)
+        {
+            boundObjs = capManager.objsToScan.ToList();
+        }
     }
 
     private void Update()
