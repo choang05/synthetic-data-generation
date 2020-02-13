@@ -80,6 +80,25 @@ public class CaptureManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        Rect rect = boundsManager.Get3dTo2dRect(objsToScan[0]);
+
+        //print(string.Format("{0},{1},{2},{3}", rect.x, rect.y, rect.width+rect.x, rect.height+rect.y));
+
+        //  correct bounding box coordinates to our dataset image size
+        float xNorm = (datasetImageSize / Screen.width) * rect.x;
+        float yNorm = (datasetImageSize / Screen.height) * rect.y;
+        float x2Norm = (datasetImageSize / Screen.width) * rect.xMax;
+        float y2Norm = (datasetImageSize / Screen.height) * rect.yMax;
+        xNorm = Mathf.Clamp(xNorm / datasetImageSize, 0, 1);
+        yNorm = Mathf.Clamp(yNorm / datasetImageSize, 0, 1);
+        x2Norm = Mathf.Clamp(x2Norm / datasetImageSize, 0, 1);
+        y2Norm = Mathf.Clamp(y2Norm / datasetImageSize, 0, 1);
+        print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm, y2Norm));
+
+    }
+
     [ContextMenu(nameof(CaptureObject))]
     public void CaptureObject()
     {
@@ -129,7 +148,12 @@ public class CaptureManager : MonoBehaviour
 
         //DebugPoints();
     }
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="points"></param>
+    /// <param name="objToScan"></param>
     private void CaptureImages(Vector3[] points, GameObject objToScan)
     {
         if (!camera || !objToScan || !screenshotManager || points.Length <= 0)
@@ -140,7 +164,7 @@ public class CaptureManager : MonoBehaviour
         col.size *= .5f;
         Bounds visable_bounds = col.bounds;
 
-        Dictionary<string, double[]> imageNameToRegions = new Dictionary<string, double[]>();
+        //Dictionary<string, double[]> imageNameToRegions = new Dictionary<string, double[]>();
         for (int i = 0; i < points.Length; i++)
         {
             camera.transform.position = points[i];
@@ -153,7 +177,7 @@ public class CaptureManager : MonoBehaviour
                 camera.transform.LookAt(objToScan.transform);
 
                 //  random distance offset
-                camera.transform.localPosition += new Vector3(0, 0, UnityEngine.Random.Range(-distanceRandomOffset, distanceRandomOffset)); 
+                camera.transform.localPosition += new Vector3(0, 0, UnityEngine.Random.Range(-distanceRandomOffset, distanceRandomOffset));
 
                 //  Add randomness to the view to assist training quality
                 float ranX = UnityEngine.Random.Range(cameraViewRandomOffsetRange.x, -cameraViewRandomOffsetRange.x);
@@ -172,12 +196,21 @@ public class CaptureManager : MonoBehaviour
             //  Take screenshot, calculate bounding box regions, and cache results
             string filename = screenshotManager.TakeScreenshot(datasetDirPath);
             Rect rect = boundsManager.Get3dTo2dRect(objToScan);
+
             //print(string.Format("{0},{1},{2},{3}", rect.x, rect.y, rect.width+rect.x, rect.height+rect.y));
 
-            float xNorm = Mathf.Clamp(rect.x / Screen.width, 0, 1);
-            float yNorm = Mathf.Clamp(rect.y / Screen.height, 0, 1);
-            float x2Norm = Mathf.Clamp(rect.xMax / Screen.width, 0, 1);
-            float y2Norm = Mathf.Clamp(rect.yMax / Screen.height, 0, 1);
+            //  correct bounding box coordinates to our dataset image size
+            float xNorm = (datasetImageSize / Screen.width) * rect.x;
+            float yNorm = (datasetImageSize / Screen.height) * rect.y;
+            float x2Norm = (datasetImageSize / Screen.width) * rect.xMax;
+            float y2Norm = (datasetImageSize / Screen.height) * rect.yMax;
+            xNorm = Mathf.Clamp(xNorm / datasetImageSize, 0, 1);
+            yNorm = Mathf.Clamp(yNorm / datasetImageSize, 0, 1);
+            x2Norm = Mathf.Clamp(x2Norm / datasetImageSize, 0, 1);
+            y2Norm = Mathf.Clamp(y2Norm / datasetImageSize, 0, 1);
+
+            //print("Screen: " + Screen.width + ", " + Screen.height);
+            print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm, y2Norm));
 
             //imageNameToRegions.Add(filename, new double[] {xNorm, yNorm, wNorm, hNorm});
             //print(string.Format("{0}, {1}", filename, new double[] { xNorm, yNorm, wNorm, hNorm }));
@@ -256,11 +289,5 @@ public class CaptureManager : MonoBehaviour
         }
 
         return directions;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

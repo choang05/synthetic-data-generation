@@ -37,8 +37,6 @@ public class ScreenshotManager : MonoBehaviour
     private Texture2D screenShot;
     private int counter = 0; // image #
 
-    private CaptureManager capManager;
-
     private void Awake()
     {
         #region Instance
@@ -58,8 +56,6 @@ public class ScreenshotManager : MonoBehaviour
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
         #endregion
-
-        capManager = FindObjectOfType<CaptureManager>();
     }
 
     private void Start()
@@ -146,10 +142,10 @@ public class ScreenshotManager : MonoBehaviour
         // if folder not specified by now use a good default
         folder = string.IsNullOrEmpty(dirPath) ? Application.persistentDataPath : dirPath;
 
-        if (capManager)
+        if (CaptureManager.instance)
         {
             //  Add class name to folder path for structured data purposes
-            folder += string.Format("/{0}", capManager.classFolderName);
+            folder += string.Format("/{0}", CaptureManager.instance.classFolderName);
         }
 
         // make sure directoroy exists

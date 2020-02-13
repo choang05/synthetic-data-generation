@@ -33,7 +33,7 @@ RenderSettings:
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
-  m_DefaultReflectionResolution: 128
+  m_DefaultReflectionResolution: 512
   m_ReflectionBounces: 3
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
@@ -702,7 +702,7 @@ MonoBehaviour:
   captureHeight: 512
   hideGameObject: {fileID: 0}
   optimizeForManyScreenshots: 1
-  format: 2
+  format: 1
   folder: 
 --- !u!4 &1910635257
 Transform:
@@ -793,9 +793,9 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_SensorSize: {x: 70, y: 51}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 61.562447
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
