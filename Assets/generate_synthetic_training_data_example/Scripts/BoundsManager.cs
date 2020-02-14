@@ -147,5 +147,7 @@ public class BoundsManager : MonoBehaviour
         textStyle.normal.textColor = Color.blue;
         Rect rectNorm = new Rect(area.x/Screen.width, area.y/ Screen.height, area.xMax/Screen.width, area.yMax/Screen.height);
         GUI.Label(area, rectNorm.ToString(), textStyle);
+        Rect areaTmp = new Rect(area.x, area.y + 15, area.xMax, area.yMax + 15);
+        GUI.Label(areaTmp, area.ToString(), textStyle);
     }
 }

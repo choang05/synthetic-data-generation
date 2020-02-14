@@ -10,16 +10,22 @@ public class CaptureManager : MonoBehaviour
 {
     public static CaptureManager instance = null;              //Static instance which allows it to be accessed by any other script.
 
-    [Header("Capture Parameters")]
+    [Header("Capture Settings")]
     public bool capturePerScene = true;
-    public Material[] skyboxesToCaptureIn;
-    public GameObject[] objsToScan;
-    public Camera camera;
     public int screenshots = 300;
     public int datasetImageSize = 512;
+    public Material[] skyboxesToCaptureIn;
+    public GameObject[] objsToScan;
+
+    [Header("Camera Settings")]
+    public Camera camera;
     public float distance = 5;
     public float distanceRandomOffset;
     public Vector3 cameraViewRandomOffsetRange;
+
+    [Header("Lights Settings")]
+    public bool randomizeLights;
+    public uint numScreenshotsPerLight = 1;
 
     [Header("IO")]
     public string datasetDirPath = "TRAINING_DATA";
@@ -80,24 +86,23 @@ public class CaptureManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        Rect rect = boundsManager.Get3dTo2dRect(objsToScan[0]);
+    //private void Update()
+    //{
+    //    Rect rect = boundsManager.Get3dTo2dRect(objsToScan[0]);
 
-        //print(string.Format("{0},{1},{2},{3}", rect.x, rect.y, rect.width+rect.x, rect.height+rect.y));
+    //    //  correct bounding box coordinates to our dataset image size. Convert screen space to dataset image resolution.
+    //    float xNorm = ((float)datasetImageSize / (float)Screen.width) * rect.x;
+    //    float yNorm = ((float)datasetImageSize / (float)Screen.height) * rect.y;
+    //    float x2Norm = ((float)datasetImageSize / (float)Screen.width) * rect.xMax;
+    //    float y2Norm = ((float)datasetImageSize / (float)Screen.height) * rect.yMax;
+    //    xNorm = Mathf.Clamp(xNorm / (float)datasetImageSize, 0, 1);
+    //    yNorm = Mathf.Clamp(yNorm / (float)datasetImageSize, 0, 1);
+    //    x2Norm = Mathf.Clamp(x2Norm / (float)datasetImageSize, 0, 1);
+    //    y2Norm = Mathf.Clamp(y2Norm / (float)datasetImageSize, 0, 1);
 
-        //  correct bounding box coordinates to our dataset image size
-        float xNorm = (datasetImageSize / Screen.width) * rect.x;
-        float yNorm = (datasetImageSize / Screen.height) * rect.y;
-        float x2Norm = (datasetImageSize / Screen.width) * rect.xMax;
-        float y2Norm = (datasetImageSize / Screen.height) * rect.yMax;
-        xNorm = Mathf.Clamp(xNorm / datasetImageSize, 0, 1);
-        yNorm = Mathf.Clamp(yNorm / datasetImageSize, 0, 1);
-        x2Norm = Mathf.Clamp(x2Norm / datasetImageSize, 0, 1);
-        y2Norm = Mathf.Clamp(y2Norm / datasetImageSize, 0, 1);
-        print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm, y2Norm));
-
-    }
+    //    //print("Screen: " + Screen.width + ", " + Screen.height);
+    //    print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm, y2Norm));
+    //}
 
     [ContextMenu(nameof(CaptureObject))]
     public void CaptureObject()
@@ -150,7 +155,8 @@ public class CaptureManager : MonoBehaviour
     }
     
     /// <summary>
-    /// 
+    /// Given a list of locations and a gameobject, the camera will iterate through each location and take a screenshot of the gameobject 
+    /// with variations.
     /// </summary>
     /// <param name="points"></param>
     /// <param name="objToScan"></param>
@@ -197,20 +203,18 @@ public class CaptureManager : MonoBehaviour
             string filename = screenshotManager.TakeScreenshot(datasetDirPath);
             Rect rect = boundsManager.Get3dTo2dRect(objToScan);
 
-            //print(string.Format("{0},{1},{2},{3}", rect.x, rect.y, rect.width+rect.x, rect.height+rect.y));
+            //  correct bounding box coordinates to our dataset image size. Convert screen space to dataset image resolution.
+            float xNorm = rect.xMin;
+            float yNorm = rect.yMin - 475;  //  [BUG] The Y position gets offsetted on capture. The -475 is to offset it back for resolution of 512x512.
+            float x2Norm = rect.width + xNorm;
+            float y2Norm = rect.height + yNorm;
+            //print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm - rect.x, y2Norm - rect.y));
 
-            //  correct bounding box coordinates to our dataset image size
-            float xNorm = (datasetImageSize / Screen.width) * rect.x;
-            float yNorm = (datasetImageSize / Screen.height) * rect.y;
-            float x2Norm = (datasetImageSize / Screen.width) * rect.xMax;
-            float y2Norm = (datasetImageSize / Screen.height) * rect.yMax;
             xNorm = Mathf.Clamp(xNorm / datasetImageSize, 0, 1);
             yNorm = Mathf.Clamp(yNorm / datasetImageSize, 0, 1);
             x2Norm = Mathf.Clamp(x2Norm / datasetImageSize, 0, 1);
             y2Norm = Mathf.Clamp(y2Norm / datasetImageSize, 0, 1);
-
-            //print("Screen: " + Screen.width + ", " + Screen.height);
-            print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm, y2Norm));
+            //print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm, y2Norm));
 
             //imageNameToRegions.Add(filename, new double[] {xNorm, yNorm, wNorm, hNorm});
             //print(string.Format("{0}, {1}", filename, new double[] { xNorm, yNorm, wNorm, hNorm }));
@@ -224,6 +228,19 @@ public class CaptureManager : MonoBehaviour
         //string json = JsonConvert.SerializeObject(imageNameToRegions, Formatting.Indented);
         //string datasetFilepath = Path.Combine(datasetDirPath, datasetJsonName);
         //File.WriteAllText(datasetFilepath, json); 
+    }
+
+    public void RandomizeLights(GameObject lightGO)
+    {
+        Light light = lightGO.GetComponent<Light>();
+        if (light)
+        {
+            //  if light is directional light, rotate it randomly instead.
+            float ranX = UnityEngine.Random.Range(0, 360);
+            float ranY = UnityEngine.Random.Range(0, 360);
+            float ranZ = UnityEngine.Random.Range(0, 360);
+            light.transform.eulerAngles = new Vector3(ranX, ranY, ranZ);
+        }
     }
 
     [ContextMenu(nameof(DebugPoints))]
