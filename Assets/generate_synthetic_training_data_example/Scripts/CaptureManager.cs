@@ -95,7 +95,7 @@ public class CaptureManager : MonoBehaviour
         yNorm = Mathf.Clamp(yNorm / datasetImageSize, 0, 1);
         x2Norm = Mathf.Clamp(x2Norm / datasetImageSize, 0, 1);
         y2Norm = Mathf.Clamp(y2Norm / datasetImageSize, 0, 1);
-        print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm, y2Norm));
+        //print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm, y2Norm));
 
     }
 
