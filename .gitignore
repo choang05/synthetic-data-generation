@@ -1,5 +1,7 @@
 XRShowDownProject/XR ShowDown/Library
 XRShowDownProject/XR ShowDown/Library/
+Temp/
+Library/
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
