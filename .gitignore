@@ -8,6 +8,7 @@
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
+/Synthetic-Data-Generation-App/TRAINING_DATA/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
