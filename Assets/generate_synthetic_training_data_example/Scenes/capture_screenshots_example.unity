@@ -574,8 +574,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46c849818e132a42a7aafd7e234b32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endpoint: 
-  trainingKey: 
+  endpoint: https://lootbox.cognitiveservices.azure.com/
+  trainingKey: 9e6e0d2201a14de3beb1dcd137223d49
+  projectID: a8d69bbf9fcb4a449f6e7b3aa1e2fff0
+  createNewProject: 0
 --- !u!1001 &1367492560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -894,3 +896,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_CameraOutput: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2

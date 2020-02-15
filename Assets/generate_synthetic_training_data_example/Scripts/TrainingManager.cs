@@ -10,8 +10,10 @@ using UnityEngine;
 public class TrainingManager : MonoBehaviour
 {
     CustomVisionTrainingClient client;
-    public string endpoint = "https://lootbox.cognitiveservices.azure.com/";
-    public string trainingKey = "9e6e0d2201a14de3beb1dcd137223d49";
+    public string endpoint;
+    public string trainingKey;
+    public string projectID;
+    public bool createNewProject;
     private static MemoryStream testImage;
 
     private static List<string> importedImages;
@@ -31,15 +33,13 @@ public class TrainingManager : MonoBehaviour
     [ContextMenu(nameof(trainTest))]
     public void trainTest()
     {
-        client = new CustomVisionTrainingClient()
-        {
-            ApiKey = trainingKey,
-            Endpoint = endpoint
-        };
+        client = new CustomVisionTrainingClient();
+        client.ApiKey = trainingKey;
+        client.Endpoint = endpoint;
 
-        var project = client.CreateProject("TestProject");
+        var project = client.GetProject(new Guid(projectID));
 
-        var tagCup = client.CreateTag(project.Id, "Cup");
+        var tagCup = client.GetTags(project.Id)[0];
 
         LoadImagesFromDisk();
 
@@ -72,7 +72,7 @@ public class TrainingManager : MonoBehaviour
     private static void LoadImagesFromDisk()
     {
         // this loads the images to be uploaded from disk into memory
-        importedImages = Directory.GetFiles(Path.Combine("Images", "Hemlock")).ToList();
+        importedImages = Directory.GetFiles(Path.Combine("Images", "Cup")).ToList();
         testImage = new MemoryStream(File.ReadAllBytes(Path.Combine("Images", "Test\\test_image.jpg")));
     }
 }
