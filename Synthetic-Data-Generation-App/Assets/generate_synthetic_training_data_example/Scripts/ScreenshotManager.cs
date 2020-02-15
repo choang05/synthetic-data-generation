@@ -145,7 +145,7 @@ public class ScreenshotManager : MonoBehaviour
         if (CaptureManager.instance)
         {
             //  Add class name to folder path for structured data purposes
-            folder += string.Format("/{0}", CaptureManager.instance.classFolderName);
+            folder += string.Format("/{0}", DatasetManager.instance.classFolderName);
         }
 
         // make sure directoroy exists
