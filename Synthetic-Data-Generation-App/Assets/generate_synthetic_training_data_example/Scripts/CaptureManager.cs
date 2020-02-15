@@ -12,6 +12,7 @@ public class CaptureManager : MonoBehaviour
 
     [Header("Capture Settings")]
     public bool capturePerScene = true;
+    public float captureRadius = 5;
     public int screenshots = 300;
     public int datasetImageSize = 512;
     public Material[] skyboxesToCaptureIn;
@@ -19,30 +20,17 @@ public class CaptureManager : MonoBehaviour
 
     [Header("Camera Settings")]
     public Camera camera;
-    public float distance = 5;
-    public float distanceRandomOffset;
-    public Vector3 cameraViewRandomOffsetRange;
+    public float randomDistanceOffset = 3;
+    public Vector3 randomCameraViewRotationOffset = new Vector3(10,10,180);
 
     [Header("Lights Settings")]
     public bool randomizeLights;
     public uint numScreenshotsPerLight = 1;
 
-    [Header("IO")]
-    public string datasetDirPath = "TRAINING_DATA";
-    public string datasetJsonName = "ml_dataset";
-    [HideInInspector] public string classFolderName;
-
-    //  Holds our data that maps image filenames and region coordinates
-    //public Dictionary<string, double[]> imageNameToRegions = new Dictionary<string, double[]>();
-
     [Header("Debug")]
     public GameObject debugPrefab;
     public bool debugPoints = false;
     public float debugSize = .1f;
-
-    private ScreenshotManager screenshotManager;
-    private BoundsManager boundsManager;
-    private CSVManager csvManager;
 
     private GameObject[] debugPointsGOs; 
 
@@ -65,54 +53,34 @@ public class CaptureManager : MonoBehaviour
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
         #endregion
-
-        screenshotManager = FindObjectOfType<ScreenshotManager>();
-        boundsManager = FindObjectOfType<BoundsManager>();
-        csvManager = FindObjectOfType<CSVManager>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        datasetDirPath = Path.Combine(Application.dataPath, "../", datasetDirPath);
-        datasetDirPath = Path.GetFullPath(datasetDirPath);
-
         Screen.SetResolution(datasetImageSize, datasetImageSize, false);
 
-        if (screenshotManager)
+        if (ScreenshotManager.instance)
         {
-            screenshotManager.captureHeight = datasetImageSize;
-            screenshotManager.captureWidth = datasetImageSize;
+            ScreenshotManager.instance.captureHeight = datasetImageSize;
+            ScreenshotManager.instance.captureWidth = datasetImageSize;
         }
     }
 
-    //private void Update()
-    //{
-    //    Rect rect = boundsManager.Get3dTo2dRect(objsToScan[0]);
-
-    //    //  correct bounding box coordinates to our dataset image size. Convert screen space to dataset image resolution.
-    //    float xNorm = ((float)datasetImageSize / (float)Screen.width) * rect.x;
-    //    float yNorm = ((float)datasetImageSize / (float)Screen.height) * rect.y;
-    //    float x2Norm = ((float)datasetImageSize / (float)Screen.width) * rect.xMax;
-    //    float y2Norm = ((float)datasetImageSize / (float)Screen.height) * rect.yMax;
-    //    xNorm = Mathf.Clamp(xNorm / (float)datasetImageSize, 0, 1);
-    //    yNorm = Mathf.Clamp(yNorm / (float)datasetImageSize, 0, 1);
-    //    x2Norm = Mathf.Clamp(x2Norm / (float)datasetImageSize, 0, 1);
-    //    y2Norm = Mathf.Clamp(y2Norm / (float)datasetImageSize, 0, 1);
-
-    //    //print("Screen: " + Screen.width + ", " + Screen.height);
-    //    print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm, y2Norm));
-    //}
-
+    /// <summary>
+    /// 1-click pipeline to capture images of obj, upload, train, and build model
+    /// </summary>
     [ContextMenu(nameof(CaptureObject))]
     public void CaptureObject()
     {
-        Vector3[] points = GetSpherePoints(screenshots, distance);
+        Vector3[] points = GetSpherePoints(screenshots, captureRadius);
+
+        DatasetManager.instance.ClearDatasetData();
 
         //  Delete previous dataset folder
         for (int i = 0; i < objsToScan.Length; i++)
         {
-            string deletePath = Path.Combine(datasetDirPath, objsToScan[i].name);
+            string deletePath = Path.Combine(DatasetManager.instance.datasetDirPath, objsToScan[i].name);
             FileUtil.DeleteFileOrDirectory(deletePath);
         }
 
@@ -146,10 +114,13 @@ public class CaptureManager : MonoBehaviour
             objsToScan[j].SetActive(false);
         }
 
-        string csvPath = csvManager.CreateCSVFromRows(null);
-        
-        Debug.Log(string.Format("Captured {0} images! Results in {1}", screenshotCount, datasetDirPath));
-        Debug.Log(string.Format("Dataset csv created at {0}", csvPath));
+        //  Create dataset files
+        string autoMLDatasetPath = DatasetManager.instance.CreateAutoMLDatasetFromRows(null);
+        string customVisionDatasetPath = DatasetManager.instance.CreateCustomVisionDatasetFromRows(null);
+
+        Debug.Log(string.Format("Captured {0} images! Results in {1}", screenshotCount, DatasetManager.instance.datasetDirPath));
+        Debug.Log(string.Format("AutoML dataset created at {0}", autoMLDatasetPath));
+        Debug.Log(string.Format("Custom Vision dataset created at {0}", customVisionDatasetPath));
 
         //DebugPoints();
     }
@@ -162,7 +133,7 @@ public class CaptureManager : MonoBehaviour
     /// <param name="objToScan"></param>
     private void CaptureImages(Vector3[] points, GameObject objToScan)
     {
-        if (!camera || !objToScan || !screenshotManager || points.Length <= 0)
+        if (!camera || !objToScan || !ScreenshotManager.instance || points.Length <= 0)
             return;
 
         //  Get bounds used to check if its visable within the camera. Get collider if avaliable, add one if not
@@ -183,12 +154,12 @@ public class CaptureManager : MonoBehaviour
                 camera.transform.LookAt(objToScan.transform);
 
                 //  random distance offset
-                camera.transform.localPosition += new Vector3(0, 0, UnityEngine.Random.Range(-distanceRandomOffset, distanceRandomOffset));
+                camera.transform.localPosition += new Vector3(0, 0, UnityEngine.Random.Range(-randomDistanceOffset, randomDistanceOffset));
 
                 //  Add randomness to the view to assist training quality
-                float ranX = UnityEngine.Random.Range(cameraViewRandomOffsetRange.x, -cameraViewRandomOffsetRange.x);
-                float ranY = UnityEngine.Random.Range(cameraViewRandomOffsetRange.y, -cameraViewRandomOffsetRange.y);
-                float ranZ = UnityEngine.Random.Range(cameraViewRandomOffsetRange.z, -cameraViewRandomOffsetRange.z);
+                float ranX = UnityEngine.Random.Range(randomCameraViewRotationOffset.x, -randomCameraViewRotationOffset.x);
+                float ranY = UnityEngine.Random.Range(randomCameraViewRotationOffset.y, -randomCameraViewRotationOffset.y);
+                float ranZ = UnityEngine.Random.Range(randomCameraViewRotationOffset.z, -randomCameraViewRotationOffset.z);
                 camera.transform.eulerAngles += new Vector3(ranX, ranY, ranZ);
 
                 planes = GeometryUtility.CalculateFrustumPlanes(camera);
@@ -197,37 +168,42 @@ public class CaptureManager : MonoBehaviour
 
             // folder name of the dataset object key
             //if (string.IsNullOrEmpty(classFolderName))
-                classFolderName = objToScan.name;
+                DatasetManager.instance.classFolderName = objToScan.name;
 
             //  Take screenshot, calculate bounding box regions, and cache results
-            string filename = screenshotManager.TakeScreenshot(datasetDirPath);
-            Rect rect = boundsManager.Get3dTo2dRect(objToScan);
+            string filename = ScreenshotManager.instance.TakeScreenshot(DatasetManager.instance.datasetDirPath);
+            (float x, float y, float x2, float y2) = GetNormalizedScreenRegion(objToScan);
 
-            //  correct bounding box coordinates to our dataset image size. Convert screen space to dataset image resolution.
-            float xNorm = rect.xMin;
-            float yNorm = rect.yMin - 475;  //  [BUG] The Y position gets offsetted on capture. The -475 is to offset it back for resolution of 512x512.
-            float x2Norm = rect.width + xNorm;
-            float y2Norm = rect.height + yNorm;
-            //print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm - rect.x, y2Norm - rect.y));
-
-            xNorm = Mathf.Clamp(xNorm / datasetImageSize, 0, 1);
-            yNorm = Mathf.Clamp(yNorm / datasetImageSize, 0, 1);
-            x2Norm = Mathf.Clamp(x2Norm / datasetImageSize, 0, 1);
-            y2Norm = Mathf.Clamp(y2Norm / datasetImageSize, 0, 1);
-            //print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm, y2Norm));
-
-            //imageNameToRegions.Add(filename, new double[] {xNorm, yNorm, wNorm, hNorm});
-            //print(string.Format("{0}, {1}", filename, new double[] { xNorm, yNorm, wNorm, hNorm }));
-
-            //  cache csv rowdata
-            string row = csvManager.GenerateRowString(CSVManager.AutoMLSets.UNASSIGNED, filename, objToScan.name, xNorm, yNorm, x2Norm, y2Norm);
-            csvManager.AppendRowData(row);
+            //  generate row data for dataset (AutoML, CustomVision, etc.)
+            string row = DatasetManager.instance.GenerateAutoMLRowData(DatasetManager.AutoMLSets.UNASSIGNED, filename, objToScan.name, x, y, x2, y2);
+            DatasetManager.instance.AppendAutoMLRowData(row);
+            string baseFilename = Path.GetFileName(filename);
+            DatasetManager.instance.AppendCustomVisionRowData(baseFilename, new double[] { x, y, x2, y2 });
         }
+    }
 
-        //  dataset dict to json
-        //string json = JsonConvert.SerializeObject(imageNameToRegions, Formatting.Indented);
-        //string datasetFilepath = Path.Combine(datasetDirPath, datasetJsonName);
-        //File.WriteAllText(datasetFilepath, json); 
+    /// <summary>
+    /// Given gameobject, return the region coordinates of it in screen space.
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    private (float, float, float, float) GetNormalizedScreenRegion(GameObject obj)
+    {
+        Rect rect = BoundsManager.instance.Get3dTo2dRect(obj);
+
+        //  correct bounding box coordinates to our dataset image size. Convert screen space to dataset image resolution.
+        float xNorm = rect.xMin;
+        float yNorm = rect.yMin /*- 475*/;  //  [BUG] The Y position gets offsetted on capture. The -475 is to offset it back for resolution of 512x512.
+        float x2Norm = rect.width + xNorm;
+        float y2Norm = rect.height + yNorm;
+        //print(string.Format("{0}, {1}, {2}, {3}", xNorm, yNorm, x2Norm - rect.x, y2Norm - rect.y));
+
+        xNorm = Mathf.Clamp(xNorm / datasetImageSize, 0, 1);
+        yNorm = Mathf.Clamp(yNorm / datasetImageSize, 0, 1);
+        x2Norm = Mathf.Clamp(x2Norm / datasetImageSize, 0, 1);
+        y2Norm = Mathf.Clamp(y2Norm / datasetImageSize, 0, 1);
+
+        return (xNorm, yNorm, x2Norm, y2Norm);
     }
 
     public void RandomizeLights(GameObject lightGO)
@@ -243,10 +219,10 @@ public class CaptureManager : MonoBehaviour
         }
     }
 
-    [ContextMenu(nameof(DebugPoints))]
-    public void DebugPoints()
+    [ContextMenu(nameof(GenerateCameraDebugPoints))]
+    public void GenerateCameraDebugPoints()
     {
-        Vector3[] points = GetSpherePoints(screenshots, distance);
+        Vector3[] points = GetSpherePoints(screenshots, captureRadius);
 
         if (debugPointsGOs != null)
             //  Clean debug objects
@@ -286,7 +262,13 @@ public class CaptureManager : MonoBehaviour
         }
     }
 
-    public Vector3[] GetSpherePoints(int numDirections, float distance)
+    /// <summary>
+    /// Generate and return a array of uniform points in a sphere
+    /// </summary>
+    /// <param name="numDirections"></param>
+    /// <param name="radius"></param>
+    /// <returns></returns>
+    public Vector3[] GetSpherePoints(int numDirections, float radius)
     {
         Vector3[] directions = new Vector3[numDirections];
 
@@ -299,9 +281,9 @@ public class CaptureManager : MonoBehaviour
             float inclination = Mathf.Acos(1 - 2 * t);
             float azimuth = angleIncrement * i;
 
-            float x = Mathf.Sin(inclination) * Mathf.Cos(azimuth) * distance;
-            float y = Mathf.Sin(inclination) * Mathf.Sin(azimuth) * distance;
-            float z = Mathf.Cos(inclination) * distance;
+            float x = Mathf.Sin(inclination) * Mathf.Cos(azimuth) * radius;
+            float y = Mathf.Sin(inclination) * Mathf.Sin(azimuth) * radius;
+            float z = Mathf.Cos(inclination) * radius;
             directions[i] = new Vector3(x, y, z);
         }
 
