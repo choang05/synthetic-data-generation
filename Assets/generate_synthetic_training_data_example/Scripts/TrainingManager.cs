@@ -10,8 +10,8 @@ using UnityEngine;
 public class TrainingManager : MonoBehaviour
 {
     CustomVisionTrainingClient client;
-    public string endpoint = "https://westcentralus.api.cognitive.microsoft.com/vision";
-    public string trainingKey = "b178dd64937a45fd978a925be35adf23";
+    public string endpoint = "https://lootbox.cognitiveservices.azure.com/";
+    public string trainingKey = "9e6e0d2201a14de3beb1dcd137223d49";
     private static MemoryStream testImage;
 
     private static List<string> importedImages;
