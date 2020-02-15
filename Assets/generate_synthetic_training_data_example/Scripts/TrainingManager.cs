@@ -14,8 +14,7 @@ public class TrainingManager : MonoBehaviour
     public string trainingKey;
     public string projectID;
     public bool createNewProject;
-    private static MemoryStream testImage;
-
+    
     private static List<string> importedImages;
 
     // Start is called before the first frame update
@@ -72,7 +71,6 @@ public class TrainingManager : MonoBehaviour
     private static void LoadImagesFromDisk()
     {
         // this loads the images to be uploaded from disk into memory
-        importedImages = Directory.GetFiles(Path.Combine("Images", "Cup")).ToList();
-        testImage = new MemoryStream(File.ReadAllBytes(Path.Combine("Images", "Test\\test_image.jpg")));
+        importedImages = Directory.GetFiles(Path.Combine("Images", "Test")).ToList();
     }
 }
