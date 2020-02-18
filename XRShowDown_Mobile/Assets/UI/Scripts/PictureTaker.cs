@@ -7,66 +7,66 @@ using UnityEngine.UI;
 public class PictureTaker : MonoBehaviour
 {
 
-    public int num = 0;
-    private WebCamDevice cameraDevice;
+    //Access Camera info from (WebCam/PhoneCam/etc)
     private WebCamTexture camera;
 
+    //Texture/RawImage to render the CameraView
     public RawImage DefaultBackground;
 
+    // For Debugging purposes
     public Text myText;
 
 
-    // Start is called before the first frame update
+
+
+
     void Start()
     {
+        // Needs to look for cameras once the user has given us permision to access the cameras
+        StartCoroutine("findCamera");
+    }
+
+    IEnumerator findCamera()
+    {
+
+        //This will trigger the phone to ask you to allow for permission
         WebCamDevice[] devices = WebCamTexture.devices;
 
+       
         if (devices.Length == 0)
         {
+            //if we already have permision we should have more than 0 other wise we dont have cameras
             Debug.Log("no Cameras found");
             myText.text = "No Cameras found";
 
+            yield return new WaitForSeconds(5.0f);
+            StartCoroutine("findCamera");
         }
         else
-            myText.text = "we got some Cameras!  " + devices.Length;
-
-        for (int i = 0; i < devices.Length; i++)
         {
+            
+            myText.text = "we got Cameras!  " + devices.Length;
 
-            if (!devices[i].isFrontFacing)
+            for (int i = 0; i < devices.Length; i++)
             {
-                camera = new WebCamTexture(devices[i].name, Screen.height, Screen.width);
+                if (!devices[i].isFrontFacing)
+                {
+                    camera = new WebCamTexture(devices[i].name, Screen.height, Screen.width);
+                }
+                if (camera == null)
+                {
+                    myText.text = " we could not find back Camera";
+                }
             }
-
-            if(camera == null)
-            {
-                myText.text = " we could not find back Camera";
-            }
-
-
-          
-
+            camera.Play();
+            DefaultBackground.texture = camera;
+            yield return 0;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
-   
-
 
     public void takePic()
     {
-        num = num +1;   //   num++;
-        Debug.Log("You took " + num + "  pic");
-
-        camera.Play();
-        DefaultBackground.texture = camera;
-
+        Debug.Log("Taking Pictures");
     }
         
 }
