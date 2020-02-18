@@ -28,7 +28,7 @@ public class CaptureManager : MonoBehaviour
     public bool randomizeLights;
     public uint numScreenshotsPerLight = 1;
 
-    [Header("Debug")]
+    [Header("Debug Settings")]
     public GameObject debugPrefab;
     public bool debugPoints = false;
     public float debugSize = .1f;
@@ -208,6 +208,10 @@ public class CaptureManager : MonoBehaviour
         return (xNorm, yNorm, x2Norm, y2Norm);
     }
 
+    /// <summary>
+    /// [TODO] Given a light object, randomize its position (if its non-directional) or its rotation (if its directional).
+    /// </summary>
+    /// <param name="lightGO"></param>
     public void RandomizeLights(GameObject lightGO)
     {
         Light light = lightGO.GetComponent<Light>();
@@ -221,6 +225,9 @@ public class CaptureManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Generates a bunch of spheres to visualize where the points of where the camera will take screenshots at.
+    /// </summary>
     [ContextMenu(nameof(GenerateCameraDebugPoints))]
     public void GenerateCameraDebugPoints()
     {

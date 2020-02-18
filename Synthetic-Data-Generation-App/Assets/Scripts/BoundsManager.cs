@@ -7,10 +7,11 @@ public class BoundsManager : MonoBehaviour
 {
     public static BoundsManager instance = null;              //Static instance which allows it to be accessed by any other script.
 
-    public List<GameObject> boundObjs = new List<GameObject>();
+    [Header("Debug Settings")]
     public int frameWidth = 1;
     public Color frameColor;
 
+    private List<GameObject> boundObjs = new List<GameObject>();
     private List<Rect> rects = new List<Rect>();
 
     private void Awake()
@@ -36,16 +37,16 @@ public class BoundsManager : MonoBehaviour
 
     private void Start()
     {
-        //rect = GUI2dRectWithObject(gameObject);
-        //Render_Colored_Rectangle((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, frameColor);
-
-        CaptureManager capManager = FindObjectOfType<CaptureManager>();
-        if (capManager)
+        //  Get the bounding box of the current active gameobjects
+        if (CaptureManager.instance)
         {
-            boundObjs = capManager.objsToScan.ToList();
+            boundObjs = CaptureManager.instance.objsToScan.ToList();
         }
     }
-
+    
+    /// <summary>
+    /// While the game is running... draw the bounding box for each gameobject to capture for debug purposes.
+    /// </summary>
     private void Update()
     {
         rects.Clear();
@@ -63,31 +64,11 @@ public class BoundsManager : MonoBehaviour
         }
     }
 
-    public static Rect GUI3dRectWithObject(GameObject go)
-    {
-        Vector3 cen = go.GetComponent<Renderer>().bounds.center;
-        Vector3 ext = go.GetComponent<Renderer>().bounds.extents;
-        Vector2[] extentPoints = new Vector2[8]
-        {
-            WorldToGUIPoint(new Vector3(cen.x-ext.x, cen.y-ext.y, cen.z-ext.z)),
-            WorldToGUIPoint(new Vector3(cen.x+ext.x, cen.y-ext.y, cen.z-ext.z)),
-            WorldToGUIPoint(new Vector3(cen.x-ext.x, cen.y-ext.y, cen.z+ext.z)),
-            WorldToGUIPoint(new Vector3(cen.x+ext.x, cen.y-ext.y, cen.z+ext.z)),
-            WorldToGUIPoint(new Vector3(cen.x-ext.x, cen.y+ext.y, cen.z-ext.z)),
-            WorldToGUIPoint(new Vector3(cen.x+ext.x, cen.y+ext.y, cen.z-ext.z)),
-            WorldToGUIPoint(new Vector3(cen.x-ext.x, cen.y+ext.y, cen.z+ext.z)),
-            WorldToGUIPoint(new Vector3(cen.x+ext.x, cen.y+ext.y, cen.z+ext.z))
-        };
-        Vector2 min = extentPoints[0];
-        Vector2 max = extentPoints[0];
-        foreach (Vector2 v in extentPoints)
-        {
-            min = Vector2.Min(min, v);
-            max = Vector2.Max(max, v);
-        }
-        return new Rect(min.x, min.y, max.x - min.x, max.y - min.y);
-    }
-
+    /// <summary>
+    /// Given a gameobject, generate the region from its world-space renderer bounding box in screen-space.
+    /// </summary>
+    /// <param name="go"></param>
+    /// <returns>Returns x,y,x2,y2 coordinates of the region in screenspace</returns>
     public Rect Get3dTo2dRect(GameObject go)
     {
         Vector3[] vertices = go.GetComponent<MeshFilter>().mesh.vertices;
@@ -109,6 +90,11 @@ public class BoundsManager : MonoBehaviour
         return bbox;
     }
 
+    /// <summary>
+    /// Converts the world point to screen space point
+    /// </summary>
+    /// <param name="world"></param>
+    /// <returns></returns>
     public static Vector2 WorldToGUIPoint(Vector3 world)
     {
         Vector2 screenPoint = Camera.main.WorldToScreenPoint(world);
@@ -116,6 +102,9 @@ public class BoundsManager : MonoBehaviour
         return screenPoint;
     }
 
+    /// <summary>
+    /// Required unity method to to draw gui on the screen
+    /// </summary>
     void OnGUI()
     {
         for (int i = 0; i < rects.Count; i++)
@@ -124,6 +113,12 @@ public class BoundsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Given drawing parameters... draw/print the bounding box to the screen for debug purposes
+    /// </summary>
+    /// <param name="area"></param>
+    /// <param name="frameWidth"></param>
+    /// <param name="color"></param>
     void DrawRectangle(Rect area, int frameWidth, Color color)
     {
         //Create a one pixel texture with the right color

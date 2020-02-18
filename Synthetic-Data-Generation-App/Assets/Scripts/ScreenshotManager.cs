@@ -58,11 +58,11 @@ public class ScreenshotManager : MonoBehaviour
         #endregion
     }
 
-    private void Start()
-    {
-
-    }
-
+    /// <summary>
+    /// Given the directory of where the screenshot is saved, a screenshot will be created under a folder named after the gameobject's name/tag.
+    /// </summary>
+    /// <param name="dirPath"></param>
+    /// <returns>Path of the screenshot</returns>
     [ContextMenu(nameof(TakeScreenshot))]
     public string TakeScreenshot(string dirPath)
     {
@@ -136,7 +136,11 @@ public class ScreenshotManager : MonoBehaviour
         return filename;
     }
 
-    // create a unique filename using a one-up variable
+    /// <summary>
+    /// create a unique filename using a one-up variable
+    /// </summary>
+    /// <param name="dirPath"></param>
+    /// <returns>Path of the unique filepath</returns>
     private string GetFilepath(string dirPath)
     {
         // if folder not specified by now use a good default
