@@ -11,18 +11,14 @@ public class canvas_Manager : MonoBehaviour
     public GameObject processing;
     public GameObject helperS;
     public GameObject archive;
-    // Start is called before the first frame update
+
+    public ProductDescriptor pd;
+
+
     void Start()
     {
-       
+        pd = this.gameObject.GetComponent<ProductDescriptor>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void swapCanvas(string canvasName)
     {
         welcome.gameObject.SetActive(false);
@@ -40,6 +36,7 @@ public class canvas_Manager : MonoBehaviour
                 break;
             case "main":
                 main.gameObject.SetActive(true);
+                pd.removeObjects();
                 break;
             case "productD":
                 productD.gameObject.SetActive(true);

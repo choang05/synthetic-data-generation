@@ -31,9 +31,9 @@ public class PictureTaker : MonoBehaviour
 
         //This will trigger the phone to ask you to allow for permission
         WebCamDevice[] devices = WebCamTexture.devices;
-
+        Debug.Log(devices.Length);
        
-        if (devices.Length == 0)
+        if (devices.Length == 0 || devices.Length == 1)
         {
             //if we already have permision we should have more than 0 other wise we dont have cameras
             Debug.Log("no Cameras found");
@@ -44,7 +44,7 @@ public class PictureTaker : MonoBehaviour
         }
         else
         {
-            
+            //We have access to 1 or more cameras
             myText.text = "we got Cameras!  " + devices.Length;
 
             for (int i = 0; i < devices.Length; i++)
