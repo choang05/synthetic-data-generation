@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class canvas_Manager : MonoBehaviour
 {
-
     public GameObject welcome;
     public GameObject main;
     public GameObject productD;
     public GameObject processing;
     public GameObject helperS;
     public GameObject archive;
+    public GameObject settings;
 
     public ProductDescriptor pd;
-
 
     void Start()
     {
@@ -27,12 +26,13 @@ public class canvas_Manager : MonoBehaviour
         processing.gameObject.SetActive(false);
         helperS.gameObject.SetActive(false);
         archive.gameObject.SetActive(false);
+        settings.gameObject.SetActive(false);
 
 
         switch (canvasName)
         {
             case "welcome":
-            welcome.gameObject.SetActive(true);
+                welcome.gameObject.SetActive(true);
                 break;
             case "main":
                 main.gameObject.SetActive(true);
@@ -48,16 +48,11 @@ public class canvas_Manager : MonoBehaviour
                 helperS.gameObject.SetActive(true);
                 break;
             case "archive":
-			archive.gameObject.SetActive(true);
-			break;
-           
-
+			    archive.gameObject.SetActive(true);
+			    break;
+            case "settings":
+                settings.gameObject.SetActive(true);
+                break;
         }
-        
-
-
-
-    }
-
-
+     }
 }
