@@ -2891,6 +2891,7 @@ MonoBehaviour:
   processing: {fileID: 874184041}
   helperS: {fileID: 1963224328}
   archive: {fileID: 672729435}
+  settings: {fileID: 157619930}
   pd: {fileID: 0}
 --- !u!114 &721746757
 MonoBehaviour:
@@ -2904,12 +2905,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75e505cde1b8c84092ed139cafa4d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voltmeter: {fileID: 1085138298393249697, guid: 30c7958213a6bf4449fe4c4f813d67b8,
+  voltmeter: {fileID: 3389719010186348383, guid: 1c503744f168b04448d337fb194fe84f,
     type: 3}
-  cup: {fileID: 6167376808534047558, guid: 2f9211da5a3584e47bc5817c74f0cd0f, type: 3}
-  lamp: {fileID: 7925340554538384525, guid: 26c35a7fd32f0dd42bc7d175494c85c1, type: 3}
-  wrench: {fileID: 6167376808534047558, guid: 2f9211da5a3584e47bc5817c74f0cd0f, type: 3}
-  hammer: {fileID: 6167376808534047558, guid: 2f9211da5a3584e47bc5817c74f0cd0f, type: 3}
+  cup: {fileID: 1202225092699208454, guid: 0b13462c469b13f46a0f3908a0c3d42a, type: 3}
+  lamp: {fileID: 7903224937069806909, guid: 14ebdd903a159e047b53dc98e77816ce, type: 3}
+  wrench: {fileID: 1202225092699208454, guid: 0b13462c469b13f46a0f3908a0c3d42a, type: 3}
+  hammer: {fileID: 1202225092699208454, guid: 0b13462c469b13f46a0f3908a0c3d42a, type: 3}
 --- !u!1 &765180739
 GameObject:
   m_ObjectHideFlags: 0
