@@ -15,7 +15,6 @@ public class CaptureManager : MonoBehaviour
     public float captureRadius = 5;
     public int screenshots = 300;
     public int datasetImageSize = 512;
-    public Material[] skyboxesToCaptureIn;
     public GameObject[] objsToScan;
     [HideInInspector] public string currentCaptureObjName;
 
@@ -23,6 +22,11 @@ public class CaptureManager : MonoBehaviour
     public Camera camera;
     public float randomDistanceOffset = 3;
     public Vector3 randomCameraViewRotationOffset = new Vector3(10,10,180);
+
+    [Header("Skybox Settings")]
+    [Tooltip("Number of skyboxes to capture with. Default of -1 means use all avaliable skyboxes")]
+    public int skyboxesToCapture = -1;
+    public Material[] skyboxesToCaptureIn;
 
     [Header("Lights Settings")]
     public bool randomizeLights;
@@ -99,7 +103,8 @@ public class CaptureManager : MonoBehaviour
 
             if (skyboxesToCaptureIn.Length > 0 && capturePerScene)
             {
-                for (int i = 0; i < skyboxesToCaptureIn.Length; i++)
+                skyboxesToCapture = skyboxesToCapture <= -1 ? skyboxesToCaptureIn.Length : skyboxesToCapture;
+                for (int i = 0; i < skyboxesToCapture; i++)
                 {
                     Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", i+1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[i].name));
                     RenderSettings.skybox = skyboxesToCaptureIn[i];
@@ -142,11 +147,6 @@ public class CaptureManager : MonoBehaviour
         if (!camera || !objToScan || !ScreenshotManager.instance || points.Length <= 0)
             return;
 
-        //  Get bounds used to check if its visable within the camera. Get collider if avaliable, add one if not
-        BoxCollider col = /*objToScan.GetComponent<Collider>()? objToScan.GetComponent<Collider>() :*/ objToScan.AddComponent<BoxCollider>();
-        col.size *= .5f;
-        Bounds visable_bounds = col.bounds;
-
         //Dictionary<string, double[]> imageNameToRegions = new Dictionary<string, double[]>();
         for (int i = 0; i < points.Length; i++)
         {
@@ -154,7 +154,7 @@ public class CaptureManager : MonoBehaviour
             camera.transform.LookAt(objToScan.transform);
 
             //  keep randomizing view until its within the shot
-            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
+            bool isWithinCaptureScreen;
             do
             {
                 camera.transform.LookAt(objToScan.transform);
@@ -168,9 +168,10 @@ public class CaptureManager : MonoBehaviour
                 float ranZ = UnityEngine.Random.Range(randomCameraViewRotationOffset.z, -randomCameraViewRotationOffset.z);
                 camera.transform.eulerAngles += new Vector3(ranX, ranY, ranZ);
 
-                planes = GeometryUtility.CalculateFrustumPlanes(camera);
-
-            } while (!GeometryUtility.TestPlanesAABB(planes, col.bounds));
+                //  get bounds and check if region is within capture screen
+                (float _x, float _y, float _x2, float _y2) = GetNormalizedScreenRegion(objToScan);
+                isWithinCaptureScreen = _x > 0 && _y > 0 && _x2 < 1 && _y2 < 1;
+            } while (!isWithinCaptureScreen);
 
             // folder name of the dataset object key
             //if (string.IsNullOrEmpty(classFolderName))

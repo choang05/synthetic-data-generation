@@ -1358,7 +1358,7 @@ PrefabInstance:
     - target: {fileID: 5340840291323371293, guid: c61b8303ee9bc514b89edf812f6d8e82,
         type: 3}
       propertyPath: m_Name
-      value: voltMeter_no_cables
+      value: volt_meter
       objectReference: {fileID: 0}
     - target: {fileID: 5340840291323371293, guid: c61b8303ee9bc514b89edf812f6d8e82,
         type: 3}
