@@ -29,6 +29,7 @@ public class DatasetManager : MonoBehaviour
 
     //  Holds our data that maps image filenames and region coordinates
     private List<string> autoMLData = new List<string>();
+    private List<string> tensorflowData = new List<string>();
     private Dictionary<string, double[]> customVisionData = new Dictionary<string, double[]>();
 
     private void Awake()
@@ -79,6 +80,11 @@ public class DatasetManager : MonoBehaviour
         autoMLData.Add(rowData);
     }
 
+    public void AppendTensorflowRowData(string rowData)
+    {
+        tensorflowData.Add(rowData);
+    }
+
     /// <summary>
     /// Given tag and region coordinates, append the data to our temporary data list
     /// </summary>
@@ -110,6 +116,12 @@ public class DatasetManager : MonoBehaviour
 
         return csvRow;
     }
+    public string GenerateTensorflowRowData(string imgName, int imgWidth, int imgHeight, string className, float x1, float y1, float x2, float y2)
+    {
+        string csvRow = string.Format("{0},{1},{2},{3},{4},{5},{6},{7}", imgName, imgWidth, imgHeight, className, x1, y1, x2, y2);
+
+        return csvRow;
+    }
 
     /// <summary>
     /// Creates a CSV file used as input dataset labels for Google's AutoML
@@ -126,6 +138,24 @@ public class DatasetManager : MonoBehaviour
         for (int i = 0; i < autoMLData.Count; i++)
         {
             sb.AppendLine(autoMLData[i]);
+        }
+
+        StreamWriter outStream = System.IO.File.CreateText(filepath);
+        outStream.WriteLine(sb);
+        outStream.Close();
+
+        return filepath;
+    }
+
+    public string CreateTensorflowDatasetFromRows(string filepath)
+    {
+        filepath = string.IsNullOrEmpty(filepath) ? Path.Combine(datasetDirPath, datasetFileName) : filepath;
+        filepath += "_tensorflow.csv";
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tensorflowData.Count; i++)
+        {
+            sb.AppendLine(tensorflowData[i]);
         }
 
         StreamWriter outStream = System.IO.File.CreateText(filepath);
