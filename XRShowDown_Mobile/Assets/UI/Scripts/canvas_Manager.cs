@@ -52,6 +52,7 @@ public class canvas_Manager : MonoBehaviour
 			    break;
             case "settings":
                 settings.gameObject.SetActive(true);
+                pd.removeObjects();
                 break;
         }
      }
