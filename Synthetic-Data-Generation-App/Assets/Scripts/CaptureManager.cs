@@ -119,9 +119,11 @@ public class CaptureManager : MonoBehaviour
         //  Create dataset files
         string autoMLDatasetPath = DatasetManager.instance.CreateAutoMLDatasetFromRows(null);
         string customVisionDatasetPath = DatasetManager.instance.CreateCustomVisionDatasetFromRows(null);
+        string tensorflowDatasetPath = DatasetManager.instance.CreateTensorflowDatasetFromRows(null);
 
         Debug.Log(string.Format("Captured {0} images! Results in {1}", screenshotCount, DatasetManager.instance.datasetDirPath));
         Debug.Log(string.Format("AutoML dataset created at {0}", autoMLDatasetPath));
+        Debug.Log(string.Format("Tensorflow dataset created at {0}", tensorflowDatasetPath));
         Debug.Log(string.Format("Custom Vision dataset created at {0}", customVisionDatasetPath));
 
         //DebugPoints();
@@ -135,6 +137,8 @@ public class CaptureManager : MonoBehaviour
     /// <param name="objToScan"></param>
     private void CaptureImages(Vector3[] points, GameObject objToScan)
     {
+        string label = objToScan.name;
+
         if (!camera || !objToScan || !ScreenshotManager.instance || points.Length <= 0)
             return;
 
@@ -170,17 +174,19 @@ public class CaptureManager : MonoBehaviour
 
             // folder name of the dataset object key
             //if (string.IsNullOrEmpty(classFolderName))
-                DatasetManager.instance.classFolderName = objToScan.name;
+                DatasetManager.instance.classFolderName = label;
 
             //  Take screenshot, calculate bounding box regions, and cache results
             string filename = ScreenshotManager.instance.TakeScreenshot(DatasetManager.instance.datasetDirPath);
             (float x, float y, float x2, float y2) = GetNormalizedScreenRegion(objToScan);
 
-            //  generate row data for dataset (AutoML, CustomVision, etc.)
-            string row = DatasetManager.instance.GenerateAutoMLRowData(DatasetManager.AutoMLSets.UNASSIGNED, filename, objToScan.name, x, y, x2, y2);
+            //  generate row data for dataset (AutoML, Tensorflow, CustomVision, etc.)
+            string row = DatasetManager.instance.GenerateAutoMLRowData(DatasetManager.AutoMLSets.UNASSIGNED, filename, label, x, y, x2, y2);
             DatasetManager.instance.AppendAutoMLRowData(row);
             string baseFilename = Path.GetFileName(filename);
             DatasetManager.instance.AppendCustomVisionRowData(baseFilename, new double[] { x, y, x2, y2 });
+            string rowTF = DatasetManager.instance.GenerateTensorflowRowData(filename, datasetImageSize, datasetImageSize, label, x, y, x2, y2);
+            DatasetManager.instance.AppendTensorflowRowData(rowTF);
         }
     }
 
