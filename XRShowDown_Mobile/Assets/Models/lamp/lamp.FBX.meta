@@ -3,9 +3,19 @@ guid: f2ace1870e3ee3f43aebec718d945867
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_lampBodyMat
+    second: {fileID: 2100000, guid: 71c3f4e5709859c41ab61db0cf607fa1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_lampSpineBulbMat
+    second: {fileID: 2100000, guid: 8bf69af2f4aedb64fadef3c7e8457f8a, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

@@ -3,9 +3,24 @@ guid: 257e1ddf06bc3ca48ab8bc7ab81ddf60
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_voltCordMat
+    second: {fileID: 2100000, guid: 95a14768f720ca94a90c44fb25217bd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_voltMeterBodyMat
+    second: {fileID: 2100000, guid: 5a482552efef2584987da565ee702650, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_voltMeterRubberMat
+    second: {fileID: 2100000, guid: 47aa23575b6ca0f4e908bca7fc4d2fe8, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

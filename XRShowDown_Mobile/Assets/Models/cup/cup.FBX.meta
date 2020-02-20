@@ -3,9 +3,19 @@ guid: 8dcd5ae0636024e49b7c263b74b00cff
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_cupBodyMat
+    second: {fileID: 2100000, guid: 3f9b155ab5ebbe741af6d1f0b8c5b830, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_cupLidMat
+    second: {fileID: 2100000, guid: 355cf66ddf82cce48b4605f3c6c09b75, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
