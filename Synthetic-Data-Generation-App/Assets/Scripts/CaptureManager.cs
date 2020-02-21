@@ -15,8 +15,9 @@ public class CaptureManager : MonoBehaviour
     public float captureRadius = 5;
     public int screenshots = 300;
     public int datasetImageSize = 512;
-    public GameObject[] objsToScan;
+    public List<GameObject> prefabsToCapture = new List<GameObject>();
     [HideInInspector] public string currentCaptureObjName;
+    [HideInInspector] public List<GameObject> objsToScan = new List<GameObject>();
 
     [Header("Camera Settings")]
     public Camera camera;
@@ -37,7 +38,7 @@ public class CaptureManager : MonoBehaviour
     public bool debugPoints = false;
     public float debugSize = .1f;
 
-    private GameObject[] debugPointsGOs; 
+    private GameObject[] debugPointsGOs;
 
     private void Awake()
     {
@@ -64,12 +65,6 @@ public class CaptureManager : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(datasetImageSize, datasetImageSize, false);
-
-        if (ScreenshotManager.instance)
-        {
-            ScreenshotManager.instance.captureHeight = datasetImageSize;
-            ScreenshotManager.instance.captureWidth = datasetImageSize;
-        }
     }
 
     /// <summary>
@@ -78,47 +73,36 @@ public class CaptureManager : MonoBehaviour
     [ContextMenu(nameof(CaptureObject))]
     public void CaptureObject()
     {
+        ResetCapture();
+
         Vector3[] points = GetSpherePoints(screenshots, captureRadius);
-
-        DatasetManager.instance.ClearDatasetData();
-
-        //  Delete previous dataset folder
-        for (int i = 0; i < objsToScan.Length; i++)
-        {
-            string deletePath = Path.Combine(DatasetManager.instance.datasetDirPath, objsToScan[i].name);
-            FileUtil.DeleteFileOrDirectory(deletePath);
-        }
-
-        //  Hide all the objects initially
-        for (int i = 0; i < objsToScan.Length; i++)
-            objsToScan[i].SetActive(false);
 
         //  if there is skyboxes, capture screenshots for each skybox... else, just capture once in current scene
         Debug.Log("Starting capture...");
         int screenshotCount = 0;
-        for (int j = 0; j < objsToScan.Length; j++)
+        for (int i = 0; i < objsToScan.Count; i++)
         {
-            objsToScan[j].SetActive(true);
-            currentCaptureObjName = objsToScan[j].name;
+            objsToScan[i].SetActive(true);
+            currentCaptureObjName = objsToScan[i].name;
 
             if (skyboxesToCaptureIn.Length > 0 && capturePerScene)
             {
                 skyboxesToCapture = skyboxesToCapture <= -1 ? skyboxesToCaptureIn.Length : skyboxesToCapture;
-                for (int i = 0; i < skyboxesToCapture; i++)
+                for (int j = 0; j < skyboxesToCapture; j++)
                 {
-                    Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", i+1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[i].name));
-                    RenderSettings.skybox = skyboxesToCaptureIn[i];
-                    CaptureImages(points, objsToScan[j]);
+                    Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", j+1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[j].name));
+                    RenderSettings.skybox = skyboxesToCaptureIn[j];
+                    CaptureImages(points, objsToScan[i]);
                     screenshotCount++;
                 }
             }
             else
             {
-                CaptureImages(points, objsToScan[j]);
+                CaptureImages(points, objsToScan[i]);
                 screenshotCount++;
             }
 
-            objsToScan[j].SetActive(false);
+            objsToScan[i].SetActive(false);
         }
 
         //  Create dataset files
@@ -130,10 +114,43 @@ public class CaptureManager : MonoBehaviour
         Debug.Log(string.Format("AutoML dataset created at {0}", autoMLDatasetPath));
         Debug.Log(string.Format("Tensorflow dataset created at {0}", tensorflowDatasetPath));
         Debug.Log(string.Format("Custom Vision dataset created at {0}", customVisionDatasetPath));
-
-        //DebugPoints();
     }
-    
+
+    /// <summary>
+    /// Cleans and preps scene before next capture process
+    /// </summary>
+    private void ResetCapture()
+    {
+        if (ScreenshotManager.instance)
+        {
+            ScreenshotManager.instance.captureHeight = datasetImageSize;
+            ScreenshotManager.instance.captureWidth = datasetImageSize;
+        }
+
+        DatasetManager.instance.ClearDatasetData();
+        for (int i = 0; i < objsToScan.Count; i++)
+        {
+            Destroy(objsToScan[i]);
+        }
+
+        //  Delete previous dataset folder
+        for (int i = 0; i < objsToScan.Count; i++)
+        {
+            string deletePath = Path.Combine(DatasetManager.instance.datasetDirPath, objsToScan[i].name);
+            FileUtil.DeleteFileOrDirectory(deletePath);
+        }
+
+        //  Instantiate objects under the capture transform and cache them
+        objsToScan.Clear();
+        for (int i = 0; i < prefabsToCapture.Count; i++)
+        {
+            Vector3 parentCenter = transform.position;
+            objsToScan.Add(Instantiate(prefabsToCapture[i], parentCenter, Quaternion.identity, transform));
+            //objsToScan[i].AddComponent<BoxCollider>();
+            //objsToScan[i].SetActive(false);
+        }
+    }
+
     /// <summary>
     /// Given a list of locations and a gameobject, the camera will iterate through each location and take a screenshot of the gameobject 
     /// with variations.

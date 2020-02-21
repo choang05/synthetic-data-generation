@@ -35,33 +35,30 @@ public class BoundsManager : MonoBehaviour
         #endregion
     }
 
-    private void Start()
-    {
-        //  Get the bounding box of the current active gameobjects
-        if (CaptureManager.instance)
-        {
-            boundObjs = CaptureManager.instance.objsToScan.ToList();
-        }
-    }
-    
     /// <summary>
     /// While the game is running... draw the bounding box for each gameobject to capture for debug purposes.
     /// </summary>
-    private void Update()
+    private void LateUpdate()
     {
-        rects.Clear();
-        for (int i = 0; i < boundObjs.Count; i++)
-        {
-            Rect rect = Get3dTo2dRect(boundObjs[i]);
-            if (rects.Contains(rect))
-            {
-                rects[i] = rect;
-            }
-            else
-            {
-                rects.Add(rect);
-            }
-        }
+        //rects.Clear();
+        //for (int i = 0; i < CaptureManager.instance.objsToScan.Count; i++)
+        //{
+        //    //boundObjs = CaptureManager.instance.objsToScan.ToList();
+        //    print(CaptureManager.instance.objsToScan[i].name);
+
+        //    //if (!boundObjs[i].activeSelf)
+        //    //    continue;
+
+        //    //Rect rect = Get3dTo2dRect(boundObjs[i]);
+        //    //if (rects.Contains(rect))
+        //    //{
+        //    //    rects[i] = rect;
+        //    //}
+        //    //else
+        //    //{
+        //    //    rects.Add(rect);
+        //    //}
+        //}
     }
 
     /// <summary>
@@ -71,7 +68,14 @@ public class BoundsManager : MonoBehaviour
     /// <returns>Returns x,y,x2,y2 coordinates of the region in screenspace</returns>
     public Rect Get3dTo2dRect(GameObject go)
     {
-        Vector3[] vertices = go.GetComponent<MeshFilter>().mesh.vertices;
+        MeshFilter meshFilter = go.GetComponent<MeshFilter>();
+        if (!meshFilter)
+        {
+            Debug.LogError(meshFilter + " is null!");
+            return new Rect(-1,-1,-1,-1);
+        }
+
+        Vector3[] vertices = meshFilter.mesh.vertices;
 
         float x1 = float.MaxValue, y1 = float.MaxValue, x2 = 0.0f, y2 = 0.0f;
 
