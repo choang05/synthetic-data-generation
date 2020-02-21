@@ -65,6 +65,8 @@ public class CaptureManager : MonoBehaviour
     {
         Screen.SetResolution(datasetImageSize, datasetImageSize, false);
 
+        if (!camera) camera = Camera.main;
+
         ResetCapture();
     }
 
