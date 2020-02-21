@@ -65,7 +65,7 @@ public class CaptureManager : MonoBehaviour
     {
         Screen.SetResolution(datasetImageSize, datasetImageSize, false);
 
-        //ResetCapture();
+        ResetCapture();
     }
 
     /// <summary>
@@ -145,11 +145,14 @@ public class CaptureManager : MonoBehaviour
         objsToScan.Clear();
         for (int i = 0; i < prefabsToCapture.Count; i++)
         {
-            Vector3 parentCenter = transform.position;
-            objsToScan.Add(Instantiate(prefabsToCapture[i], parentCenter, Quaternion.Euler(-90, 0, 0), transform));
+            objsToScan.Add(Instantiate(prefabsToCapture[i], Vector3.zero, Quaternion.Euler(-90, 0, 0), transform));
+            //  correct center pivot point
+            Bounds bounds = objsToScan[i].GetComponent<Renderer>().bounds;
+            float yOffset = -bounds.extents.y;
+            objsToScan[i].transform.position = transform.position + transform.position + new Vector3(0, yOffset, 0);
+            //  Remove "(Clone) part of name"
             objsToScan[i].name = prefabsToCapture[i].name;
-            //objsToScan[i].AddComponent<BoxCollider>();
-            objsToScan[i].SetActive(false);
+            //objsToScan[i].SetActive(false);
         }
     }
 
