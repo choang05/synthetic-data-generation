@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Text;
 using System.IO;
 using System;
-using Newtonsoft.Json;
 
 public class DatasetManager : MonoBehaviour
 {
@@ -172,11 +171,22 @@ public class DatasetManager : MonoBehaviour
     /// <returns></returns>
     public string CreateCustomVisionDatasetFromRows(string filepath)
     {
-        filepath = string.IsNullOrEmpty(filepath) ? Path.Combine(datasetDirPath, datasetFileName) : filepath;
-        filepath += ".json";
+        #region TODO: generate custom vision specific dataset/label file once we figure out what the format is
+        //filepath = string.IsNullOrEmpty(filepath) ? Path.Combine(datasetDirPath, datasetFileName) : filepath;
+        //filepath += ".txt";
 
-        string json = JsonConvert.SerializeObject(customVisionData, Formatting.Indented);
-        File.WriteAllText(filepath, json); 
+        //System.IO.WriteAllLines(filepath, customVisionData, System.Text.Encoding encoding);
+        ////string json = JsonConvert.SerializeObject(customVisionData, Formatting.Indented);
+        ////File.WriteAllText(filepath, json); 
+        //// Write the string array to a new file named "WriteLines.txt".
+        //using (StreamWriter outputFile = new StreamWriter(Path.Combine(datasetDirPath, "WriteLines.txt")))
+        //{
+        //    foreach (string line in customVisionData)
+        //    {
+        //        outputFile.WriteLine(line);
+        //    }
+        //}
+        #endregion
 
         return filepath;
     }
