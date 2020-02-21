@@ -7,16 +7,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class UploadImageManager : MonoBehaviour
+public class CustomVisionManager : MonoBehaviour
 {
     //Static instance which allows it to be accessed by any other script.
-    public static UploadImageManager instance = null;
-    
+    public static CustomVisionManager instance = null;
+
     //Custom Vision variables
+    [Header("CustomVision Settings")]
     CustomVisionTrainingClient client;
-    public string endpoint;
-    public string trainingKey;
-    public string projectID;
+    public string endpoint = "9e6e0d2201a14de3beb1dcd137223d49";
+    public string trainingKey = "https://lootbox.cognitiveservices.azure.com/";
+    public string projectID = "a8d69bbf-9fcb-4a44-9f6e-7b3aa1e2fff0";
     public bool createNewProject;
     private static List<string> importedImages;
 
@@ -24,7 +25,7 @@ public class UploadImageManager : MonoBehaviour
     /// This is where we actually utrain the model
     /// </summary>
     /// <returns></returns>
-    private async Task TestModelAsync()
+    private async Task TrainModelAsync()
     {
         client = new CustomVisionTrainingClient();
         client.ApiKey = trainingKey;
@@ -111,7 +112,7 @@ public class UploadImageManager : MonoBehaviour
     {
         try
         {
-            await TestModelAsync();
+            await TrainModelAsync();
         }
         catch (Exception e)
         {

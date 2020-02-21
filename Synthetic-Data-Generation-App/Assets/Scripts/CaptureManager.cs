@@ -76,6 +76,7 @@ public class CaptureManager : MonoBehaviour
     [ContextMenu(nameof(Capture))]
     public void Capture()
     {
+        CustomVisionManager uploadManager = new CustomVisionManager();
         ResetCapture();
 
         Vector3[] points = GetSpherePoints(screenshots, captureRadius);
@@ -106,6 +107,9 @@ public class CaptureManager : MonoBehaviour
             }
 
             objsToScan[i].SetActive(false);
+
+            //Upload the images
+            uploadManager.uploadModel(objsToScan[i].name);
         }
 
         //  Create dataset files
