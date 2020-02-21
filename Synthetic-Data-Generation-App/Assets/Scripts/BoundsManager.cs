@@ -11,7 +11,7 @@ public class BoundsManager : MonoBehaviour
     public int frameWidth = 1;
     public Color frameColor;
 
-    private List<GameObject> boundObjs = new List<GameObject>();
+    //private List<GameObject> boundObjs = new List<GameObject>();
     private List<Rect> rects = new List<Rect>();
 
     private void Awake()
@@ -44,20 +44,19 @@ public class BoundsManager : MonoBehaviour
         //for (int i = 0; i < CaptureManager.instance.objsToScan.Count; i++)
         //{
         //    //boundObjs = CaptureManager.instance.objsToScan.ToList();
-        //    print(CaptureManager.instance.objsToScan[i].name);
 
-        //    //if (!boundObjs[i].activeSelf)
-        //    //    continue;
+        //    if (!CaptureManager.instance.objsToScan[i].activeSelf)
+        //        continue;
 
-        //    //Rect rect = Get3dTo2dRect(boundObjs[i]);
-        //    //if (rects.Contains(rect))
-        //    //{
-        //    //    rects[i] = rect;
-        //    //}
-        //    //else
-        //    //{
-        //    //    rects.Add(rect);
-        //    //}
+        //    Rect rect = Get3dTo2dRect(CaptureManager.instance.objsToScan[i]);
+        //    if (rects.Contains(rect))
+        //    {
+        //        rects[i] = rect;
+        //    }
+        //    else
+        //    {
+        //        rects.Add(rect);
+        //    }
         //}
     }
 

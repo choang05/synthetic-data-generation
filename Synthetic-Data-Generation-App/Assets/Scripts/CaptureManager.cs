@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -65,13 +64,15 @@ public class CaptureManager : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(datasetImageSize, datasetImageSize, false);
+
+        //ResetCapture();
     }
 
     /// <summary>
     /// 1-click pipeline to capture images of obj, upload, train, and build model
     /// </summary>
-    [ContextMenu(nameof(CaptureObject))]
-    public void CaptureObject()
+    [ContextMenu(nameof(Capture))]
+    public void Capture()
     {
         ResetCapture();
 
@@ -145,9 +146,10 @@ public class CaptureManager : MonoBehaviour
         for (int i = 0; i < prefabsToCapture.Count; i++)
         {
             Vector3 parentCenter = transform.position;
-            objsToScan.Add(Instantiate(prefabsToCapture[i], parentCenter, Quaternion.identity, transform));
+            objsToScan.Add(Instantiate(prefabsToCapture[i], parentCenter, Quaternion.Euler(-90, 0, 0), transform));
+            objsToScan[i].name = prefabsToCapture[i].name;
             //objsToScan[i].AddComponent<BoxCollider>();
-            //objsToScan[i].SetActive(false);
+            objsToScan[i].SetActive(false);
         }
     }
 
