@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
