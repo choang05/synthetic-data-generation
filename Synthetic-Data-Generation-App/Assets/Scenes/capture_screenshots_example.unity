@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.50315917, g: 0.5106079, b: 0.42235002, a: 1}
+  m_IndirectSpecularColor: {r: 0.50313956, g: 0.5103851, b: 0.4224067, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -198,44 +198,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capturePerScene: 1
   captureRadius: 5
-  screenshots: 50
+  screenshots: 300
   datasetImageSize: 512
   prefabsToCapture:
-  - {fileID: 9025812402467498468, guid: c29fc7f1cc544d54db4fa817eb56a7b1, type: 3}
-  - {fileID: 4540656120509653137, guid: 8c8898c85ed9cf145a2566b0479fb41e, type: 3}
   - {fileID: 5340840291323371293, guid: c61b8303ee9bc514b89edf812f6d8e82, type: 3}
+  - {fileID: 4540656120509653137, guid: 8c8898c85ed9cf145a2566b0479fb41e, type: 3}
+  - {fileID: 9025812402467498468, guid: c29fc7f1cc544d54db4fa817eb56a7b1, type: 3}
   currentCaptureObjName: 
   objsToScan: []
-  camera: {fileID: 2070142260}
+  camera: {fileID: 0}
   randomDistanceOffset: 3
-  randomCameraViewRotationOffset: {x: 7, y: 7, z: 180}
+  randomCameraViewRotationOffset: {x: 10, y: 10, z: 180}
   skyboxesToCapture: -1
-  skyboxesToCaptureIn:
-  - {fileID: 2100000, guid: 86c68eaa348884e4f9f9bae46852aa55, type: 2}
-  - {fileID: 2100000, guid: 22c68036e1faf7f4e825321669091730, type: 2}
-  - {fileID: 2100000, guid: 0901e8f10661731429ea8b61ce97d384, type: 2}
-  - {fileID: 2100000, guid: d1d9882979086294dafd848053fcb937, type: 2}
-  - {fileID: 2100000, guid: 463e2fc0d0279184699fb969ae96bc14, type: 2}
-  - {fileID: 2100000, guid: ca2ff2a4e3c6abe4780e5e388fac2ba6, type: 2}
-  - {fileID: 2100000, guid: e6d29015c1111bb4c9525b8f53d078d2, type: 2}
-  - {fileID: 2100000, guid: 51e884fc8ffdf2944b7e84091d9ce422, type: 2}
-  - {fileID: 2100000, guid: d5b2b813026c94642aaf5333050265d4, type: 2}
-  - {fileID: 2100000, guid: d18c3ae3715fe0c428f3c0c10c1349db, type: 2}
-  - {fileID: 2100000, guid: 7c2964d45a9d6cc4eae65d62721d0ff7, type: 2}
-  - {fileID: 2100000, guid: 15c4cba1181583d41a1bd875fc37fcc5, type: 2}
-  - {fileID: 2100000, guid: 88d3a0f078bda2c48b60a16189a0378c, type: 2}
-  - {fileID: 2100000, guid: e59976f87e6a72b46988c28a1d3c2ab4, type: 2}
-  - {fileID: 2100000, guid: 9152e2377a315db48b22a17410a6f8d5, type: 2}
-  - {fileID: 2100000, guid: 3d83baf162326004e94ee2f1dd9400f9, type: 2}
-  - {fileID: 2100000, guid: f0b718a050ac6af458ed483600859103, type: 2}
-  - {fileID: 2100000, guid: 85a3a7cada059064fbe5904f743dd547, type: 2}
-  - {fileID: 2100000, guid: 503526694d9fb0b4ba1ff1d19be6a323, type: 2}
-  - {fileID: 2100000, guid: ac296d2079eea034089d4b784b715be0, type: 2}
+  skyboxesToCaptureIn: []
   randomizeLights: 0
   numScreenshotsPerLight: 1
-  debugPrefab: {fileID: 2400855512571375086, guid: 277c4ee8fadfcf34e9a8ded0d5385945,
-    type: 3}
-  debugPoints: 1
+  debugPrefab: {fileID: 0}
+  debugPoints: 0
   debugSize: 0.1
 --- !u!4 &432490617
 Transform:
@@ -285,10 +264,10 @@ RectTransform:
   m_Father: {fileID: 984857980}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 208.25, y: -25}
+  m_SizeDelta: {x: 396.5, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &664985481
 MonoBehaviour:
@@ -310,18 +289,35 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    m_HighlightedColor:
+      r: 0.9607843
+      g: 0.9607843
+      b: 0.9607843
+      a: 1
+    m_PressedColor:
+      r: 0.78431374
+      g: 0.78431374
+      b: 0.78431374
+      a: 1
+    m_SelectedColor:
+      r: 0.9607843
+      g: 0.9607843
+      b: 0.9607843
+      a: 1
+    m_DisabledColor:
+      r: 0.78431374
+      g: 0.78431374
+      b: 0.78431374
+      a: 0.5019608
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+  m_SpriteState: {m_HighlightedSprite: {fileID: 0}, m_PressedSprite: {fileID: 0},
+    m_SelectedSprite: {fileID: 0}, m_DisabledSprite: {fileID: 0}}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -330,20 +326,18 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 664985482}
+  m_GroupsAllowInteraction: 1
+  m_CurrentIndex: 0
+  <isPointerInside>k__BackingField: 0
+  <isPointerDown>k__BackingField: 0
+  <hasSelection>k__BackingField: 0
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 432490616}
-        m_MethodName: Capture
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      - {m_Target: {fileID: 432490616}, m_MethodName: Capture, m_Mode: 1, m_Arguments: {m_ObjectArgument: {fileID: 0},
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, m_IntArgument: 0,
+          m_FloatArgument: 0, m_StringArgument: , m_BoolArgument: 0}, m_CallState: 2}
+    m_CallsDirty: 1
 --- !u!114 &664985482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,11 +351,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
   m_RaycastTarget: 1
+  <useLegacyMeshGeneration>k__BackingField: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+    m_CallsDirty: 1
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -370,8 +370,11 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  m_AlphaHitTestMinimumThreshold: 0
+  m_Tracked: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+  m_CachedReferencePixelsPerUnit: 100
 --- !u!222 &664985483
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -643,6 +646,9 @@ MonoBehaviour:
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
+  m_TotalMinSize: {x: 30, y: 20}
+  m_TotalPreferredSize: {x: 50, y: 30}
+  m_TotalFlexibleSize: {x: 2, y: 1}
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -650,6 +656,18 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
+  m_Capacity: 10
+  m_Sizes:
+  - {x: 396.5, y: 30}
+  - {x: 396.5, y: 30}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
 --- !u!114 &984857982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,11 +681,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.392
   m_RaycastTarget: 1
+  <useLegacyMeshGeneration>k__BackingField: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+    m_CallsDirty: 1
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -676,8 +700,11 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  m_AlphaHitTestMinimumThreshold: 0
+  m_Tracked: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+  m_CachedReferencePixelsPerUnit: 100
 --- !u!222 &984857983
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -686,6 +713,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984857979}
   m_CullTransparentMesh: 0
+--- !u!1 &1188782753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1188782754}
+  - component: {fileID: 1188782755}
+  m_Layer: 0
+  m_Name: CustomVisionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1188782754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188782753}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2064726824}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1188782755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188782753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97d41804070e8f4780df3946547aa05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endpoint: 9e6e0d2201a14de3beb1dcd137223d49
+  trainingKey: https://lootbox.cognitiveservices.azure.com/
+  projectID: a8d69bbf-9fcb-4a44-9f6e-7b3aa1e2fff0
+  createNewProject: 0
 --- !u!1 &1199992420
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,10 +794,10 @@ RectTransform:
   m_Father: {fileID: 984857980}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 614.75, y: -25}
+  m_SizeDelta: {x: 396.5, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1199992422
 MonoBehaviour:
@@ -745,18 +819,35 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    m_HighlightedColor:
+      r: 0.9607843
+      g: 0.9607843
+      b: 0.9607843
+      a: 1
+    m_PressedColor:
+      r: 0.78431374
+      g: 0.78431374
+      b: 0.78431374
+      a: 1
+    m_SelectedColor:
+      r: 0.9607843
+      g: 0.9607843
+      b: 0.9607843
+      a: 1
+    m_DisabledColor:
+      r: 0.78431374
+      g: 0.78431374
+      b: 0.78431374
+      a: 0.5019608
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+  m_SpriteState: {m_HighlightedSprite: {fileID: 0}, m_PressedSprite: {fileID: 0},
+    m_SelectedSprite: {fileID: 0}, m_DisabledSprite: {fileID: 0}}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -765,20 +856,18 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1199992423}
+  m_GroupsAllowInteraction: 1
+  m_CurrentIndex: 0
+  <isPointerInside>k__BackingField: 0
+  <isPointerDown>k__BackingField: 0
+  <hasSelection>k__BackingField: 0
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1819408369}
-        m_MethodName: OpenDataDirectory
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      - {m_Target: {fileID: 1819408369}, m_MethodName: OpenDataDirectory, m_Mode: 1, m_Arguments: {m_ObjectArgument: {fileID: 0},
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, m_IntArgument: 0,
+          m_FloatArgument: 0, m_StringArgument: , m_BoolArgument: 0}, m_CallState: 2}
+    m_CallsDirty: 1
 --- !u!114 &1199992423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -792,11 +881,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
   m_RaycastTarget: 1
+  <useLegacyMeshGeneration>k__BackingField: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+    m_CallsDirty: 1
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -805,8 +900,11 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  m_AlphaHitTestMinimumThreshold: 0
+  m_Tracked: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+  m_CachedReferencePixelsPerUnit: 100
 --- !u!222 &1199992424
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -898,24 +996,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color:
+    r: 0.19607843
+    g: 0.19607843
+    b: 0.19607843
+    a: 1
   m_RaycastTarget: 1
+  <useLegacyMeshGeneration>k__BackingField: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_CallsDirty: 1
+  m_FontData: {m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0},
+    m_FontSize: 14, m_FontStyle: 0, m_BestFit: 0, m_MinSize: 10, m_MaxSize: 40, m_Alignment: 4,
+    m_AlignByGeometry: 0, m_RichText: 1, m_HorizontalOverflow: 0, m_VerticalOverflow: 0,
+    m_LineSpacing: 1}
+  m_LastTrackedFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Text: Open Data Directory
 --- !u!222 &1477257014
 CanvasRenderer:
@@ -955,6 +1051,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_EventSystem: {fileID: 0}
+  m_InputOverride: {fileID: 0}
+  m_DefaultInput: {fileID: 0}
+  m_PrevActionTime: 0
+  m_LastMoveVector: {x: 0, y: 0}
+  m_ConsecutiveMoveCount: 0
+  m_LastMousePosition: {x: 0, y: 0}
+  m_MousePosition: {x: 0, y: 0}
+  m_CurrentFocusedGameObject: {fileID: 0}
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -974,9 +1079,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SystemInputModules: []
+  m_CurrentInputModule: {fileID: 0}
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+  m_CurrentSelected: {fileID: 0}
+  m_HasFocus: 1
+  m_SelectionGuard: 0
 --- !u!4 &1606181090
 Transform:
   m_ObjectHideFlags: 0
@@ -1041,24 +1151,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color:
+    r: 0.19607843
+    g: 0.19607843
+    b: 0.19607843
+    a: 1
   m_RaycastTarget: 1
+  <useLegacyMeshGeneration>k__BackingField: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_CallsDirty: 1
+  m_FontData: {m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0},
+    m_FontSize: 14, m_FontStyle: 0, m_BestFit: 0, m_MinSize: 10, m_MaxSize: 40, m_Alignment: 4,
+    m_AlignByGeometry: 0, m_RichText: 1, m_HorizontalOverflow: 0, m_VerticalOverflow: 0,
+    m_LineSpacing: 1}
+  m_LastTrackedFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Text: Capture
 --- !u!222 &1686642459
 CanvasRenderer:
@@ -1099,11 +1207,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RootRaycaster: {fileID: 0}
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
   m_BlockingMask:
-    serializedVersion: 2
     m_Bits: 4294967295
+  m_Canvas: {fileID: 0}
 --- !u!114 &1734626343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,6 +1235,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_Canvas: {fileID: 1734626344}
 --- !u!223 &1734626344
 Canvas:
   m_ObjectHideFlags: 0
@@ -1296,6 +1406,7 @@ Transform:
   - {fileID: 1910635257}
   - {fileID: 133491868}
   - {fileID: 1819408368}
+  - {fileID: 1188782754}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1403,7 +1514,6 @@ MonoBehaviour:
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
-    serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_RenderPostProcessing: 0

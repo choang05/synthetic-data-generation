@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training</id>
+    <version>1.0.0</version>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</licenseUrl>
+    <projectUrl>http://customvision.ai/</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
+    <description>This client library provides access to the Microsoft Cognitive Services CustomVision Training APIs.</description>
+    <releaseNotes>This is a public release of the Cognitive Services Custom Vision Training SDK.
+
+    Changes in this release:
+    1) Added an advanced training option to set a budget to train longer for improved iteration performance.
+    2) Added additional export options targetting Vision AI Dev Kit and Docker ARM for Raspberry Pi.</releaseNotes>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>Microsoft Cognitive Services Cognitive Services Cognitive Services SDK REST HTTP client Custom Vision Custom Vision Training API Custom Vision Training SDK Vision netcore451511 SHA256Signed</tags>
+    <repository url="https://github.com/Azure/azure-sdk-for-net" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="Microsoft.Rest.ClientRuntime" version="[2.3.19, 3.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Rest.ClientRuntime.Azure" version="[3.3.19, 4.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.5.2">
+        <dependency id="Microsoft.Rest.ClientRuntime" version="[2.3.19, 3.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Rest.ClientRuntime.Azure" version="[3.3.19, 4.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="6.0.8" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard1.4">
+        <dependency id="Microsoft.Rest.ClientRuntime" version="[2.3.19, 3.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Rest.ClientRuntime.Azure" version="[3.3.19, 4.0.0)" exclude="Build,Analyzers" />
+        <dependency id="NETStandard.Library" version="1.6.1" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Microsoft.Rest.ClientRuntime" version="[2.3.19, 3.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Rest.ClientRuntime.Azure" version="[3.3.19, 4.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

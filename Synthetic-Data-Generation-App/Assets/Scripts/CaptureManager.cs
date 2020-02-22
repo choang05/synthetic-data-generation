@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
@@ -76,6 +78,7 @@ public class CaptureManager : MonoBehaviour
     [ContextMenu(nameof(Capture))]
     public void Capture()
     {
+        CustomVisionManager uploadManager = new CustomVisionManager();
         ResetCapture();
 
         Vector3[] points = GetSpherePoints(screenshots, captureRadius);
@@ -106,6 +109,9 @@ public class CaptureManager : MonoBehaviour
             }
 
             objsToScan[i].SetActive(false);
+
+            //Upload the images
+            uploadManager.uploadModel(objsToScan[i].name);
         }
 
         //  Create dataset files
