@@ -150,4 +150,12 @@ public class DatasetManager : MonoBehaviour
 
         return filepath;
     }
+
+    /// <summary>
+    /// Open the data dictioanry using System api
+    /// </summary>
+    public void OpenDataDirectory()
+    {
+        System.Diagnostics.Process.Start("explorer.exe", datasetDirPath);
+    }
 }
