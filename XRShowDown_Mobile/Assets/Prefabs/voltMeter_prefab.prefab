@@ -257,6 +257,20 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!64 &6083800922581548184
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4032087842150463233}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5060444177187149915, guid: 257e1ddf06bc3ca48ab8bc7ab81ddf60, type: 3}
 --- !u!1 &4396759443572309062
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +348,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: A voltmeter is an instrument for measuring electric potential in volts.
+--- !u!65 &4898959100701885425
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5680309052436496627}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7756262000722940256
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,9 +599,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 257e1ddf06bc3ca48ab8bc7ab81ddf60, type: 3}
+--- !u!1 &5680309052436496627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 257e1ddf06bc3ca48ab8bc7ab81ddf60,
+    type: 3}
+  m_PrefabInstance: {fileID: 4464597659556420090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8687403154884473568 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 257e1ddf06bc3ca48ab8bc7ab81ddf60,
+    type: 3}
+  m_PrefabInstance: {fileID: 4464597659556420090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4032087842150463233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 721056895991426811, guid: 257e1ddf06bc3ca48ab8bc7ab81ddf60,
     type: 3}
   m_PrefabInstance: {fileID: 4464597659556420090}
   m_PrefabAsset: {fileID: 0}
