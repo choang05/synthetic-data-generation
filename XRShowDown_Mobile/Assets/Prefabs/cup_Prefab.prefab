@@ -449,22 +449,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -9203390643985754587, guid: 8dcd5ae0636024e49b7c263b74b00cff, type: 3}
---- !u!114 &4338903317988761121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261149831427194410}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b70400c366bd60144a8f7e67ca78f48b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 8261149831427194410}
-  minScale: 1
-  maxScale: 5
-  rotationSpeed: 0.05
 --- !u!65 &7940405012758640370
 BoxCollider:
   m_ObjectHideFlags: 0
