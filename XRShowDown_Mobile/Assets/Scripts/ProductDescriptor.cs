@@ -1,61 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ProductDescriptor : MonoBehaviour
 {
+    public Transform productNode;
 
-    public GameObject voltmeter;
-    public GameObject cup;
-    public GameObject lamp;
-    public GameObject wrench;
-    public GameObject hammer;
-
-
-    void Start()
-    {
-        voltmeter = Instantiate(voltmeter, new Vector3(0, 0, 0), Quaternion.identity);
-        cup = Instantiate(cup, new Vector3(0, 0, 0), Quaternion.identity);
-        lamp = Instantiate(lamp, new Vector3(0, 0, 0), Quaternion.identity);
-        wrench = Instantiate(wrench, new Vector3(0, 0, 0), Quaternion.identity);
-        hammer = Instantiate(hammer, new Vector3(0, 0, 0), Quaternion.identity);
-
-        removeObjects();
-    }
+    private GameObject currentDisplayingObject;
 
     public void removeObjects()
     {
-        voltmeter.gameObject.SetActive(false);
-        cup.gameObject.SetActive(false);
-        lamp.gameObject.SetActive(false);
-        wrench.gameObject.SetActive(false);
-        hammer.gameObject.SetActive(false);
-
+        Destroy(currentDisplayingObject);
+        currentDisplayingObject = null;
     }
 
-    public void showProduct(string productName)
+    public void showProduct(string productKey)
     {
-        removeObjects();
-        switch (productName)
+        //  if provided key is empty... randomly grab a database key and display that object??
+        if (string.IsNullOrEmpty(productKey))
         {
-            case "":
-                Debug.Log("Stating");
-                break;
-            case "voltmeter":
-                voltmeter.gameObject.SetActive(true);
-                break;
-            case "cup":
-                cup.gameObject.SetActive(true);
-                break;
-            case "lamp":
-                lamp.gameObject.SetActive(true);
-                break;
-            case "wrench":
-                wrench.gameObject.SetActive(true);
-                break;
-            case "hammer":
-                hammer.gameObject.SetActive(true);
-                break;
+            int randomIndex = Random.Range(0, ProductManager.instance.products.Count-1);
+            productKey = ProductManager.instance.products.ElementAt(randomIndex).Key;
+        }
+
+        //  Destroy any existing product
+        if (currentDisplayingObject)
+        {
+            removeObjects();
+        }
+
+        //  Spawn new object
+        GameObject product;
+        if (ProductManager.instance.products.TryGetValue(productKey, out product))
+        {
+            currentDisplayingObject = Instantiate(product, productNode.position, Quaternion.identity, productNode);
+
+            //  correct position for objects that have center/pivot NOT in center of object
+            Renderer rend = currentDisplayingObject.GetComponent<Renderer>();
+            if (rend)
+            {
+                Bounds bounds = rend.bounds;
+                float yOffset = -bounds.extents.y;
+                currentDisplayingObject.transform.position = transform.position + transform.position + new Vector3(0, yOffset, 0);
+            }
+        }
+        else
+        {
+            Debug.LogWarning(productKey + " does not exist in database!");
         }
     }
 }
