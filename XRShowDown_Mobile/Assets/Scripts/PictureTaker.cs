@@ -12,8 +12,8 @@ public class PictureTaker : MonoBehaviour
     public AspectRatioFitter aspectFitter;
     public Texture2D currentPicture;
     public string currentPicturePath;
+    public GameObject mainCameraPanel;
 
-    private bool cameraActive = true;
     private bool isCameraAvaliable;
     private WebCamTexture backCamera;
 
@@ -34,10 +34,11 @@ public class PictureTaker : MonoBehaviour
             aspectFitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        if (cameraActive)
+        if (mainCameraPanel && mainCameraPanel.activeSelf)
         {
             OrientCameraScreen();
         }

@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class canvas_Manager : MonoBehaviour
 {
+    [Header("Panels")]
     public GameObject welcome;
     public GameObject main;
     public GameObject productD;
@@ -11,13 +13,16 @@ public class canvas_Manager : MonoBehaviour
     public GameObject helperS;
     public GameObject archive;
     public GameObject settings;
+    public GameObject capturedImage;
 
-    public ProductDescriptor pd;
+    [Header("UI misc panels")]
+    public GameObject imageProcessingAnimationPanel;
 
     void Start()
     {
-        pd = this.gameObject.GetComponent<ProductDescriptor>();
+
     }
+
     public void swapCanvas(string canvasName)
     {
         welcome.gameObject.SetActive(false);
@@ -28,7 +33,6 @@ public class canvas_Manager : MonoBehaviour
         archive.gameObject.SetActive(false);
         settings.gameObject.SetActive(false);
 
-
         switch (canvasName)
         {
             case "welcome":
@@ -36,7 +40,6 @@ public class canvas_Manager : MonoBehaviour
                 break;
             case "main":
                 main.gameObject.SetActive(true);
-                pd.removeObjects();
                 break;
             case "productD":
                 productD.gameObject.SetActive(true);
@@ -52,8 +55,69 @@ public class canvas_Manager : MonoBehaviour
 			    break;
             case "settings":
                 settings.gameObject.SetActive(true);
-                pd.removeObjects();
                 break;
         }
      }
+
+    public void StartProcessingImage()
+    {
+        StopAllCoroutines();
+        StartCoroutine(ProcessImage());
+    }
+
+    private IEnumerator ProcessImage()
+    {
+        WaitForSeconds delay = new WaitForSeconds(1);
+        bool isImageValid = false;
+        float maxWaitTime = 15;
+        float currentElapsedTime = 0;
+
+        //  Animations
+        imageProcessingAnimationPanel.SetActive(true);
+
+        while (!isImageValid)
+        {
+            currentElapsedTime += 1;
+
+            //  DEBUG (give 3 seconds to process)
+            if (currentElapsedTime >= 7)
+            {
+                isImageValid = true;    //  DEBUG
+                break;
+            }
+
+            //  Error handling for timeouts
+            if (currentElapsedTime >= maxWaitTime)
+            {
+                Debug.LogError("Time to process image timed out!");
+                isImageValid = false;
+                break;
+            }
+
+            yield return delay; 
+        }
+
+        //  Animations
+        imageProcessingAnimationPanel.SetActive(false);
+
+        OnImageProcessed(isImageValid);
+    }
+
+    /// <summary>
+    /// Once image has proessed, if image is valid, turn on image panel, else, give suggestion and return to capture screen
+    /// </summary>
+    /// <param name="isValid"></param>
+    private void OnImageProcessed(bool isValid)
+    {
+        if (isValid)
+        {
+            Debug.Log("Image valid!");
+            capturedImage.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Image invalid!");
+            helperS.gameObject.SetActive(true);
+        }
+    }
 }
