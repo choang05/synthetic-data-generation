@@ -180,8 +180,10 @@ public class CaptureManager : MonoBehaviour
 
             //  keep randomizing view until its within the shot
             bool isWithinCaptureScreen;
+            int attempts = 0;
             do
             {
+                attempts += 1;
                 camera.transform.LookAt(objToScan.transform);
 
                 //  random distance offset
@@ -196,7 +198,7 @@ public class CaptureManager : MonoBehaviour
                 //  get bounds and check if region is within capture screen
                 (float _x, float _y, float _x2, float _y2) = GetNormalizedScreenRegion(objToScan);
                 isWithinCaptureScreen = _x > 0 && _y > 0 && _x2 < 1 && _y2 < 1;
-            } while (!isWithinCaptureScreen);
+            } while (!isWithinCaptureScreen && attempts < 5);
 
             // folder name of the dataset object key
             //if (string.IsNullOrEmpty(classFolderName))
