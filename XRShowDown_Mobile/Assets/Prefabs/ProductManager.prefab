@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 769479994049820971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b610e40d1c1d0c4bbb0f73ec5bf1f0e, type: 3}
+  m_Script: {fileID: 11500000, guid: bcf0225f5412b734a80de186543e2f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   products:
@@ -67,14 +67,20 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
-    - cup
+    - voltmeter
     - lamp
-    - voltMeter
+    - cup
+    - hammer
+    - wrench
     _keys:
-    - cup
+    - voltmeter
     - lamp
-    - voltMeter
+    - cup
+    - hammer
+    - wrench
     _values:
-    - {fileID: 1202225092699208454, guid: 0b13462c469b13f46a0f3908a0c3d42a, type: 3}
-    - {fileID: 7903224937069806909, guid: 14ebdd903a159e047b53dc98e77816ce, type: 3}
-    - {fileID: 3389719010186348383, guid: 1c503744f168b04448d337fb194fe84f, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
