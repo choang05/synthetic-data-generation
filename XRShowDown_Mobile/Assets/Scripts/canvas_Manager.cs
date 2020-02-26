@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ public class canvas_Manager : MonoBehaviour
 
     [Header("UI misc panels")]
     public GameObject imageProcessingAnimationPanel;
+    public Transform validImagePanel;
+    public Transform invalidImagePanel;
 
     void Start()
     {
@@ -97,9 +100,6 @@ public class canvas_Manager : MonoBehaviour
             yield return delay; 
         }
 
-        //  Animations
-        imageProcessingAnimationPanel.SetActive(false);
-
         OnImageProcessed(isImageValid);
     }
 
@@ -109,15 +109,28 @@ public class canvas_Manager : MonoBehaviour
     /// <param name="isValid"></param>
     private void OnImageProcessed(bool isValid)
     {
-        if (isValid)
+        Sequence mySequence = DOTween.Sequence();
+        mySequence.Append(imageProcessingAnimationPanel.transform.DOScale(0, .5f))
+          .Append(isValid? validImagePanel.DOScale(1, .5f) : invalidImagePanel.DOScale(1, .5f))
+          .PrependInterval(3)
+          //.Insert(0, transform.DOScale(new Vector3(3, 3, 3), mySequence.Duration()))
+          .OnComplete(MyCallback);
+
+        void MyCallback()
         {
-            Debug.Log("Image valid!");
-            capturedImage.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("Image invalid!");
-            helperS.gameObject.SetActive(true);
+            //  Animations
+            imageProcessingAnimationPanel.SetActive(false);
+
+            if (isValid)
+            {
+                Debug.Log("Image valid!");
+                capturedImage.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("Image invalid!");
+                helperS.gameObject.SetActive(true);
+            }
         }
     }
 }
