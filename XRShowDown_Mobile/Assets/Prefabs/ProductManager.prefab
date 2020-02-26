@@ -68,19 +68,19 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - voltmeter
-    - lamp
     - cup
-    - hammer
+    - lamp
     - wrench
+    - hammer
     _keys:
     - voltmeter
-    - lamp
     - cup
-    - hammer
+    - lamp
     - wrench
+    - hammer
     _values:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 3389719010186348383, guid: 1c503744f168b04448d337fb194fe84f, type: 3}
+    - {fileID: 225100281419760762, guid: 0b13462c469b13f46a0f3908a0c3d42a, type: 3}
+    - {fileID: 7903224937069806909, guid: 14ebdd903a159e047b53dc98e77816ce, type: 3}
+    - {fileID: 3389719010186348383, guid: 1c503744f168b04448d337fb194fe84f, type: 3}
+    - {fileID: 3389719010186348383, guid: 1c503744f168b04448d337fb194fe84f, type: 3}
