@@ -80,7 +80,7 @@ public class CustomVisionManager : MonoBehaviour
                 // using (var stream = new MemoryStream(File.ReadAllBytes(image)))
                 using (var stream = File.OpenRead(image))
                 {
-                    await client.CreateImagesFromDataAsync(project.Id, stream, tagList);
+                    client.CreateImagesFromData(project.Id, stream, tagList);
                 }
             }
         }

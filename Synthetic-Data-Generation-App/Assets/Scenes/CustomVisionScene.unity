@@ -1186,14 +1186,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047263719}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffe01a312b6678c489797903fd7a7a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   capturePerScene: 1
   captureRadius: 5
-  screenshots: 3
+  screenshots: 10
   datasetImageSize: 512
   prefabsToCapture:
   - {fileID: 9025812402467498468, guid: c29fc7f1cc544d54db4fa817eb56a7b1, type: 3}
