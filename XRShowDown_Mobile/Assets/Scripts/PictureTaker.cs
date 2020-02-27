@@ -10,12 +10,13 @@ public class PictureTaker : MonoBehaviour
     [Header("Camera Settings")]
     public RawImage background;
     public AspectRatioFitter aspectFitter;
-    public Texture2D currentPicture;
-    public string currentPicturePath;
+    public GameObject mainCameraPanel;
+    public bool useDesktopWebcam = false;
+    [HideInInspector] public Texture2D currentPicture;
+    [HideInInspector] public string currentPicturePath;
 
-    private bool cameraActive = true;
     private bool isCameraAvaliable;
-    private WebCamTexture backCamera;
+    private WebCamTexture deviceCamera;
 
     [Header("Debug Settings")]
     public Text debugText;
@@ -34,10 +35,11 @@ public class PictureTaker : MonoBehaviour
             aspectFitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        if (cameraActive)
+        if (mainCameraPanel && mainCameraPanel.activeSelf)
         {
             OrientCameraScreen();
         }
@@ -59,21 +61,20 @@ public class PictureTaker : MonoBehaviour
 
         for (int i = 0; i < devices.Length; i++)
         {
-            if (!devices[i].isFrontFacing)
+            if (!devices[i].isFrontFacing || useDesktopWebcam)
             {
-                backCamera = new WebCamTexture(devices[i].name,
-                Screen.width, Screen.height);
+                deviceCamera = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
             }
         }
 
-        if (backCamera == null)
+        if (deviceCamera == null)
         {
             print("No backcam");
             return;
         }
 
-        backCamera.Play();
-        background.texture = backCamera;
+        deviceCamera.Play();
+        background.texture = deviceCamera;
 
         isCameraAvaliable = true;
     }
@@ -89,13 +90,13 @@ public class PictureTaker : MonoBehaviour
             return;
         }
 
-        float ratio = (float)backCamera.width / (float)backCamera.height;
+        float ratio = (float)deviceCamera.width / (float)deviceCamera.height;
         aspectFitter.aspectRatio = ratio;
 
-        float scaleY = backCamera.videoVerticallyMirrored ? -1f : 1f;
+        float scaleY = deviceCamera.videoVerticallyMirrored ? -1f : 1f;
         background.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
 
-        int orient = -backCamera.videoRotationAngle;
+        int orient = -deviceCamera.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
     }
 
@@ -117,12 +118,14 @@ public class PictureTaker : MonoBehaviour
         // NOTE - you almost certainly have to do this here:
         yield return new WaitForEndOfFrame();
 
+        OrientCameraScreen();
+
         // it's a rare case where the Unity doco is pretty clear,
         // http://docs.unity3d.com/ScriptReference/WaitForEndOfFrame.html
         // be sure to scroll down to the SECOND long example on that doco page 
 
-        Texture2D photo = new Texture2D(backCamera.width, backCamera.height);
-        photo.SetPixels(backCamera.GetPixels());
+        Texture2D photo = new Texture2D(deviceCamera.width, deviceCamera.height);
+        photo.SetPixels(deviceCamera.GetPixels());
         photo.Apply();
 
         //Encode to a PNG
