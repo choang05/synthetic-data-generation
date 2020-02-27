@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class canvas_Manager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class canvas_Manager : MonoBehaviour
     public GameObject imageProcessingAnimationPanel;
     public Transform validImagePanel;
     public Transform invalidImagePanel;
+    public Transform capturedImagePlaceHolder;
 
     void Start()
     {
@@ -74,6 +76,9 @@ public class canvas_Manager : MonoBehaviour
         bool isImageValid = false;
         float maxWaitTime = 15;
         float currentElapsedTime = 0;
+
+        PictureTaker pt = FindObjectOfType<PictureTaker>();
+        capturedImagePlaceHolder.GetComponent<RawImage>().texture = pt.currentPicture;
 
         //  Animations
         imageProcessingAnimationPanel.SetActive(true);
