@@ -16,6 +16,7 @@ public class canvas_Manager : MonoBehaviour
     public GameObject archive;
     public GameObject settings;
     public GameObject capturedImage;
+    public GameObject cameraImageProcessingPanel;
 
     [Header("UI misc panels")]
     public GameObject imageProcessingAnimationPanel;
@@ -77,18 +78,16 @@ public class canvas_Manager : MonoBehaviour
         float maxWaitTime = 15;
         float currentElapsedTime = 0;
 
-        PictureTaker pt = FindObjectOfType<PictureTaker>();
-        capturedImagePlaceHolder.GetComponent<RawImage>().texture = pt.currentPicture;
-
         //  Animations
         imageProcessingAnimationPanel.SetActive(true);
+        capturedImage.SetActive(true);
 
         while (!isImageValid)
         {
             currentElapsedTime += 1;
 
             //  DEBUG (give 3 seconds to process)
-            if (currentElapsedTime >= 7)
+            if (currentElapsedTime >= 2)
             {
                 isImageValid = true;    //  DEBUG
                 break;
@@ -125,11 +124,15 @@ public class canvas_Manager : MonoBehaviour
         {
             //  Animations
             imageProcessingAnimationPanel.SetActive(false);
+            cameraImageProcessingPanel.SetActive(false);
 
             if (isValid)
             {
                 Debug.Log("Image valid!");
-                capturedImage.SetActive(true);
+                //  Set image to render texture
+                PictureTaker pt = FindObjectOfType<PictureTaker>();
+                RawImage rawImage = capturedImagePlaceHolder.GetComponent<RawImage>();
+                rawImage.texture = pt.currentPicture;
             }
             else
             {
