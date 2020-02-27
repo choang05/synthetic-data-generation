@@ -63,9 +63,8 @@ public class PictureTaker : MonoBehaviour
         {
             if (!devices[i].isFrontFacing || useDesktopWebcam)
             {
-                deviceCamera = new WebCamTexture(devices[i].name);
+                deviceCamera = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
             }
-            deviceCamera = new WebCamTexture(devices[i].name, deviceCamera.width, deviceCamera.height);
         }
 
         if (deviceCamera == null)
