@@ -6488,7 +6488,7 @@ MonoBehaviour:
   background: {fileID: 1360243585}
   aspectFitter: {fileID: 1360243586}
   mainCameraPanel: {fileID: 1838621174}
-  useDesktopWebcam: 1
+  useDesktopWebcam: 0
   currentPicture: {fileID: 0}
   currentPicturePath: 
   debugText: {fileID: 625054886}
