@@ -1,7 +1,9 @@
 ﻿using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using UnityEditor;
@@ -73,8 +75,33 @@ public class CaptureManager : MonoBehaviour
     /// <summary>
     /// 1-click pipeline to capture images of obj, upload, train, and build model
     /// </summary>
+    /// <remarks>
+    /// This method should ONLY be called from the context menu. If calling from code, use the async Task version below.
+    /// </remarks>
+    [EditorBrowsable(EditorBrowsableState.Never)]
     [ContextMenu(nameof(Capture))]
-    public void Capture()
+    public async void Capture()
+    {
+        try
+        {
+            await CaptureAsync();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"{nameof(CaptureManager)}.{nameof(Capture)} could not complete. {e.Message}");
+            if (e.InnerException != null)
+            {
+                Debug.Log($"{nameof(CaptureManager)}.{nameof(Capture)} Additional info: {e.InnerException.Message}");
+            }
+            var cve = e as CustomVisionErrorException;
+            if (cve != null)
+            {
+                Debug.Log($"{nameof(CaptureManager)}.{nameof(Capture)} Custom Vision info:\r\n HResult: {cve.HResult} \r\n Message: {cve.Message}, \r\n Status Code: {cve.Response.StatusCode} \r\n Reason: {cve.Response.ReasonPhrase} \r\n Content: {cve.Response.Content}");
+            }
+        }
+    }
+
+    public async Task CaptureAsync()
     {
         CustomVisionManager uploadManager = new CustomVisionManager();
         ResetCapture();
@@ -94,7 +121,7 @@ public class CaptureManager : MonoBehaviour
                 skyboxesToCapture = skyboxesToCapture <= -1 ? skyboxesToCaptureIn.Length : skyboxesToCapture;
                 for (int j = 0; j < skyboxesToCapture; j++)
                 {
-                    Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", j+1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[j].name));
+                    Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", j + 1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[j].name));
                     RenderSettings.skybox = skyboxesToCaptureIn[j];
                     CaptureImages(points, objsToScan[i]);
                     screenshotCount++;
@@ -109,8 +136,10 @@ public class CaptureManager : MonoBehaviour
             objsToScan[i].SetActive(false);
 
             //Upload the images
-            uploadManager.uploadModel(objsToScan[i].name);
+            await uploadManager.UploadModelAsync(objsToScan[i].name);
         }
+
+        await uploadManager.TrainModelAsync();
 
         //  Create dataset files
         string autoMLDatasetPath = DatasetManager.instance.CreateAutoMLDatasetFromRows(null);
@@ -122,6 +151,7 @@ public class CaptureManager : MonoBehaviour
         Debug.Log(string.Format("Tensorflow dataset created at {0}", tensorflowDatasetPath));
         Debug.Log(string.Format("Custom Vision dataset created at {0}", customVisionDatasetPath));
     }
+
 
     /// <summary>
     /// Cleans and preps scene before next capture process
