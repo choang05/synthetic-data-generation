@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartScene.unity
     guid: 8baccc21e0809314ab9f33d0d318aec5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LootBox_UI.unity
     guid: 590f96dafa80a094ba1dc7334d9634f6
+  - enabled: 1
+    path: Assets/Scenes/nativeCameraTest.unity
+    guid: 0dc568bffe7b30943a04f80ed561a289
   m_configObjects: {}

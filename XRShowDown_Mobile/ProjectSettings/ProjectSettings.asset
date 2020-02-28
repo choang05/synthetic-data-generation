@@ -392,7 +392,7 @@ PlayerSettings:
     m_DynamicBatching: 0
   - m_BuildTarget: Android
     m_StaticBatching: 1
-    m_DynamicBatching: 0
+    m_DynamicBatching: 1
   - m_BuildTarget: iPhone
     m_StaticBatching: 1
     m_DynamicBatching: 0
@@ -423,7 +423,7 @@ PlayerSettings:
   - m_BuildTarget: LuminSupport
     m_GraphicsJobs: 0
   - m_BuildTarget: AndroidPlayer
-    m_GraphicsJobs: 0
+    m_GraphicsJobs: 1
   - m_BuildTarget: WebGLSupport
     m_GraphicsJobs: 0
   m_BuildTargetGraphicsJobMode:
@@ -692,16 +692,18 @@ PlayerSettings:
     1: RHSD
     7: RHSD
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Android: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
   allowUnsafeCode: 0
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
-  gcIncremental: 0
+  gcIncremental: 1
   gcWBarrierValidation: 0
-  apiCompatibilityLevelPerPlatform: {}
+  apiCompatibilityLevelPerPlatform:
+    Android: 3
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: Template_3D
