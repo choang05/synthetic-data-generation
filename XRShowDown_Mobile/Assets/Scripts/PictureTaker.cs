@@ -12,7 +12,7 @@ public class PictureTaker : MonoBehaviour
 
     //  Events
     public delegate void CameraEvents(Texture2D texture2d, RawImage rawImage, string path);
-    public static CameraEvents OnPictureTaken;
+    public static CameraEvents OnPictureLoaded;
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +45,10 @@ public class PictureTaker : MonoBehaviour
 
                 pictureHolder.texture = texture;
 
+                NativeGallery.SaveImageToGallery(texture, "core_app", "core_img.png");
+
                 //  Broadcast events
-                OnPictureTaken?.Invoke(texture, pictureHolder, path);
+                OnPictureLoaded?.Invoke(texture, pictureHolder, path);
             }
         });
 
@@ -68,6 +70,31 @@ public class PictureTaker : MonoBehaviour
                 Handheld.PlayFullScreenMovie("file://" + path);
             }
         });
+
+        Debug.Log("Permission result: " + permission);
+    }
+
+    public void LoadImage()
+    {
+        NativeGallery.Permission permission = NativeGallery.GetImageFromGallery((path) =>
+        {
+            Debug.Log("Image path: " + path);
+            if (path != null)
+            {
+                // Create Texture from selected image
+                Texture2D texture = NativeGallery.LoadImageAtPath(path);
+                if (texture == null)
+                {
+                    Debug.Log("Couldn't load texture from " + path);
+                    return;
+                }
+
+                pictureHolder.texture = texture;
+
+                //  Broadcast events
+                OnPictureLoaded?.Invoke(texture, pictureHolder, path);
+            }
+        }, "Select a PNG image", "image/png");
 
         Debug.Log("Permission result: " + permission);
     }
