@@ -8,150 +8,67 @@ using UnityEngine.UI;
 public class PictureTaker : MonoBehaviour
 {
     [Header("Camera Settings")]
-    public RawImage background;
-    public AspectRatioFitter aspectFitter;
-    public GameObject mainCameraPanel;
-    public bool useDesktopWebcam = false;
-    [HideInInspector] public Texture2D currentPicture;
-    [HideInInspector] public string currentPicturePath;
-
-    private bool isCameraAvaliable;
-    private WebCamTexture deviceCamera;
-
-    [Header("Debug Settings")]
-    public Text debugText;
+    public RawImage pictureHolder;
 
     //  Events
-    public delegate void CameraEvents(Texture2D texture2d);
+    public delegate void CameraEvents(Texture2D texture2d, RawImage rawImage);
     public static CameraEvents OnPictureTaken;
 
     // Start is called before the first frame update
     void Start()
     {
-        TryGetAndActivateCamera();
-
-        //  Correct aspect fitter parameters
-        if (aspectFitter)
-            aspectFitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (mainCameraPanel && mainCameraPanel.activeSelf)
-        {
-            OrientCameraScreen();
-        }
+       
     }
 
     /// <summary>
-    /// Method to try to get and turn on the back camera of the device its running on.
+    /// Opens the native camera of device and will cache picture to raw image
     /// </summary>
-    void TryGetAndActivateCamera()
+    /// <param name="maxSize"></param>
+    public void TakePicture()
     {
-        WebCamDevice[] devices = WebCamTexture.devices;
-
-        if (devices.Length == 0)
-        {
-            print("no webcam ");
-            isCameraAvaliable = false;
+        // Don't attempt to use the camera if it is already open
+        if (NativeCamera.IsCameraBusy())
             return;
-        }
 
-        for (int i = 0; i < devices.Length; i++)
+        NativeCamera.Permission permission = NativeCamera.TakePicture((path) =>
         {
-            if (!devices[i].isFrontFacing || useDesktopWebcam)
+            Debug.Log("Image path: " + path);
+            if (path != null)
             {
-                deviceCamera = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
+                // Create a Texture2D from the captured image
+                Texture2D texture = NativeCamera.LoadImageAtPath(path);
+                if (texture == null)
+                {
+                    Debug.Log("Couldn't load texture from " + path);
+                    return;
+                }
+
+                pictureHolder.texture = texture;
+
+                //  Broadcast events
+                OnPictureTaken?.Invoke(texture, pictureHolder);
             }
-        }
+        });
 
-        if (deviceCamera == null)
-        {
-            print("No backcam");
+        Debug.Log("Permission result: " + permission);
+    }
+
+    public void RecordVideo()
+    {
+        // Don't attempt to use the camera if it is already open
+        if (NativeCamera.IsCameraBusy())
             return;
-        }
 
-        deviceCamera.Play();
-        background.texture = deviceCamera;
-
-        isCameraAvaliable = true;
-    }
-
-    /// <summary>
-    /// Correct orientation of camera screen (portrait/landscape) given a camera is activated
-    /// </summary>
-    void OrientCameraScreen()
-    {
-        if (!isCameraAvaliable)
+        NativeCamera.Permission permission = NativeCamera.RecordVideo((path) =>
         {
-            TryGetAndActivateCamera();
-            return;
-        }
+            Debug.Log("Video path: " + path);
+            if (path != null)
+            {
+                // Play the recorded video
+                Handheld.PlayFullScreenMovie("file://" + path);
+            }
+        });
 
-        float ratio = (float)deviceCamera.width / (float)deviceCamera.height;
-        aspectFitter.aspectRatio = ratio;
-
-        float scaleY = deviceCamera.videoVerticallyMirrored ? -1f : 1f;
-        background.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
-
-        int orient = -deviceCamera.videoRotationAngle;
-        background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-    }
-
-    /// <summary>
-    /// Method to capture image from camera (android, webcam, etc.) given the WebCamTexture (camera texture) and saves it to given path
-    /// </summary>
-    /// <param name="webcamTexture"></param>
-    /// <param name="directoryPath"></param>
-    /// <returns></returns>
-    public void ButtonTakePhoto()
-    {
-        StartCoroutine(TakePhoto(null));
-    }
-    public IEnumerator TakePhoto(string directoryPath)
-    {
-        if (!isCameraAvaliable)
-            yield break;
-
-        // NOTE - you almost certainly have to do this here:
-        yield return new WaitForEndOfFrame();
-
-        OrientCameraScreen();
-
-        // it's a rare case where the Unity doco is pretty clear,
-        // http://docs.unity3d.com/ScriptReference/WaitForEndOfFrame.html
-        // be sure to scroll down to the SECOND long example on that doco page 
-
-        Texture2D photo = new Texture2D(deviceCamera.width, deviceCamera.height);
-        photo.SetPixels(deviceCamera.GetPixels());
-        photo.Apply();
-
-        //Encode to a PNG
-        currentPicture = photo;
-        byte[] bytes = photo.EncodeToPNG();
-
-        if (string.IsNullOrEmpty(directoryPath))
-        {
-            directoryPath = Application.persistentDataPath;
-        }
-
-        currentPicturePath = Path.Combine(directoryPath + "lootbox_photo.png");
-
-        //Write out the PNG.
-        File.WriteAllBytes(currentPicturePath, bytes);
-
-        //  Broadcast events
-        OnPictureTaken?.Invoke(currentPicture);
-        UpdateDebugInfo();
-    }
-
-    public void UpdateDebugInfo()
-    {
-        if (debugText && currentPicture)
-        {
-            debugText.text = currentPicturePath;
-        }
+        Debug.Log("Permission result: " + permission);
     }
 }

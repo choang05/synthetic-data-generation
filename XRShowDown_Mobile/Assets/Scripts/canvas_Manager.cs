@@ -132,7 +132,6 @@ public class canvas_Manager : MonoBehaviour
                 //  Set image to render texture
                 PictureTaker pt = FindObjectOfType<PictureTaker>();
                 RawImage rawImage = capturedImagePlaceHolder.GetComponent<RawImage>();
-                rawImage.texture = pt.currentPicture;
             }
             else
             {
