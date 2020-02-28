@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 458496938}
   - component: {fileID: 458496939}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: RawImageHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 4
-  m_AspectRatio: 1
+  m_AspectRatio: 0.5
 --- !u!222 &458496940
 CanvasRenderer:
   m_ObjectHideFlags: 0
