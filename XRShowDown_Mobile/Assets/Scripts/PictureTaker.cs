@@ -11,7 +11,7 @@ public class PictureTaker : MonoBehaviour
     public RawImage pictureHolder;
 
     //  Events
-    public delegate void CameraEvents(Texture2D texture2d, RawImage rawImage);
+    public delegate void CameraEvents(Texture2D texture2d, RawImage rawImage, string path);
     public static CameraEvents OnPictureTaken;
 
     // Start is called before the first frame update
@@ -46,7 +46,7 @@ public class PictureTaker : MonoBehaviour
                 pictureHolder.texture = texture;
 
                 //  Broadcast events
-                OnPictureTaken?.Invoke(texture, pictureHolder);
+                OnPictureTaken?.Invoke(texture, pictureHolder, path);
             }
         });
 
