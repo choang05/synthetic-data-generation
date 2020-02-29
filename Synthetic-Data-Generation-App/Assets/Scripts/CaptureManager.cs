@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
@@ -65,15 +69,43 @@ public class CaptureManager : MonoBehaviour
     {
         Screen.SetResolution(datasetImageSize, datasetImageSize, false);
 
-        //ResetCapture();
+        if (!camera) camera = Camera.main;
+
+        ResetCapture();
     }
 
     /// <summary>
     /// 1-click pipeline to capture images of obj, upload, train, and build model
     /// </summary>
+    /// <remarks>
+    /// This method should ONLY be called from the context menu. If calling from code, use the async Task version below.
+    /// </remarks>
+    [EditorBrowsable(EditorBrowsableState.Never)]
     [ContextMenu(nameof(Capture))]
-    public void Capture()
+    public async void Capture()
     {
+        try
+        {
+            await CaptureAsync();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"{nameof(CaptureManager)}.{nameof(Capture)} could not complete. {e.Message}");
+            if (e.InnerException != null)
+            {
+                Debug.Log($"{nameof(CaptureManager)}.{nameof(Capture)} Additional info: {e.InnerException.Message}");
+            }
+            var cve = e as CustomVisionErrorException;
+            if (cve != null)
+            {
+                Debug.Log($"{nameof(CaptureManager)}.{nameof(Capture)} Custom Vision info:\r\n HResult: {cve.HResult} \r\n Message: {cve.Message}, \r\n Status Code: {cve.Response.StatusCode} \r\n Reason: {cve.Response.ReasonPhrase} \r\n Content: {cve.Response.Content}");
+            }
+        }
+    }
+
+    public async Task CaptureAsync()
+    {
+        CustomVisionManager uploadManager = new CustomVisionManager();
         ResetCapture();
 
         Vector3[] points = GetSpherePoints(screenshots, captureRadius);
@@ -91,7 +123,7 @@ public class CaptureManager : MonoBehaviour
                 skyboxesToCapture = skyboxesToCapture <= -1 ? skyboxesToCaptureIn.Length : skyboxesToCapture;
                 for (int j = 0; j < skyboxesToCapture; j++)
                 {
-                    Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", j+1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[j].name));
+                    Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", j + 1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[j].name));
                     RenderSettings.skybox = skyboxesToCaptureIn[j];
                     CaptureImages(points, objsToScan[i]);
                     screenshotCount++;
@@ -104,7 +136,12 @@ public class CaptureManager : MonoBehaviour
             }
 
             objsToScan[i].SetActive(false);
+
+            //Upload the images
+            await uploadManager.UploadModelAsync(objsToScan[i].name);
         }
+
+        await uploadManager.TrainModelAsync();
 
         //  Create dataset files
         string autoMLDatasetPath = DatasetManager.instance.CreateAutoMLDatasetFromRows(null);
@@ -116,6 +153,7 @@ public class CaptureManager : MonoBehaviour
         Debug.Log(string.Format("Tensorflow dataset created at {0}", tensorflowDatasetPath));
         Debug.Log(string.Format("Custom Vision dataset created at {0}", customVisionDatasetPath));
     }
+
 
     /// <summary>
     /// Cleans and preps scene before next capture process
@@ -145,11 +183,14 @@ public class CaptureManager : MonoBehaviour
         objsToScan.Clear();
         for (int i = 0; i < prefabsToCapture.Count; i++)
         {
-            Vector3 parentCenter = transform.position;
-            objsToScan.Add(Instantiate(prefabsToCapture[i], parentCenter, Quaternion.Euler(-90, 0, 0), transform));
+            objsToScan.Add(Instantiate(prefabsToCapture[i], Vector3.zero, Quaternion.Euler(-90, 0, 0), transform));
+            //  correct center pivot point
+            Bounds bounds = objsToScan[i].GetComponent<Renderer>().bounds;
+            float yOffset = -bounds.extents.y;
+            objsToScan[i].transform.position = transform.position + transform.position + new Vector3(0, yOffset, 0);
+            //  Remove "(Clone) part of name"
             objsToScan[i].name = prefabsToCapture[i].name;
-            //objsToScan[i].AddComponent<BoxCollider>();
-            objsToScan[i].SetActive(false);
+            //objsToScan[i].SetActive(false);
         }
     }
 
@@ -174,8 +215,10 @@ public class CaptureManager : MonoBehaviour
 
             //  keep randomizing view until its within the shot
             bool isWithinCaptureScreen;
+            int attempts = 0;
             do
             {
+                attempts += 1;
                 camera.transform.LookAt(objToScan.transform);
 
                 //  random distance offset
@@ -190,7 +233,7 @@ public class CaptureManager : MonoBehaviour
                 //  get bounds and check if region is within capture screen
                 (float _x, float _y, float _x2, float _y2) = GetNormalizedScreenRegion(objToScan);
                 isWithinCaptureScreen = _x > 0 && _y > 0 && _x2 < 1 && _y2 < 1;
-            } while (!isWithinCaptureScreen);
+            } while (!isWithinCaptureScreen && attempts < 5);
 
             // folder name of the dataset object key
             //if (string.IsNullOrEmpty(classFolderName))
