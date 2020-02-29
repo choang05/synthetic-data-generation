@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.37311313, g: 0.38073763, b: 0.35873553, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311292, g: 0.38073754, b: 0.358736, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -151,7 +151,7 @@ RectTransform:
   m_Children:
   - {fileID: 445402523}
   m_Father: {fileID: 427127289}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -200,7 +200,7 @@ RectTransform:
   - {fileID: 1545163016}
   - {fileID: 505741368}
   m_Father: {fileID: 427127289}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1196,7 +1196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.17254902, g: 0.72156864, b: 0.7529412, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1325,7 +1325,7 @@ RectTransform:
   - {fileID: 901245728}
   - {fileID: 321016180}
   m_Father: {fileID: 427127289}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1814,10 +1814,9 @@ RectTransform:
   m_Children:
   - {fileID: 1157416521}
   - {fileID: 1337171786}
-  - {fileID: 23903939}
-  - {fileID: 2124881583}
-  - {fileID: 431962821}
   - {fileID: 1838621175}
+  - {fileID: 23903939}
+  - {fileID: 431962821}
   - {fileID: 54713775}
   - {fileID: 280193462}
   - {fileID: 1204309012}
@@ -1825,6 +1824,7 @@ RectTransform:
   - {fileID: 1928272401}
   - {fileID: 1591042151}
   - {fileID: 625054888}
+  - {fileID: 2124881583}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3093,7 +3093,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 427127289}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5347,7 +5347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.17254902, g: 0.72156864, b: 0.7529412, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7167,7 +7167,7 @@ RectTransform:
   - {fileID: 576449742}
   - {fileID: 1361455837}
   m_Father: {fileID: 427127289}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7739,8 +7739,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290820140
+  m_fontColor: {r: 0.17254902, g: 0.72156864, b: 0.7529412, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10082,7 +10082,7 @@ RectTransform:
   - {fileID: 1923619647}
   - {fileID: 1924197213}
   m_Father: {fileID: 427127289}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11190,6 +11190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PredictionKey: c2854719f84840f6b0b456562652db05
   MicrosoftCustomeVisionAIURL: https://lootbox.cognitiveservices.azure.com/customvision/v3.0/Prediction/a8d69bbf-9fcb-4a44-9f6e-7b3aa1e2fff0/classify/iterations/Iteration3/image
+  processingAnimationGO: {fileID: 2124881581}
   debuggerText: {fileID: 625054886}
   imagePath: 
 --- !u!4 &1716018127
@@ -12049,7 +12050,7 @@ RectTransform:
   - {fileID: 1029450319}
   - {fileID: 1182978041}
   m_Father: {fileID: 427127289}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -12804,7 +12805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.17254902, g: 0.72156864, b: 0.7529412, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -13387,7 +13388,7 @@ RectTransform:
   - {fileID: 1936401795}
   - {fileID: 352824562}
   m_Father: {fileID: 427127289}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13872,7 +13873,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973861089}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -14506,7 +14507,7 @@ RectTransform:
   - {fileID: 1307232135}
   - {fileID: 2010386823}
   m_Father: {fileID: 427127289}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14587,7 +14588,7 @@ RectTransform:
   m_Children:
   - {fileID: 1973861090}
   m_Father: {fileID: 427127289}
-  m_RootOrder: 3
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

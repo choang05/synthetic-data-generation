@@ -16,6 +16,10 @@ public class CloudServiceManager : MonoBehaviour
     public string PredictionKey = "c2854719f84840f6b0b456562652db05";
     public string MicrosoftCustomeVisionAIURL = "https://lootbox.cognitiveservices.azure.com/customvision/v3.0/Prediction/a8d69bbf-9fcb-4a44-9f6e-7b3aa1e2fff0/classify/iterations/Iteration3/image";
 
+    [Header("Loading Animation Panel")]
+    public GameObject processingAnimationGO;
+
+    [Header("Debug")]
     public Text debuggerText;
     public string imagePath;
 
@@ -62,6 +66,9 @@ public class CloudServiceManager : MonoBehaviour
 
     private void OnPictureLoaded(Texture2D texture2d, RawImage rawImage, string imagePath)
     {
+        //  Animation
+        processingAnimationGO.SetActive(true);
+
         StopAllCoroutines();
 
         StartCoroutine(RecognizeImage(texture2d, rawImage, imagePath));
@@ -99,6 +106,9 @@ public class CloudServiceManager : MonoBehaviour
         yield return request.SendWebRequest();
 
         debuggerText.text = "PROCESSING";
+
+        //  Animation
+        processingAnimationGO.SetActive(false);
 
         //Error handling
         if (request.isNetworkError || request.isHttpError)
