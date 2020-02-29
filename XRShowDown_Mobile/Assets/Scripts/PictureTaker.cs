@@ -9,10 +9,11 @@ public class PictureTaker : MonoBehaviour
 {
     [Header("Camera Settings")]
     public RawImage pictureHolder;
+    public int maxSize = 1920;
 
     //  Events
-    public delegate void CameraEvents(Texture2D texture2d, RawImage rawImage, string path);
-    public static CameraEvents OnPictureLoaded;
+    public delegate void PictureEvents(Texture2D texture2d, RawImage rawImage, string path);
+    public static PictureEvents OnPictureLoaded;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,7 @@ public class PictureTaker : MonoBehaviour
             if (path != null)
             {
                 // Create a Texture2D from the captured image
-                Texture2D texture = NativeCamera.LoadImageAtPath(path);
+                Texture2D texture = NativeCamera.LoadImageAtPath(path, maxSize);
                 if (texture == null)
                 {
                     Debug.Log("Couldn't load texture from " + path);
@@ -50,7 +51,7 @@ public class PictureTaker : MonoBehaviour
                 //  Broadcast events
                 OnPictureLoaded?.Invoke(texture, pictureHolder, path);
             }
-        });
+        }, maxSize);
 
         Debug.Log("Permission result: " + permission);
     }
