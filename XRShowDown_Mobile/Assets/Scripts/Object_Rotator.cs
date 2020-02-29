@@ -67,7 +67,7 @@ public class Object_Rotator : MonoBehaviour
                 scale.y = Mathf.Clamp(scale.y, minScale, maxScale);
                 scale.z = Mathf.Clamp(scale.z, minScale, maxScale);
                 model.localScale = scale;
-                this.gameObject.GetComponent<SphereCollider>().radius = scale.x;
+                this.gameObject.GetComponent<SphereCollider>().radius = scale.x * 1.75f;
             }
         }
     }
