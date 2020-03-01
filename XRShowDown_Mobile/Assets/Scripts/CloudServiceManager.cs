@@ -16,12 +16,16 @@ public class CloudServiceManager : MonoBehaviour
     public string PredictionKey = "c2854719f84840f6b0b456562652db05";
     public string MicrosoftCustomeVisionAIURL = "https://lootbox.cognitiveservices.azure.com/customvision/v3.0/Prediction/a8d69bbf-9fcb-4a44-9f6e-7b3aa1e2fff0/classify/iterations/Iteration3/image";
 
+    [Header("Loading Animation Panel")]
+    public GameObject processingAnimationGO;
+
+    [Header("Debug")]
     public Text debuggerText;
     public string imagePath;
 
 
     //  Events
-    public delegate void CloudServiceEvent(string path);
+    public delegate void CloudServiceEvent(string tagName, float probability);
     public static CloudServiceEvent OnImageRecognized;
 
     private void Awake()
@@ -62,6 +66,9 @@ public class CloudServiceManager : MonoBehaviour
 
     private void OnPictureLoaded(Texture2D texture2d, RawImage rawImage, string imagePath)
     {
+        //  Animation
+        processingAnimationGO.SetActive(true);
+
         StopAllCoroutines();
 
         StartCoroutine(RecognizeImage(texture2d, rawImage, imagePath));
@@ -100,6 +107,9 @@ public class CloudServiceManager : MonoBehaviour
 
         debuggerText.text = "PROCESSING";
 
+        //  Animation
+        processingAnimationGO.SetActive(false);
+
         //Error handling
         if (request.isNetworkError || request.isHttpError)
         {
@@ -111,26 +121,7 @@ public class CloudServiceManager : MonoBehaviour
         {
             try
             {
-                //  Parse JSON
-                JObject parsed = JObject.Parse(request.downloadHandler.text);
-
-                //  get all predictions
-                //foreach (JToken myToken in parsed["predictions"])
-                //{
-                //    string tagName = myToken["tagName"].ToString();
-                //    float probability = );
-
-                //    debuggerText.text += (tagName + " : " + probability);
-                //    debuggerText.text += "\n";
-                //}
-
-                //  fetch highest prediction
-                string tagName = (string)parsed["predictions"][0]["tagName"];
-                float probability = (float)parsed["predictions"][0]["probability"];
-                debuggerText.text += (tagName + " : " + probability);
-
-                //  Broadcast events
-                //OnImageRecognized?.Invoke(resultJson);
+                ParseRequestResultsAndBroadcastEvent(request.downloadHandler.text);
             }
             catch (Exception e)
             {
@@ -150,6 +141,30 @@ public class CloudServiceManager : MonoBehaviour
         FileStream fileStream = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
         BinaryReader binaryReader = new BinaryReader(fileStream);
         return binaryReader.ReadBytes((int)fileStream.Length);
+    }
+
+    private void ParseRequestResultsAndBroadcastEvent(string unParsedJson)
+    {
+        //  Parse JSON
+        JObject parsed = JObject.Parse(unParsedJson);
+
+        //  get all predictions
+        //foreach (JToken myToken in parsed["predictions"])
+        //{
+        //    string tagName = myToken["tagName"].ToString();
+        //    float probability = );
+
+        //    debuggerText.text += (tagName + " : " + probability);
+        //    debuggerText.text += "\n";
+        //}
+
+        //  fetch highest prediction
+        string tagName = (string)parsed["predictions"][0]["tagName"];
+        float probability = (float)parsed["predictions"][0]["probability"];
+        debuggerText.text += (tagName + " : " + probability);
+
+        //  Broadcast events
+        OnImageRecognized?.Invoke(tagName, probability);
     }
 }
 
