@@ -42,7 +42,7 @@ public class Object_Rotator : MonoBehaviour
     void scale()
     {
 
-        if (model.localScale.x > maxScale)
+        if (model.localScale.x > maxScale || model.localScale.x < minScale)
             model.localScale = new Vector3(1f, 1f, 1f);
         if (Input.touches.Length == 2)
         {
