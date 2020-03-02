@@ -270,7 +270,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2985557623135080032}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!114 &8827511974886578074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,8 +302,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "This is a reusable cup that can carry lots of your favorite drinks. Students
-    use it here at XR Showdown!\r"
+  m_Text: ' Pliers that can be locked into position, using an over-center toggle
+    action'
 --- !u!1 &3945094257636265025
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7096922902312324612
 RectTransform:
   m_ObjectHideFlags: 0
@@ -667,10 +667,8 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 'STOCK: 28    -----------------------------------------
-            10                         AH 1                                   12                        
-            AH 2                                   6                          TZ
-            1'
+          m_StringArgument: The bolt is used to set the jaws to a size slightly smaller
+            than what is to be gripped. The jaws are then closed on the gripped object.
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &5761082137970882445
@@ -798,7 +796,8 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Info? need more info?
+          m_StringArgument: 'STOCK: 2    -----------------------------------------
+            2                         BH 2'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6103893764366698861
@@ -946,7 +945,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 9007589163383806591}
   m_OnClick:
     m_PersistentCalls:
@@ -959,8 +958,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 'HEIGHT:     15 cm                          WEIGHT: 
-            5 gm'
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &7332608214318441159
