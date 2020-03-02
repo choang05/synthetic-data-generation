@@ -40,24 +40,24 @@ public class BoundsManager : MonoBehaviour
     /// </summary>
     private void LateUpdate()
     {
-        //rects.Clear();
-        //for (int i = 0; i < CaptureManager.instance.objsToScan.Count; i++)
-        //{
-        //    //boundObjs = CaptureManager.instance.objsToScan.ToList();
+        rects.Clear();
+        for (int i = 0; i < CaptureManager.instance.objsToScan.Count; i++)
+        {
+            //boundObjs = CaptureManager.instance.objsToScan.ToList();
 
-        //    if (!CaptureManager.instance.objsToScan[i].activeSelf)
-        //        continue;
+            if (!CaptureManager.instance.objsToScan[i].activeSelf)
+                continue;
 
-        //    Rect rect = Get3dTo2dRect(CaptureManager.instance.objsToScan[i]);
-        //    if (rects.Contains(rect))
-        //    {
-        //        rects[i] = rect;
-        //    }
-        //    else
-        //    {
-        //        rects.Add(rect);
-        //    }
-        //}
+            Rect rect = Get3dTo2dRect(CaptureManager.instance.objsToScan[i]);
+            if (rects.Contains(rect))
+            {
+                rects[i] = rect;
+            }
+            else
+            {
+                rects.Add(rect);
+            }
+        }
     }
 
     /// <summary>

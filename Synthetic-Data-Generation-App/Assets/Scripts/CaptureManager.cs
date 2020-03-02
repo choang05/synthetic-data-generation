@@ -190,7 +190,7 @@ public class CaptureManager : MonoBehaviour
             objsToScan[i].transform.position = transform.position + transform.position + new Vector3(0, yOffset, 0);
             //  Remove "(Clone) part of name"
             objsToScan[i].name = prefabsToCapture[i].name;
-            //objsToScan[i].SetActive(false);
+            objsToScan[i].SetActive(false);
         }
     }
 
