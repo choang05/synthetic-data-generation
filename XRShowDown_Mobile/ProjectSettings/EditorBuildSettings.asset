@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/StartScene.unity
     guid: 8baccc21e0809314ab9f33d0d318aec5
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 1d79a882c70019e44a2279b25bffaba8
   - enabled: 1
     path: Assets/Scenes/LootBox_UI.unity
     guid: 590f96dafa80a094ba1dc7334d9634f6

@@ -1054,7 +1054,7 @@ AnimationClip:
   m_Events:
   - time: 4.75
     functionName: Load
-    data: LootBox_UI
+    data: TutorialScene
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

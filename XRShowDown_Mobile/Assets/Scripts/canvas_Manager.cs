@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class canvas_Manager : MonoBehaviour
 {
     [Header("Panels")]
-    public GameObject welcome;
     public GameObject main;
     public GameObject productD;
     public GameObject processing;
@@ -31,7 +30,6 @@ public class canvas_Manager : MonoBehaviour
 
     public void swapCanvas(string canvasName)
     {
-        welcome.gameObject.SetActive(false);
         main.gameObject.SetActive(false);
         productD.gameObject.SetActive(false);
         processing.gameObject.SetActive(false);
@@ -41,9 +39,6 @@ public class canvas_Manager : MonoBehaviour
 
         switch (canvasName)
         {
-            case "welcome":
-                welcome.gameObject.SetActive(true);
-                break;
             case "main":
                 main.gameObject.SetActive(true);
                 break;
