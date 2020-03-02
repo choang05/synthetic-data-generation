@@ -23,11 +23,26 @@ public class canvas_Manager : MonoBehaviour
     public Transform invalidImagePanel;
     public Transform capturedImagePlaceHolder;
 
-    void Start()
-    {
 
+    void OnEnable()
+    {
+        CloudServiceManager.OnImageRecognized += OnRecognizedImage;
     }
 
+
+    void OnDisable()
+    {
+        CloudServiceManager.OnImageRecognized -= OnRecognizedImage;
+    }
+
+
+    void OnRecognizedImage(string tagName, float probability)
+    {
+        swapCanvas("productD");
+        this.gameObject.GetComponent<ProductDescriptor>().removeObjects();
+        this.gameObject.GetComponent<ProductDescriptor>().showProduct(tagName);
+    }
+    
     public void swapCanvas(string canvasName)
     {
         main.gameObject.SetActive(false);
