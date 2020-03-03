@@ -36,10 +36,14 @@ public class CaptureManager : MonoBehaviour
     public bool randomizeLights;
     public uint numScreenshotsPerLight = 1;
 
+    [Header("Cloud Services")]
+    public bool uploadAndTrain = false;
+
     [Header("Debug Settings")]
     public GameObject debugPrefab;
     public bool debugPoints = false;
     public float debugSize = .1f;
+
 
     private GameObject[] debugPointsGOs;
 
@@ -106,6 +110,7 @@ public class CaptureManager : MonoBehaviour
     public async Task CaptureAsync()
     {
         CustomVisionManager uploadManager = new CustomVisionManager();
+        
         ResetCapture();
 
         Vector3[] points = GetSpherePoints(screenshots, captureRadius);
@@ -138,10 +143,10 @@ public class CaptureManager : MonoBehaviour
             objsToScan[i].SetActive(false);
 
             //Upload the images
-            await uploadManager.UploadModelAsync(objsToScan[i].name);
+            if (uploadAndTrain) await uploadManager.UploadModelAsync(objsToScan[i].name);
         }
 
-        await uploadManager.TrainModelAsync();
+        if (uploadAndTrain) await uploadManager.TrainModelAsync();
 
         //  Create dataset files
         string autoMLDatasetPath = DatasetManager.instance.CreateAutoMLDatasetFromRows(null);
