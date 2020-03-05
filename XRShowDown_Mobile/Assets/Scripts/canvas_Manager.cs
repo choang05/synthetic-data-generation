@@ -14,6 +14,7 @@ public class canvas_Manager : MonoBehaviour
     public GameObject helperS;
     public GameObject archive;
     public GameObject settings;
+    public GameObject feedBack;
     public GameObject capturedImage;
     public GameObject cameraImageProcessingPanel;
 
@@ -50,6 +51,7 @@ public class canvas_Manager : MonoBehaviour
         processing.gameObject.SetActive(false);
         helperS.gameObject.SetActive(false);
         archive.gameObject.SetActive(false);
+        feedBack.gameObject.SetActive(false);
         settings.gameObject.SetActive(false);
 
         switch (canvasName)
@@ -71,6 +73,9 @@ public class canvas_Manager : MonoBehaviour
 			    break;
             case "settings":
                 settings.gameObject.SetActive(true);
+                break;
+            case "feedBack":
+                feedBack.gameObject.SetActive(true);
                 break;
         }
      }
