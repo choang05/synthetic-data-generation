@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Object_Rotator : MonoBehaviour
 {
-
+    public bool floating = false;
     public int rotSpeed = 3;
 
     public float minScale = 1;
@@ -15,6 +15,16 @@ public class Object_Rotator : MonoBehaviour
     public Transform model;
     float initialFingerDistance;
 
+    Vector3 tempPos = new Vector3();
+    private bool waitingToAnimate = false;
+
+
+    private void Start()
+    {
+        tempPos.x = model.position.x;
+        tempPos.z = model.position.z;
+        tempPos.y = 0;
+    }
     void OnMouseDrag()
     {
         if (Input.touchCount == 1)
@@ -24,6 +34,7 @@ public class Object_Rotator : MonoBehaviour
 
             model.RotateAround(Vector3.up, -rotX);
             model.RotateAround(Vector3.right, rotY);
+ 
         }
         else if (Input.touchCount == 2)
         {
@@ -37,6 +48,7 @@ public class Object_Rotator : MonoBehaviour
             model.RotateAround(Vector3.up, -rotX);
             model.RotateAround(Vector3.right, rotY);
         }
+
     }
 
     void scale()
@@ -69,6 +81,16 @@ public class Object_Rotator : MonoBehaviour
                 model.localScale = scale;
                 this.gameObject.GetComponent<SphereCollider>().radius = scale.x * 1.75f;
             }
+        }
+    }
+
+    void Update()
+    {
+        tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI) * .25f;
+
+        if (floating)
+        {
+            transform.position = tempPos;
         }
     }
 }
