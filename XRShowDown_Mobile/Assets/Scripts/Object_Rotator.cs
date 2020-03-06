@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Object_Rotator : MonoBehaviour
 {
-    public bool floating = false;
+
     public int rotSpeed = 3;
 
     public float minScale = 1;
@@ -15,14 +15,6 @@ public class Object_Rotator : MonoBehaviour
     public Transform model;
     float initialFingerDistance;
 
-    Vector3 tempPos = new Vector3();
-    private bool waitingToAnimate = false;
-
-
-    private void Start()
-    {
-        tempPos = model.position;
-    }
     void OnMouseDrag()
     {
         if (Input.touchCount == 1)
@@ -36,7 +28,6 @@ public class Object_Rotator : MonoBehaviour
         }
         else if (Input.touchCount == 2)
         {
-            if(!floating)
             scale();
         }
         else
@@ -52,14 +43,12 @@ public class Object_Rotator : MonoBehaviour
 
     void scale()
     {
-
         if (model.localScale.x > maxScale || model.localScale.x < minScale)
             model.localScale = new Vector3(1f, 1f, 1f);
         if (Input.touches.Length == 2)
         {
             Touch touch1 = Input.touches[0];
             Touch touch2 = Input.touches[1];
-
 
             if (touch1.phase == TouchPhase.Began || touch2.phase == TouchPhase.Began)
             {
@@ -81,16 +70,6 @@ public class Object_Rotator : MonoBehaviour
 
                 this.gameObject.GetComponent<SphereCollider>().radius = scale.x * 1.75f;
             }
-        }
-    }
-
-    void Update()
-    {
-        tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI) * .25f;
-
-        if (floating)
-        {
-            transform.position = tempPos;
         }
     }
 }
