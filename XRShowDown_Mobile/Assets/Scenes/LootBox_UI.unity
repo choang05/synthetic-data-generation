@@ -3501,7 +3501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &625054886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3522,7 +3522,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -8108,6 +8108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objToSetActive: {fileID: 1422611084}
   setActiveOnFirstPictureLoaded: 0
+  text: {fileID: 0}
 --- !u!114 &1422611087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10665,7 +10666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PredictionKey: c2854719f84840f6b0b456562652db05
   MicrosoftCustomeVisionAIURL: https://lootbox.cognitiveservices.azure.com/customvision/v3.0/Prediction/a8d69bbf-9fcb-4a44-9f6e-7b3aa1e2fff0/classify/iterations/Iteration3/image
-  processingAnimationGO: {fileID: 2124881581}
+  processingAnimationGO: {fileID: 1973861089}
   debuggerText: {fileID: 625054886}
   imagePath: 
 --- !u!4 &1716018127
@@ -11167,8 +11168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efff4a1f18ead264da58172cc6e15c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objToSetActive: {fileID: 2124881581}
+  objToSetActive: {fileID: 1973861089}
   setActiveOnFirstPictureLoaded: 1
+  text: {fileID: 625054886}
 --- !u!1 &1790695281
 GameObject:
   m_ObjectHideFlags: 0
@@ -11754,7 +11756,7 @@ RectTransform:
   - {fileID: 1422611085}
   - {fileID: 558725856}
   - {fileID: 1153475383}
-  - {fileID: 2124881583}
+  - {fileID: 1973861090}
   m_Father: {fileID: 427127289}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13443,7 +13445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1973861090
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13458,8 +13460,8 @@ RectTransform:
   - {fileID: 640549503}
   - {fileID: 1961544207}
   - {fileID: 1690748552}
-  m_Father: {fileID: 2124881583}
-  m_RootOrder: 0
+  m_Father: {fileID: 1838621175}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14150,51 +14152,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088110991}
   m_CullTransparentMesh: 0
---- !u!1 &2124881581
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2124881583}
-  - component: {fileID: 2124881582}
-  m_Layer: 5
-  m_Name: captureProcessing_Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!222 &2124881582
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2124881581}
-  m_CullTransparentMesh: 0
---- !u!224 &2124881583
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2124881581}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1973861090}
-  m_Father: {fileID: 1838621175}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2128933395
 GameObject:
   m_ObjectHideFlags: 0
