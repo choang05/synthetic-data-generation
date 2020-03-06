@@ -5824,7 +5824,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
@@ -5898,20 +5897,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 210e1a21742ae324a9d49a77d7ed798a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotSpeed: 3
-  model: {fileID: 1153475383}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5938,7 +5923,7 @@ GameObject:
   - component: {fileID: 983937577}
   - component: {fileID: 983937576}
   m_Layer: 5
-  m_Name: overLay_Canvas
+  m_Name: overlay_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6953,6 +6938,7 @@ GameObject:
   - component: {fileID: 1153475387}
   - component: {fileID: 1153475386}
   - component: {fileID: 1153475385}
+  - component: {fileID: 1153475384}
   m_Layer: 5
   m_Name: mascot
   m_TagString: Untagged
@@ -6974,6 +6960,20 @@ Transform:
   m_Father: {fileID: 1838621175}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 250.41, y: 46.1, z: 0}
+--- !u!114 &1153475384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153475382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210e1a21742ae324a9d49a77d7ed798a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotSpeed: 3
+  model: {fileID: 1153475383}
 --- !u!135 &1153475385
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -15,6 +15,13 @@ public class Object_Rotator : MonoBehaviour
     public Transform model;
     float initialFingerDistance;
 
+    private Vector3 ogScale;
+
+
+    private void Start()
+    {
+        ogScale = model.localScale;
+    }
     void OnMouseDrag()
     {
         if (Input.touchCount == 1)
@@ -43,8 +50,9 @@ public class Object_Rotator : MonoBehaviour
 
     void scale()
     {
-        if (model.localScale.x > maxScale || model.localScale.x < minScale)
-            model.localScale = new Vector3(1f, 1f, 1f);
+
+
+
         if (Input.touches.Length == 2)
         {
             Touch touch1 = Input.touches[0];
@@ -59,6 +67,9 @@ public class Object_Rotator : MonoBehaviour
             {
                 float currentFingerDistance = Vector2.Distance(touch1.position, touch2.position);
                 var scaleFactor = currentFingerDistance / initialFingerDistance;
+
+                if (initialFingerDistance == 0)
+                    initialFingerDistance = 1;
                 Vector3 scale = initialScale * scaleFactor;
                 Debug.Log(scale.x + "  " + scale.y + "  " + scale.z);
                 // Debug.Log(scale);
@@ -71,5 +82,10 @@ public class Object_Rotator : MonoBehaviour
                 this.gameObject.GetComponent<SphereCollider>().radius = scale.x * 1.75f;
             }
         }
+
+        if (model.localScale.x > maxScale || model.localScale.x < minScale )
+            model.localScale = ogScale;
+
+
     }
 }
