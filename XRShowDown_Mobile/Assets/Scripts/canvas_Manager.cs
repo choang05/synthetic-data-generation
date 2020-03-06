@@ -38,9 +38,16 @@ public class canvas_Manager : MonoBehaviour
 
     void OnRecognizedImage(string tagName, float probability)
     {
-        swapCanvas("productD");
-        this.gameObject.GetComponent<ProductDescriptor>().removeObjects();
-        this.gameObject.GetComponent<ProductDescriptor>().showProduct(tagName);
+        if (probability >= 0.65f)
+        {
+            swapCanvas("productD");
+            this.gameObject.GetComponent<ProductDescriptor>().removeObjects();
+            this.gameObject.GetComponent<ProductDescriptor>().showProduct(tagName);
+        }
+        else
+        {
+            helperS.SetActive(true);
+        }
     }
     
     public void swapCanvas(string canvasName)
