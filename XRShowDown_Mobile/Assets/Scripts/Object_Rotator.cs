@@ -21,9 +21,7 @@ public class Object_Rotator : MonoBehaviour
 
     private void Start()
     {
-        tempPos.x = model.position.x;
-        tempPos.z = model.position.z;
-        tempPos.y = 0;
+        tempPos = model.position;
     }
     void OnMouseDrag()
     {
@@ -38,6 +36,7 @@ public class Object_Rotator : MonoBehaviour
         }
         else if (Input.touchCount == 2)
         {
+            if(!floating)
             scale();
         }
         else
@@ -79,6 +78,7 @@ public class Object_Rotator : MonoBehaviour
                 scale.y = Mathf.Clamp(scale.y, minScale, maxScale);
                 scale.z = Mathf.Clamp(scale.z, minScale, maxScale);
                 model.localScale = scale;
+
                 this.gameObject.GetComponent<SphereCollider>().radius = scale.x * 1.75f;
             }
         }
