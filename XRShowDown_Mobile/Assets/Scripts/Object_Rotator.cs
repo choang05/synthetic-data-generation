@@ -24,6 +24,7 @@ public class Object_Rotator : MonoBehaviour
 
             model.RotateAround(Vector3.up, -rotX);
             model.RotateAround(Vector3.right, rotY);
+ 
         }
         else if (Input.touchCount == 2)
         {
@@ -37,18 +38,17 @@ public class Object_Rotator : MonoBehaviour
             model.RotateAround(Vector3.up, -rotX);
             model.RotateAround(Vector3.right, rotY);
         }
+
     }
 
     void scale()
     {
-
         if (model.localScale.x > maxScale || model.localScale.x < minScale)
             model.localScale = new Vector3(1f, 1f, 1f);
         if (Input.touches.Length == 2)
         {
             Touch touch1 = Input.touches[0];
             Touch touch2 = Input.touches[1];
-
 
             if (touch1.phase == TouchPhase.Began || touch2.phase == TouchPhase.Began)
             {
@@ -67,6 +67,7 @@ public class Object_Rotator : MonoBehaviour
                 scale.y = Mathf.Clamp(scale.y, minScale, maxScale);
                 scale.z = Mathf.Clamp(scale.z, minScale, maxScale);
                 model.localScale = scale;
+
                 this.gameObject.GetComponent<SphereCollider>().radius = scale.x * 1.75f;
             }
         }
