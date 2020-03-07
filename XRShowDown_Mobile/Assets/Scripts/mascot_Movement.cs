@@ -9,11 +9,16 @@ public class mascot_Movement : MonoBehaviour
     public int rotSpeed = 3;
     public Transform model;
     Vector3 tempPos = new Vector3();
+    Vector3 ogPos = new Vector3();
 
+    private bool init = false;
 
     private void Start()
     {
         tempPos = model.position;
+        ogPos = tempPos;
+        init = true;
+
 
     }
     void OnMouseDrag()
@@ -26,8 +31,15 @@ public class mascot_Movement : MonoBehaviour
             model.RotateAround(Vector3.right, rotY);
 
     }
+    void OnEnable()
+    {
+        if (init)
+        {
+            model.position = ogPos;
+            tempPos = model.position;
+        }
+    }
 
-   
     void Update()
     {
         tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI) * .25f;
