@@ -19,7 +19,7 @@ public class CustomVisionManager : MonoBehaviour
     CustomVisionTrainingClient client;
     public string endpoint = "https://lootbox.cognitiveservices.azure.com/";
     public string trainingKey = "9e6e0d2201a14de3beb1dcd137223d49";
-    public string projectID = "a8d69bbf-9fcb-4a44-9f6e-7b3aa1e2fff0";
+    public string projectID = "65b2a73e-688a-4b59-b574-b9a5d3d2bba6";
     public string resourceID = "/subscriptions/bd2cd714-0307-4ce0-a94b-5ee900b7965d/resourceGroups/Lootbox/providers/Microsoft.CognitiveServices/accounts/Lootbox";
     public bool createNewProject;
     private static List<string> importedImages;

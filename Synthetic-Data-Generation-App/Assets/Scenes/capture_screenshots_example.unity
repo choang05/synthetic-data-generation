@@ -1111,6 +1111,16 @@ PrefabInstance:
       propertyPath: skyboxesToCaptureIn.Array.data[19]
       value: 
       objectReference: {fileID: 2100000, guid: 503526694d9fb0b4ba1ff1d19be6a323, type: 2}
+    - target: {fileID: 5171368362588306280, guid: 4ca682d179fbafb4595f5135fa885b01,
+        type: 3}
+      propertyPath: screenshots
+      value: 49
+      objectReference: {fileID: 0}
+    - target: {fileID: 5171368362588306280, guid: 4ca682d179fbafb4595f5135fa885b01,
+        type: 3}
+      propertyPath: uploadAndTrain
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5171368362588306281, guid: 4ca682d179fbafb4595f5135fa885b01,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1391,6 +1401,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CustomVisionManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407099381165171262, guid: 3b11004db47408e4b89d06f59a670a5e,
+        type: 3}
+      propertyPath: projectID
+      value: 65b2a73e-688a-4b59-b574-b9a5d3d2bba6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407099381165171262, guid: 3b11004db47408e4b89d06f59a670a5e,
+        type: 3}
+      propertyPath: endpoint
+      value: https://lootbox.cognitiveservices.azure.com/
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407099381165171262, guid: 3b11004db47408e4b89d06f59a670a5e,
+        type: 3}
+      propertyPath: trainingKey
+      value: 9e6e0d2201a14de3beb1dcd137223d49
       objectReference: {fileID: 0}
     - target: {fileID: 7407099381165171263, guid: 3b11004db47408e4b89d06f59a670a5e,
         type: 3}

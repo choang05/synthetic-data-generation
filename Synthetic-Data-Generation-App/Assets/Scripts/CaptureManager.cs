@@ -128,7 +128,7 @@ public class CaptureManager : MonoBehaviour
                 skyboxesToCapture = skyboxesToCapture <= -1 ? skyboxesToCaptureIn.Length : skyboxesToCapture;
                 for (int j = 0; j < skyboxesToCapture; j++)
                 {
-                    Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", j + 1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[j].name));
+                    //Debug.Log(string.Format("Capturing in skybox {0}/{1}: {2}...", j + 1, skyboxesToCaptureIn.Length, skyboxesToCaptureIn[j].name));
                     RenderSettings.skybox = skyboxesToCaptureIn[j];
                     CaptureImages(points, objsToScan[i]);
                     screenshotCount++;
