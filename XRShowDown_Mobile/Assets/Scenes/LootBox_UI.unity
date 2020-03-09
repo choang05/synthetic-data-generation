@@ -2380,7 +2380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.62072223, y: 0.89337844}
   m_AnchorMax: {x: 0.77349997, y: 0.96500003}
-  m_AnchoredPosition: {x: 248, y: 1.5}
+  m_AnchoredPosition: {x: 248.00002, y: 1.5}
   m_SizeDelta: {x: -6.200012, y: -2.100006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &498403303
@@ -11294,7 +11294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PredictionKey: c2854719f84840f6b0b456562652db05
-  MicrosoftCustomeVisionAIURL: https://lootbox.cognitiveservices.azure.com/customvision/v3.0/Prediction/a8d69bbf-9fcb-4a44-9f6e-7b3aa1e2fff0/classify/iterations/Iteration12/image
+  MicrosoftCustomeVisionAIURL: https://lootbox.cognitiveservices.azure.com/customvision/v3.0/Prediction/65b2a73e-688a-4b59-b574-b9a5d3d2bba6/classify/iterations/Iteration4/image
   processingAnimationGO: {fileID: 1973861089}
   debuggerText: {fileID: 625054886}
   imagePath: 
