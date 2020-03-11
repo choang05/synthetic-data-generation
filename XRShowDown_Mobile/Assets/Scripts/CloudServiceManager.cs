@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Events;
 
 public class CloudServiceManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class CloudServiceManager : MonoBehaviour
     //  Events
     public delegate void CloudServiceEvent(string tagName, float probability);
     public static CloudServiceEvent OnImageRecognized;
+    public UnityEvent OnRecognitionConnectionFailed;
 
     private void Awake()
     {
@@ -49,10 +51,13 @@ public class CloudServiceManager : MonoBehaviour
         #endregion
     }
 
-    //private void Start()
-    //{
-    //    StartCoroutine(RecognizeImage(null, null, imagePath));
-    //}
+    private void Start()
+    {
+        //StartCoroutine(RecognizeImage(null, null, imagePath));
+        if (OnRecognitionConnectionFailed == null)
+            OnRecognitionConnectionFailed = new UnityEvent();
+
+    }
 
     private void OnEnable()
     {
@@ -116,6 +121,9 @@ public class CloudServiceManager : MonoBehaviour
             Debug.Log(request.error);
 
             debuggerText.text = request.error;
+
+            //  Event
+            OnRecognitionConnectionFailed.Invoke();
         }
         else
         {
@@ -126,6 +134,9 @@ public class CloudServiceManager : MonoBehaviour
             catch (Exception e)
             {
                 Debug.Log("AAAAUGGH!\n" + e.Message);
+
+                //  Event
+                OnRecognitionConnectionFailed.Invoke();
             }
         }
     }

@@ -2380,7 +2380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.62072223, y: 0.89337844}
   m_AnchorMax: {x: 0.77349997, y: 0.96500003}
-  m_AnchoredPosition: {x: 248.00002, y: 1.5}
+  m_AnchoredPosition: {x: 248, y: 1.5}
   m_SizeDelta: {x: -6.200012, y: -2.100006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &498403303
@@ -11298,6 +11298,20 @@ MonoBehaviour:
   processingAnimationGO: {fileID: 1973861089}
   debuggerText: {fileID: 625054886}
   imagePath: 
+  OnRecognitionConnectionFailed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 721746756}
+        m_MethodName: swapCanvas
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: helperS
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!4 &1716018127
 Transform:
   m_ObjectHideFlags: 0
