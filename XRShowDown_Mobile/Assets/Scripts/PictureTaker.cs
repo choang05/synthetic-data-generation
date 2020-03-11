@@ -9,7 +9,7 @@ public class PictureTaker : MonoBehaviour
 {
     [Header("Camera Settings")]
     public RawImage pictureHolder;
-    public int maxSize = 1920;
+    public int maxSize = 720;
 
     //  Events
     public delegate void PictureEvents(Texture2D texture2d, RawImage rawImage, string path);

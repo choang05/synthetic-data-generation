@@ -14,8 +14,8 @@ public class canvas_Manager : MonoBehaviour
     public GameObject helperS;
     public GameObject archive;
     public GameObject settings;
+    public GameObject feedBack;
     public GameObject capturedImage;
-    public GameObject cameraImageProcessingPanel;
 
     [Header("UI misc panels")]
     public GameObject imageProcessingAnimationPanel;
@@ -38,9 +38,16 @@ public class canvas_Manager : MonoBehaviour
 
     void OnRecognizedImage(string tagName, float probability)
     {
-        swapCanvas("productD");
-        this.gameObject.GetComponent<ProductDescriptor>().removeObjects();
-        this.gameObject.GetComponent<ProductDescriptor>().showProduct(tagName);
+        if (probability >= 0.65f)
+        {
+            swapCanvas("productD");
+            this.gameObject.GetComponent<ProductDescriptor>().removeObjects();
+            this.gameObject.GetComponent<ProductDescriptor>().showProduct(tagName);
+        }
+        else
+        {
+            helperS.SetActive(true);
+        }
     }
     
     public void swapCanvas(string canvasName)
@@ -50,6 +57,7 @@ public class canvas_Manager : MonoBehaviour
         processing.gameObject.SetActive(false);
         helperS.gameObject.SetActive(false);
         archive.gameObject.SetActive(false);
+        feedBack.gameObject.SetActive(false);
         settings.gameObject.SetActive(false);
 
         switch (canvasName)
@@ -72,82 +80,85 @@ public class canvas_Manager : MonoBehaviour
             case "settings":
                 settings.gameObject.SetActive(true);
                 break;
+            case "feedBack":
+                feedBack.gameObject.SetActive(true);
+                break;
         }
      }
 
-    public void StartProcessingImage()
-    {
-        StopAllCoroutines();
-        StartCoroutine(ProcessImage());
-    }
+    //public void StartProcessingImage()
+    //{
+    //    StopAllCoroutines();
+    //    StartCoroutine(ProcessImage());
+    //}
 
-    private IEnumerator ProcessImage()
-    {
-        WaitForSeconds delay = new WaitForSeconds(1);
-        bool isImageValid = false;
-        float maxWaitTime = 15;
-        float currentElapsedTime = 0;
+    //private IEnumerator ProcessImage()
+    //{
+    //    WaitForSeconds delay = new WaitForSeconds(1);
+    //    bool isImageValid = false;
+    //    float maxWaitTime = 15;
+    //    float currentElapsedTime = 0;
 
-        //  Animations
-        imageProcessingAnimationPanel.SetActive(true);
-        capturedImage.SetActive(true);
+    //    //  Animations
+    //    imageProcessingAnimationPanel.SetActive(true);
+    //    capturedImage.SetActive(true);
 
-        while (!isImageValid)
-        {
-            currentElapsedTime += 1;
+    //    while (!isImageValid)
+    //    {
+    //        currentElapsedTime += 1;
 
-            //  DEBUG (give 3 seconds to process)
-            if (currentElapsedTime >= 2)
-            {
-                isImageValid = true;    //  DEBUG
-                break;
-            }
+    //        //  DEBUG (give 3 seconds to process)
+    //        if (currentElapsedTime >= 2)
+    //        {
+    //            isImageValid = true;    //  DEBUG
+    //            break;
+    //        }
 
-            //  Error handling for timeouts
-            if (currentElapsedTime >= maxWaitTime)
-            {
-                Debug.LogError("Time to process image timed out!");
-                isImageValid = false;
-                break;
-            }
+    //        //  Error handling for timeouts
+    //        if (currentElapsedTime >= maxWaitTime)
+    //        {
+    //            Debug.LogError("Time to process image timed out!");
+    //            isImageValid = false;
+    //            break;
+    //        }
 
-            yield return delay; 
-        }
+    //        yield return delay; 
+    //    }
 
-        OnImageProcessed(isImageValid);
-    }
+    //    OnImageProcessed(isImageValid);
+    //}
 
     /// <summary>
     /// Once image has proessed, if image is valid, turn on image panel, else, give suggestion and return to capture screen
     /// </summary>
     /// <param name="isValid"></param>
-    private void OnImageProcessed(bool isValid)
-    {
-        Sequence mySequence = DOTween.Sequence();
-        mySequence.Append(imageProcessingAnimationPanel.transform.DOScale(0, .5f))
-          .Append(isValid? validImagePanel.DOScale(1, .5f) : invalidImagePanel.DOScale(1, .5f))
-          .PrependInterval(3)
-          //.Insert(0, transform.DOScale(new Vector3(3, 3, 3), mySequence.Duration()))
-          .OnComplete(MyCallback);
+    //private void OnImageProcessed(bool isValid)
+    //{
+    //    Sequence mySequence = DOTween.Sequence();
+    //    mySequence.Append(imageProcessingAnimationPanel.transform.DOScale(0, .5f))
+    //      .Append(isValid? validImagePanel.DOScale(1, .5f) : invalidImagePanel.DOScale(1, .5f))
+    //      .PrependInterval(3)
+    //      //.Insert(0, transform.DOScale(new Vector3(3, 3, 3), mySequence.Duration()))
+    //      .OnComplete(MyCallback);
 
-        void MyCallback()
-        {
-            //  Animations
-            imageProcessingAnimationPanel.SetActive(false);
-            cameraImageProcessingPanel.SetActive(false);
+    //    void MyCallback()
+    //    {
+    //        //  Animations
+    //        imageProcessingAnimationPanel.SetActive(false);
+    //        cameraImageProcessingPanel.SetActive(false);
 
-            if (isValid)
-            {
-                Debug.Log("Image valid!");
-                //  Set image to render texture
-                PictureTaker pt = FindObjectOfType<PictureTaker>();
-                RawImage rawImage = capturedImagePlaceHolder.GetComponent<RawImage>();
-            }
-            else
-            {
-                Debug.Log("Image invalid!");
-                helperS.gameObject.SetActive(true);
-            }
-        }
-    }
+    //        if (isValid)
+    //        {
+    //            Debug.Log("Image valid!");
+    //            //  Set image to render texture
+    //            PictureTaker pt = FindObjectOfType<PictureTaker>();
+    //            RawImage rawImage = capturedImagePlaceHolder.GetComponent<RawImage>();
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("Image invalid!");
+    //            helperS.gameObject.SetActive(true);
+    //        }
+    //    }
+    //}
 }
