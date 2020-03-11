@@ -15,6 +15,13 @@ public class Object_Rotator : MonoBehaviour
     public Transform model;
     float initialFingerDistance;
 
+    private Vector3 ogScale;
+
+
+    private void Start()
+    {
+        ogScale = model.localScale;
+    }
     void OnMouseDrag()
     {
         if (Input.touchCount == 1)
@@ -24,6 +31,7 @@ public class Object_Rotator : MonoBehaviour
 
             model.RotateAround(Vector3.up, -rotX);
             model.RotateAround(Vector3.right, rotY);
+ 
         }
         else if (Input.touchCount == 2)
         {
@@ -37,18 +45,18 @@ public class Object_Rotator : MonoBehaviour
             model.RotateAround(Vector3.up, -rotX);
             model.RotateAround(Vector3.right, rotY);
         }
+
     }
 
     void scale()
     {
 
-        if (model.localScale.x > maxScale || model.localScale.x < minScale)
-            model.localScale = new Vector3(1f, 1f, 1f);
+
+
         if (Input.touches.Length == 2)
         {
             Touch touch1 = Input.touches[0];
             Touch touch2 = Input.touches[1];
-
 
             if (touch1.phase == TouchPhase.Began || touch2.phase == TouchPhase.Began)
             {
@@ -59,6 +67,9 @@ public class Object_Rotator : MonoBehaviour
             {
                 float currentFingerDistance = Vector2.Distance(touch1.position, touch2.position);
                 var scaleFactor = currentFingerDistance / initialFingerDistance;
+
+                if (initialFingerDistance == 0)
+                    initialFingerDistance = 1;
                 Vector3 scale = initialScale * scaleFactor;
                 Debug.Log(scale.x + "  " + scale.y + "  " + scale.z);
                 // Debug.Log(scale);
@@ -67,8 +78,14 @@ public class Object_Rotator : MonoBehaviour
                 scale.y = Mathf.Clamp(scale.y, minScale, maxScale);
                 scale.z = Mathf.Clamp(scale.z, minScale, maxScale);
                 model.localScale = scale;
+
                 this.gameObject.GetComponent<SphereCollider>().radius = scale.x * 1.75f;
             }
         }
+
+        if (model.localScale.x > maxScale || model.localScale.x < minScale )
+            model.localScale = ogScale;
+
+
     }
 }

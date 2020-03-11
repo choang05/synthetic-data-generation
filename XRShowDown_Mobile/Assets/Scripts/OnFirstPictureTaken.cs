@@ -9,11 +9,22 @@ public class OnFirstPictureTaken : MonoBehaviour
     public GameObject objToSetActive;
     public bool setActiveOnFirstPictureLoaded = false;
 
+    [Header("DEBUG")]
+    public Text text;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
+
+    //private void LateUpdate()
+    //{
+    //    if (text)
+    //    {
+    //        text.text = objToSetActive.activeSelf.ToString();
+    //    }
+    //}
 
     private void OnEnable()
     {
