@@ -1,3 +1,9 @@
+As of June 10, 2020, Unity has released the Perceptron Package, which is a more streamlined process of this project.
+https://blogs.unity3d.com/2020/06/10/use-unitys-perception-tools-to-generate-and-analyze-synthetic-data-at-scale-to-train-your-ml-models/
+
+As of May 1, 2020, Unity publishes a article on their take on synthetic data which is what essentially our project does.
+https://blogs.unity3d.com/2020/05/01/synthetic-data-simulating-myriad-possibilities-to-train-robust-machine-learning-models/
+
 # XR-Showdown-2020
 XR Showdown 2020 Presented by ExxonMobil - Team 2
 
