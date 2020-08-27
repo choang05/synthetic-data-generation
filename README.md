@@ -22,3 +22,8 @@ As part of the XR Showdown, we exploited this technique by creating an mobile ap
 
 Overview process:
 ![alt text](https://github.com/choang05/synthetic-data-generation/blob/develop/powerpoint_img1.PNG?raw=true)
+
+##  Early Development
+Below demonstrates what our early scene setup looks like. We have a 3D model (soda can in this case) sourrounded by a sphere point cloud that dictates where the camera will take pictures for training data. Below that shows the images that were taken at random.
+![](https://i.imgur.com/gY4TWcT.png)
+![](https://i.imgur.com/KcCqDxJ.png)
