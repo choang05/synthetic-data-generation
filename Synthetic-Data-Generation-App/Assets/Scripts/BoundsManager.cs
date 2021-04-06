@@ -9,7 +9,7 @@ public class BoundsManager : MonoBehaviour
 
     [Header("Debug Settings")]
     public int frameWidth = 1;
-    public Color frameColor;
+    public Color frameColor = Color.red;
 
     //private List<GameObject> boundObjs = new List<GameObject>();
     private List<Rect> rects = new List<Rect>();

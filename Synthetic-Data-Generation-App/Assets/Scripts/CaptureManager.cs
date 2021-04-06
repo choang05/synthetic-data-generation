@@ -1,6 +1,4 @@
-﻿using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
-using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training.Models;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -99,17 +97,17 @@ public class CaptureManager : MonoBehaviour
             {
                 Debug.Log($"{nameof(CaptureManager)}.{nameof(Capture)} Additional info: {e.InnerException.Message}");
             }
-            var cve = e as CustomVisionErrorException;
-            if (cve != null)
-            {
-                Debug.Log($"{nameof(CaptureManager)}.{nameof(Capture)} Custom Vision info:\r\n HResult: {cve.HResult} \r\n Message: {cve.Message}, \r\n Status Code: {cve.Response.StatusCode} \r\n Reason: {cve.Response.ReasonPhrase} \r\n Content: {cve.Response.Content}");
-            }
+            //var cve = e as CustomVisionErrorException;
+            //if (cve != null)
+            //{
+            //    Debug.Log($"{nameof(CaptureManager)}.{nameof(Capture)} Custom Vision info:\r\n HResult: {cve.HResult} \r\n Message: {cve.Message}, \r\n Status Code: {cve.Response.StatusCode} \r\n Reason: {cve.Response.ReasonPhrase} \r\n Content: {cve.Response.Content}");
+            //}
         }
     }
 
     public async Task CaptureAsync()
     {
-        CustomVisionManager uploadManager = new CustomVisionManager();
+        //CustomVisionManager uploadManager = new CustomVisionManager();
         
         ResetCapture();
 
@@ -143,10 +141,10 @@ public class CaptureManager : MonoBehaviour
             objsToScan[i].SetActive(false);
 
             //Upload the images
-            if (uploadAndTrain) await uploadManager.UploadModelAsync(objsToScan[i].name);
+            //if (uploadAndTrain) await uploadManager.UploadModelAsync(objsToScan[i].name);
         }
 
-        if (uploadAndTrain) await uploadManager.TrainModelAsync();
+        //if (uploadAndTrain) await uploadManager.TrainModelAsync();
 
         //  Create dataset files
         string autoMLDatasetPath = DatasetManager.instance.CreateAutoMLDatasetFromRows(null);
@@ -311,7 +309,7 @@ public class CaptureManager : MonoBehaviour
             //  Clean debug objects
             for (int i = 0; i < debugPointsGOs.Length; i++)
                 if (debugPointsGOs[i] != null)
-                    Destroy(debugPointsGOs[i]);
+                    DestroyImmediate(debugPointsGOs[i]);
         debugPointsGOs = new GameObject[points.Length];
 
         for (int i = 0; i < points.Length; i++)

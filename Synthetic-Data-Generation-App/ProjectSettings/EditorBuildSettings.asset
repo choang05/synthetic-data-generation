@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: e7a7c8bb3476d3b4cb4d46c47eca0078,
+      type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: aadb7ae5c7b9e92429288aaa66d0c948,
+      type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
+      guid: ac6f3f2da5c6ef84e8ef9562d52fb9f8, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: 456b6e41bffd6d843a665d91a7b6e3a9,
       type: 2}
     com.unity.xr.arkit.PlayerSettings: {fileID: 11400000, guid: 2d5fb8e61571b4e3897f221189089fd6,

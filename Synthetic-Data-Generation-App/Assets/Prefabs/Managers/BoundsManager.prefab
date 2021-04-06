@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36376041a44fca4ea9faef61377a9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameWidth: 5
-  frameColor: {r: 1, g: 0.033018887, b: 0.033018887, a: 1}
+  frameWidth: 1
+  frameColor: {r: 1, g: 0, b: 0, a: 1}
